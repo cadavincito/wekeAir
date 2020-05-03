@@ -29,7 +29,7 @@ public class AdjacencyList<V> implements Graph<V>{
 		
 		boolean added = false;
 		
-		if(!this.vertex.contains(vertex)) {
+		if(searchIndex(vertex) == -1) {
 			
 			this.vertex.add(vertex);
 			
@@ -45,11 +45,11 @@ public class AdjacencyList<V> implements Graph<V>{
 	public boolean removeVertex(Vertex<V> vertex) {
 		boolean removed = false;
 
-		int a = this.vertex.indexOf(vertex);
+		int a = searchIndex(vertex);
 		
 		if(a != -1) {
 			
-			this.vertex.remove(vertex);
+			this.vertex.remove(a);
 			
 			removed = true;
 			
@@ -71,8 +71,8 @@ public class AdjacencyList<V> implements Graph<V>{
 		
 		boolean added = false;
 		
-		int a = this.vertex.indexOf(vertex_1);
-		int b = this.vertex.indexOf(vertex_2);
+		int a = searchIndex(vertex_1);
+		int b = searchIndex(vertex_2);
 				
 		if(a != -1 && b != -1) {
 			
@@ -95,8 +95,8 @@ public class AdjacencyList<V> implements Graph<V>{
 		
 		boolean added = false;
 		
-		int a = this.vertex.indexOf(vertex_1);
-		int b = this.vertex.indexOf(vertex_2);
+		int a = searchIndex(vertex_1);
+		int b = searchIndex(vertex_2);
 				
 		if(a != -1 && b != -1) {
 			
@@ -124,6 +124,26 @@ public class AdjacencyList<V> implements Graph<V>{
 	}
 
 
+	public int searchIndex(Vertex<V> vertex) {
+		
+		int index = -1;
+		
+		int hashcode = vertex.getElement().hashCode();
+		
+		boolean stop = false;
+		
+		for (int i = 0; i < this.vertex.size() && !stop ; i++) {
+			
+			if(this.vertex.get(i).getElement().hashCode() == hashcode) {
+				
+				index = i;
+				stop = true;
+			}
+		}
+		
+		return index;
+	}
+	
 	/**
 	 * @return the graph
 	 */

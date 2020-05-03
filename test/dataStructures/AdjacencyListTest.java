@@ -91,8 +91,9 @@ class AdjacencyListTest<V> {
 	@Test
 	 void removeVertexTest2() {
 		setupScenario3();
-		boolean b = al.addVertex(vi);
-		assertTrue(b);
+		
+		
+		
 		
 	}
 	
