@@ -236,11 +236,28 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		for (int i = 0; i < this.vertex.size(); i++) {
 			
 			if(this.graph[index][i] >= 1) {
-				adjacents.add(i);
+				if(!contains(adjacents,i))
+					adjacents.add(i);
 			}
 		}
 		
 		return adjacents;
+	}
+	
+	public boolean contains (ArrayList<Integer> a, Integer b) {
+		
+		boolean contains = false;
+		boolean stop = false;
+		
+		for (int i = 0; i < a.size() && !stop; i++) {
+			if(a.get(i) == b) {
+				
+				contains = true;
+				stop = true;
+			}
+		}
+		
+		return contains;
 	}
 
 }
