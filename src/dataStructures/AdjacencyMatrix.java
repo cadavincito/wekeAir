@@ -13,6 +13,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 	
 	public final static int BASE = 30;
+	public final static double GROWTHFACTOR = 1.5;
 	
 	private int[][] graph;
 	private double[][] weights;
@@ -26,6 +27,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			throw new InvalidBaseNumber("The given base number to initizalize the mathix must be > 0.");
 		this.graph = new int[m][m];
 		this.weights = new double[m][m];
+		
+		for (int i = 0; i < graph.length; i++) {
+			Arrays.fill(graph[i], 0);
+		}
 		
 		this.vertex = new ArrayList<Vertex<V>>();
 		this.directed = directed;
@@ -70,7 +75,14 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public void extendMatrix() {
 		
 		int tempLength = this.graph.length;
-		int temp[][] = new int[2*tempLength][2*tempLength];
+		double newLength = tempLength*GROWTHFACTOR;
+		int tLength = (int) newLength;
+		
+		if (tempLength==1) {
+			tLength = 2;
+		}
+		
+		int temp[][] = new int[tLength][tLength];
 		
 		for (int i = 0; i < this.graph.length; i++) {
 			for (int j = 0; j < this.graph[i].length; j++) {
@@ -116,6 +128,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 					}
 				}
 			}
+			
+			this.graph = temp;
 			
 			this.size--;
 		}
@@ -260,4 +274,4 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return contains;
 	}
 
-}
+} //end of class
