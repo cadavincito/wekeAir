@@ -51,7 +51,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 		boolean added = false;
 		
-		if(!this.vertex.contains(vertex)) {
+		if(searchIndex(vertex) == -1) {
 			
 			this.size++;
 			
@@ -85,7 +85,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public boolean removeVertex(Vertex<V> vertex) {
 		
 	
-		int index = this.vertex.indexOf(vertex);
+		int index = searchIndex(vertex);
 		int temp[][] = new int[this.graph.length-1][this.graph.length-1];
 		
 		if(index >= 0 ) {
@@ -124,8 +124,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	@Override
 	public boolean addEdge(Vertex<V> vertex_1, Vertex<V> vertex_2) {
 		
-		int a = this.vertex.indexOf(vertex_1);
-		int b = this.vertex.indexOf(vertex_2);
+		int a = searchIndex(vertex_1);
+		int b = searchIndex(vertex_2);
 		
 		
 		if(a != -1 && b != -1) {
@@ -145,8 +145,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	@Override
 	public boolean addEdge(Vertex<V> vertex_1, Vertex<V> vertex_2, double weight) {
 		
-		int a = this.vertex.indexOf(vertex_1);
-		int b = this.vertex.indexOf(vertex_2);
+		int a = searchIndex(vertex_1);
+		int b = searchIndex(vertex_2);
 		
 		if(a != -1 && b != -1) {
 			if(this.directed) {
@@ -171,6 +171,18 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public int searchIndex(Vertex<V> vertex) {
 		
 		int index = -1;
+		int hashcode = vertex.getElement().hashCode();
+		boolean stop = false;
+		
+		for (int i = 0; i < this.vertex.size() && !stop; i++) {
+			
+			if(this.vertex.get(i).getElement().hashCode() == hashcode) {
+				
+				index = i;
+				
+				stop = true;
+			}
+		}
 		
 		return index;
 	}
