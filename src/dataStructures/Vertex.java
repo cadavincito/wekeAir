@@ -11,6 +11,7 @@ public class Vertex<E> {
 	private int timeStampf;
 	private String color;
 	private int distance;
+	private Vertex prior;
 	
 	/**
 	 * @param element
@@ -26,6 +27,7 @@ public class Vertex<E> {
 		this.timeStampf = 0;
 		this.color = WHITE;
 		this.distance = -1;
+		this.prior = null;
 	}
 
 	/**
@@ -98,7 +100,23 @@ public class Vertex<E> {
 		this.distance = distance;
 	}
 	
+	/**
+	 * @return the prior
+	 */
+	public Vertex getPrior() {
+		return prior;
+	}
+	
+	/**
+	 * @param prior the prior to set
+	 */
+	public void setPrior(Vertex prior) {
+		this.prior = prior;
+	}
 	
 	
 	
-}
+	
+	
+	
+} //end of class
