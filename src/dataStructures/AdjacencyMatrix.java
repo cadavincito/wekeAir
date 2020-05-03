@@ -168,6 +168,13 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			return false;
 	}
 	
+	public int searchIndex(Vertex<V> vertex) {
+		
+		int index = -1;
+		
+		return index;
+	}
+	
 	public int getSize() {
 		return this.size;
 	}

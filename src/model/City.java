@@ -9,5 +9,10 @@ public class City {
 		this.name = name;
 		this.country = country;
 	}
+	@Override
+	public int hashCode() {
+
+		return name.hashCode();
+	}
 	
 }
