@@ -2,9 +2,11 @@ package dataStructures;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-
+import AuxiliarDataStructures.IQueue;
+import AuxiliarDataStructures.Queue;
 import exceptions.InvalidBaseNumber;
 
 public class AdjacencyMatrix<V> implements Graph<V> {
@@ -22,8 +24,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 		if(m<=0)
 			throw new InvalidBaseNumber("The given base number to initizalize the mathix must be > 0.");
-		this.graph = new int[BASE][BASE];
-		this.weights = new double[BASE][BASE];
+		this.graph = new int[m][m];
+		this.weights = new double[m][m];
 		
 		this.vertex = new ArrayList<Vertex<V>>();
 		this.directed = directed;
@@ -193,6 +195,52 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	
 	public List<Vertex<V>> getVertex(){
 		return this.vertex;
+	}
+	
+	
+	
+	public List<Integer> bfs(Vertex<V> origin){
+		
+		Integer index = searchIndex(origin);
+		
+		ArrayList<Integer> path = new ArrayList<Integer>();
+
+		IQueue<Integer> q = new Queue<Integer>();
+		q.add(index);
+		
+		while(q.size() > 0) {
+			
+			index = q.poll();
+			if(!q.contains(index))
+				path.add(index);
+			
+			ArrayList<Integer> adjacents = adjacents(index);
+			
+			for (int i = 0; i < adjacents.size(); i++) {
+				
+				Integer temp = adjacents.get(i);
+				
+				if(!q.contains(temp))
+					q.add(temp);
+			}
+			
+		}
+		
+		return path;
+	}
+
+	private ArrayList<Integer> adjacents(Integer index) {
+		
+		ArrayList<Integer> adjacents = new ArrayList<Integer>();
+		
+		for (int i = 0; i < this.vertex.size(); i++) {
+			
+			if(this.graph[index][i] >= 1) {
+				adjacents.add(i);
+			}
+		}
+		
+		return adjacents;
 	}
 
 }
