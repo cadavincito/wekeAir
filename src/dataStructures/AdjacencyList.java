@@ -104,7 +104,7 @@ public class AdjacencyList<V> implements Graph<V>{
 		if(a != -1 && b != -1) {
 			
 			ArrayList<Double> temp = new ArrayList<Double>();
-
+			
 			temp.add((double) a);
 			temp.add((double) b);
 			temp.add(weight);
