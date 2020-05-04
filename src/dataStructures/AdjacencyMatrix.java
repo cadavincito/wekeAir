@@ -99,12 +99,14 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	@Override
 	public boolean removeVertex(Vertex<V> vertex) {
 		
-	
+		boolean removed = false;
 		int index = searchIndex(vertex);
 		int temp[][] = new int[this.graph.length-1][this.graph.length-1];
 		
 		if(index >= 0 ) {
 
+			removed = true;
+			this.vertex.remove(index);
 			
 			for (int i = 0; i < temp.length; i++) {
 				for (int j = 0; j < temp.length; j++) {
@@ -135,7 +137,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			this.size--;
 		}
 		
-		return this.vertex.remove(vertex);
+		return removed;
 	}
 
 	@Override

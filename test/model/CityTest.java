@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 class CityTest {
 
+	private City c;
+	
+	void setupScenario1() {
+		c = new City("Bogota", "Colombia");
+	}
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		int a = c.hashCode();
+		System.out.println(a);
 	}
 
 }

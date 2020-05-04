@@ -11,7 +11,7 @@ import AuxiliarDataStructures.Queue;
 
 public class AdjacencyList<V> implements Graph<V>{
 
-	private List<List<Double>> graph;
+	private List<List<List<Double>>> graph;
 	private List<Vertex<V>> vertex;
 	private boolean directed ;
 	private int size;
@@ -23,7 +23,7 @@ public class AdjacencyList<V> implements Graph<V>{
 	 */
 	public AdjacencyList(boolean directed) {
 
-		graph = new ArrayList<List<Double>>();
+		graph = new ArrayList<List<List<Double>>>();
 		this.vertex = new ArrayList<Vertex<V>>();
 		this.directed = directed;
 		this.size = 0;
@@ -49,22 +49,26 @@ public class AdjacencyList<V> implements Graph<V>{
 
 	@Override
 	public boolean removeVertex(Vertex<V> vertex) {
+		
 		boolean removed = false;
 
-		int a = searchIndex(vertex);
+		int index = searchIndex(vertex);
 		
-		if(a != -1) {
-			
-			this.vertex.remove(a);
+		if(index != -1) {
 			
 			removed = true;
 			
-			for (int i = 0; i < this.graph.size(); i++) {
-				
-				if((this.graph.get(i).get(0).compareTo((double) a) == 0) || this.graph.get(i).get(1).compareTo((double) a) == 0) {
-					this.graph.remove(i);
+			for(int i = 0; i < this.graph.size(); i++) {
+				for (int j = 0; j < this.graph.get(i).size(); j++) {
+					
+					if(this.graph.get(i).get(j).get(0) == ((double) index)) {
+						
+						this.graph.get(i).remove(j);
+					}
 				}
 			}
+			
+			this.vertex.remove(index);
 			
 			this.size --;
 		}
@@ -83,11 +87,16 @@ public class AdjacencyList<V> implements Graph<V>{
 		if(a != -1 && b != -1) {
 			
 			ArrayList<Double> temp = new ArrayList<Double>();
-
-			temp.add((double) a);
 			temp.add((double) b);
+			this.graph.get(a).add(temp);
 			
-			this.graph.add(temp);
+			if(!this.isDirected()) {
+				
+				ArrayList<Double> temp2 = new ArrayList<Double>();
+				temp2.add((double) a);
+				this.graph.get(b).add(temp2);
+			}
+			
 			
 			added = true;
 
@@ -107,12 +116,24 @@ public class AdjacencyList<V> implements Graph<V>{
 		if(a != -1 && b != -1) {
 			
 			ArrayList<Double> temp = new ArrayList<Double>();
-
+<<<<<<< HEAD
+			
 			temp.add((double) a);
+=======
+>>>>>>> 7d785451e01f5b829fc7536ccdb0440e3b6cff26
 			temp.add((double) b);
 			temp.add(weight);
 			
-			this.graph.add(temp);
+			this.graph.get(a).add(temp);
+			
+			if(!this.isDirected()) {
+				
+				ArrayList<Double> temp2 = new ArrayList<Double>();
+				temp2.add((double) a);
+				temp2.add(weight);
+				this.graph.get(b).add(temp2);
+			}
+			
 			
 			added = true;
 
