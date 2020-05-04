@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import AuxiliarDataStructures.IQueue;
 import AuxiliarDataStructures.Queue;
@@ -209,6 +210,27 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	
 	public List<Vertex<V>> getVertex(){
 		return this.vertex;
+	}
+	
+	public void primInMatrix(Vertex<V> origin) {
+		
+		for (int i = 0; i < vertex.size(); i++) {
+			vertex.get(i).setColor(Vertex.WHITE);
+			vertex.get(i).setDistance(-1);
+			vertex.get(i).setPrior(null);
+		}
+		
+		int foundOriginIndex = searchIndex(origin);
+		
+		origin = null;
+		
+		if (foundOriginIndex != -1) {
+			origin = vertex.get(foundOriginIndex); 
+		}
+		//TODO
+		
+		
+		
 	}
 	
 	
