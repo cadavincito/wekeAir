@@ -2,6 +2,8 @@ package AuxiliarDataStructures;
 
 import java.util.ArrayList;
 
+import AuxiliarDataStructures.Queue.Node;
+
 public class Stack<T> implements IStack<T> {
 
 	private Node<T> top;
@@ -53,6 +55,32 @@ public class Stack<T> implements IStack<T> {
 	@Override
 	public boolean isEmpty() {
 		return top == null;
+	}
+	
+	@Override
+	public boolean contains(Integer element) {
+		
+		boolean contains = false;
+		boolean stop = false;
+		
+		Node<T> temp = this.top;
+		
+		for (int i = 0; i < this.size && !stop; i++) {
+			
+			if(temp == null) {
+				stop = true;
+			}
+			else if(temp.value.equals(element)) {
+				stop = true;
+				contains = true;
+			}
+			else {
+				
+				temp = temp.prev;
+			}
+		}
+		
+		return contains;
 	}
 
 	public class Node<T> {
