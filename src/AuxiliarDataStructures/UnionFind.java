@@ -1,15 +1,18 @@
 package AuxiliarDataStructures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dataStructures.Vertex;
 
 public class UnionFind<E> implements IUnionFind<E>{
 	
-	private Vertex<E>[] vertexes;
+	private ArrayList<Vertex<E>> vertexes;
 	private int[] parents;
 	
-	public UnionFind(Vertex<E>[] vertexes) {
-		this.vertexes = vertexes;
-		parents = new int[vertexes.length];
+	public UnionFind(List<Vertex<E>> list) {
+		this.vertexes = (ArrayList<Vertex<E>>) list;
+		parents = new int[list.size()];
 	}
 
 	@Override
