@@ -315,10 +315,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		IQueue<Integer> q = new Queue<Integer>();
 		q.add(index);
 		
-		while(q.size() > 0) {
+		while(!q.isEmpty()) {
 			
 			index = q.poll();
-			if(!q.contains(index))
+			if(!contains(path, index))
 				path.add(index);
 			
 			ArrayList<Integer> adjacents = adjacents(index);
@@ -327,8 +327,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 				
 				Integer temp = adjacents.get(i);
 				
-				if(!q.contains(temp))
+				if((!q.contains(temp))&&(!contains(path, temp))) {
 					q.add(temp);
+					
+				}
 			}
 			
 		}
@@ -336,7 +338,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return path;
 	}
 
-	private ArrayList<Integer> adjacents(Integer index) {
+	public ArrayList<Integer> adjacents(Integer index) {
 		
 		ArrayList<Integer> adjacents = new ArrayList<Integer>();
 		

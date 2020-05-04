@@ -3,6 +3,8 @@ package dataStructures;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -184,22 +186,33 @@ class TestAdjacencyMatrix {
 		
 		
 		
-//		@Test
-//		void bfsTest1() {
-//		setupScenario4();
-//
-//		List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(0));
-//		
-//		List<Integer> b = new ArrayList<Integer>();	
-//		
-//		for(int i = 0; i<5;i++){
-//			b.add(i);
-//		}
-//			
-//		assertEquals(a,b);
-//		
-//		
-//		}
+		@Test
+		void bfsTest1() {
+		setupScenario4();
+
+		List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(0));
+		
+		
+		for (int i = 0; i < adjacencyMatrix.getGraph()[0].length; i++) {
+			
+			System.out.println(Arrays.toString(adjacencyMatrix.getGraph()[i]));
+		}
+		
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		for(int i = 0; i<5;i++){
+			b.add(i);
+		}
+		
+		System.out.println(a.toString());
+		System.out.println(b.toString());
+		
+		System.out.println("Estos sysos están en el test de bfs, Toño. Si quieres, los puedes borrar.");
+		
+		assertEquals(a,b);
+		
+		
+		}
 		
 		
 				@Test
