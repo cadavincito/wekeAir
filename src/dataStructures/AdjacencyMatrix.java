@@ -271,38 +271,38 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 	}
 	
-    public  <E> void kruskalInMatrix(){
-    	//TODO
-    	//Missing fill all edges
-        PriorityQueue<Edge> pq = new PriorityQueue<Edge>(allEdges.size(), Comparator.comparingInt(o -> o.weight));
-
-        //add all the edges to priority queue, //sort the edges on weights
-        for (int i = 0; i <allEdges.size() ; i++) {
-            pq.add(allEdges.get(i));
-        }
-
-        UnionFind<Vertex<E>> unionFind = new  UnionFind<Vertex<E>>(getVertex());
-        //makeset
-        unionFind.makeSet();
-
-        ArrayList<Edge> mst = new ArrayList<>();
-
-        //process vertices - 1 edges
-        int index = 0;
-        while( index < vertex.size()-1){
-            Edge edge = pq.remove();
-          
-            int origin = unionFind.find(searchIndex(edge.getOrigin()));
-            int destination = unionFind.find(searchIndex(edge.getDestination()));
-
-            if(origin != destination){
-                mst.add(edge);
-                index++;
-                unionFind.union(origin,destination);
-            }
-        }
-        
-    }
+//    public  <E> void kruskalInMatrix(){
+//    	//TODO
+//    	//Missing fill all edges
+//        PriorityQueue<Edge> pq = new PriorityQueue<Edge>(allEdges.size(), Comparator.comparingInt(o -> o.weight));
+//
+//        //add all the edges to priority queue, //sort the edges on weights
+//        for (int i = 0; i <allEdges.size() ; i++) {
+//            pq.add(allEdges.get(i));
+//        }
+//
+//        UnionFind<Vertex<E>> unionFind = new  UnionFind<Vertex<E>>(getVertex());
+//        //makeset
+//        unionFind.makeSet();
+//
+//        ArrayList<Edge> mst = new ArrayList<>();
+//
+//        //process vertices - 1 edges
+//        int index = 0;
+//        while( index < vertex.size()-1){
+//            Edge edge = pq.remove();
+//          
+//            int origin = unionFind.find(searchIndex(edge.getOrigin()));
+//            int destination = unionFind.find(searchIndex(edge.getDestination()));
+//
+//            if(origin != destination){
+//                mst.add(edge);
+//                index++;
+//                unionFind.union(origin,destination);
+//            }
+//        }
+//        
+//    }
 	
 	
 	
