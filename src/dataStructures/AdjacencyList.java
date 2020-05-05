@@ -7,7 +7,9 @@ import java.util.PriorityQueue;
 import org.junit.internal.runners.model.EachTestNotifier;
 
 import AuxiliarDataStructures.IQueue;
+import AuxiliarDataStructures.IStack;
 import AuxiliarDataStructures.Queue;
+import AuxiliarDataStructures.Stack;
 
 public class AdjacencyList<V> implements Graph<V>{
 
@@ -202,6 +204,40 @@ public class AdjacencyList<V> implements Graph<V>{
 		return path;
 	}
 
+	public List<Integer> dfs(Vertex<V> origin){
+		
+		Integer index = searchIndex(origin);
+		
+		ArrayList<Integer> path = new ArrayList<Integer>();
+
+		IStack<Integer> s = new Stack<Integer>();
+		s.push(index);
+		
+		while(!s.isEmpty()) {
+			
+			index = s.pop();
+			if(!contains(path, index))
+				path.add(index);
+			
+			ArrayList<Integer> adjacents = adjacents(index);
+			
+			for (int i = 0; i < adjacents.size(); i++) {
+				
+				Integer temp = adjacents.get(i);
+				
+				if((!s.contains(temp))&&(!contains(path, temp))) {
+					s.push(temp);
+					
+				}
+			}
+			
+		}
+		
+		return path;
+	}
+	
+	
+	
 	private ArrayList<Integer> adjacents(Integer index) {
 		
 		Double inde = (double) index.intValue();
