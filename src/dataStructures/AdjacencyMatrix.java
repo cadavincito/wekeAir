@@ -213,6 +213,9 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
+	public int [][] getGraph(){
+		return this.graph;
+	}
 	
 	
 	public List<Integer> bfs(Vertex<V> origin){
