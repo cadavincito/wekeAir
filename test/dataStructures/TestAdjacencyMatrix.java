@@ -286,7 +286,6 @@ class TestAdjacencyMatrix {
 		
 		
 		
-<<<<<<< HEAD
 		
 				
 //				@Test
@@ -326,7 +325,6 @@ class TestAdjacencyMatrix {
 				
 		
 						
-=======
 		@Test
 		void bfsTest1() {
 		setupScenario4();
@@ -354,7 +352,6 @@ class TestAdjacencyMatrix {
 		
 		
 		}
->>>>>>> 885da2ce27860bcfb253f698a85abe1eb3a84513
 		
 		
 				@Test
