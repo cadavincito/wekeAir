@@ -3,10 +3,15 @@ package dataStructures;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import AuxiliarDataStructures.IQueue;
+import AuxiliarDataStructures.IStack;
 import AuxiliarDataStructures.Queue;
+import AuxiliarDataStructures.Stack;
+import AuxiliarDataStructures.UnionFind;
 import exceptions.InvalidBaseNumber;
 
 public class AdjacencyMatrix<V> implements Graph<V> {
@@ -53,6 +58,40 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 	}
 	
+	
+	
+	public int[][] getGraph() {
+		return graph;
+	}
+
+	public void setGraph(int[][] graph) {
+		this.graph = graph;
+	}
+
+	public double[][] getWeights() {
+		return weights;
+	}
+
+	public void setWeights(double[][] weights) {
+		this.weights = weights;
+	}
+
+	public boolean isDirected() {
+		return directed;
+	}
+
+	public void setDirected(boolean directed) {
+		this.directed = directed;
+	}
+
+	public void setVertex(List<Vertex<V>> vertex) {
+		this.vertex = vertex;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	@Override
 	public boolean addVertex(Vertex<V> vertex) {
 		
@@ -213,9 +252,66 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
+<<<<<<< HEAD
 	public int [][] getGraph(){
 		return this.graph;
 	}
+=======
+	public void primInMatrix(Vertex<V> origin) {
+		
+		for (int i = 0; i < vertex.size(); i++) {
+			vertex.get(i).setColor(Vertex.WHITE);
+			vertex.get(i).setDistance(-1);
+			vertex.get(i).setPrior(null);
+		}
+		
+		int foundOriginIndex = searchIndex(origin);
+		
+		origin = null;
+		
+		if (foundOriginIndex != -1) {
+			origin = vertex.get(foundOriginIndex); 
+		}
+		//TODO
+		
+		
+		
+	}
+	
+//    public  <E> void kruskalInMatrix(){
+//    	//TODO
+//    	//Missing fill all edges
+//        PriorityQueue<Edge> pq = new PriorityQueue<Edge>(allEdges.size(), Comparator.comparingInt(o -> o.weight));
+//
+//        //add all the edges to priority queue, //sort the edges on weights
+//        for (int i = 0; i <allEdges.size() ; i++) {
+//            pq.add(allEdges.get(i));
+//        }
+//
+//        UnionFind<Vertex<E>> unionFind = new  UnionFind<Vertex<E>>(getVertex());
+//        //makeset
+//        unionFind.makeSet();
+//
+//        ArrayList<Edge> mst = new ArrayList<>();
+//
+//        //process vertices - 1 edges
+//        int index = 0;
+//        while( index < vertex.size()-1){
+//            Edge edge = pq.remove();
+//          
+//            int origin = unionFind.find(searchIndex(edge.getOrigin()));
+//            int destination = unionFind.find(searchIndex(edge.getDestination()));
+//
+//            if(origin != destination){
+//                mst.add(edge);
+//                index++;
+//                unionFind.union(origin,destination);
+//            }
+//        }
+//        
+//    }
+	
+>>>>>>> 885da2ce27860bcfb253f698a85abe1eb3a84513
 	
 	
 	public List<Integer> bfs(Vertex<V> origin){
@@ -227,10 +323,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		IQueue<Integer> q = new Queue<Integer>();
 		q.add(index);
 		
-		while(q.size() > 0) {
+		while(!q.isEmpty()) {
 			
 			index = q.poll();
-			if(!q.contains(index))
+			if(!contains(path, index))
 				path.add(index);
 			
 			ArrayList<Integer> adjacents = adjacents(index);
@@ -239,8 +335,44 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 				
 				Integer temp = adjacents.get(i);
 				
-				if(!q.contains(temp))
+				if((!q.contains(temp))&&(!contains(path, temp))) {
 					q.add(temp);
+					
+				}
+			}
+			
+		}
+		
+		return path;
+	}
+	
+	
+	//Está en revisión
+	public List<Integer> dfs(Vertex<V> origin){
+		
+		Integer index = searchIndex(origin);
+		
+		ArrayList<Integer> path = new ArrayList<Integer>();
+
+		IStack<Integer> s = new Stack<Integer>();
+		s.push(index);
+		
+		while(!s.isEmpty()) {
+			
+			index = s.pop();
+			if(!contains(path, index))
+				path.add(index);
+			
+			ArrayList<Integer> adjacents = adjacents(index);
+			
+			for (int i = 0; i < adjacents.size(); i++) {
+				
+				Integer temp = adjacents.get(i);
+				
+				if((!s.contains(temp))&&(!contains(path, temp))) {
+					s.push(temp);
+					
+				}
 			}
 			
 		}
@@ -248,7 +380,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return path;
 	}
 
-	private ArrayList<Integer> adjacents(Integer index) {
+	public ArrayList<Integer> adjacents(Integer index) {
 		
 		ArrayList<Integer> adjacents = new ArrayList<Integer>();
 		

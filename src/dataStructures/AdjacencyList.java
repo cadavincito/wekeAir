@@ -2,6 +2,9 @@ package dataStructures;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+
+import org.junit.internal.runners.model.EachTestNotifier;
 
 import AuxiliarDataStructures.IQueue;
 import AuxiliarDataStructures.Queue;
@@ -37,7 +40,9 @@ public class AdjacencyList<V> implements Graph<V>{
 			this.vertex.add(vertex);
 			
 			added = true;
-			
+
+			this.graph.add(new ArrayList<List<Double>>());
+
 			this.size++;
 		}
 		
@@ -110,17 +115,15 @@ public class AdjacencyList<V> implements Graph<V>{
 		int a = searchIndex(vertex_1);
 		int b = searchIndex(vertex_2);
 				
+		System.out.println(a+" , "+b);
+		
 		if(a != -1 && b != -1) {
 			
 			ArrayList<Double> temp = new ArrayList<Double>();
-<<<<<<< HEAD
-			
-			temp.add((double) a);
-=======
->>>>>>> 7d785451e01f5b829fc7536ccdb0440e3b6cff26
+
 			temp.add((double) b);
 			temp.add(weight);
-			
+
 			this.graph.get(a).add(temp);
 			
 			if(!this.isDirected()) {
@@ -178,10 +181,10 @@ public class AdjacencyList<V> implements Graph<V>{
 		IQueue<Integer> q = new Queue<Integer>();
 		q.add(index);
 		
-		while(q.size() > 0) {
+		while(!q.isEmpty()) {
 			
 			index = q.poll();
-			if(!q.contains(index))
+			if(!contains(path,index))
 				path.add(index);
 			
 			ArrayList<Integer> adjacents = adjacents(index);
@@ -190,7 +193,7 @@ public class AdjacencyList<V> implements Graph<V>{
 				
 				Integer temp = adjacents.get(i);
 				
-				if(!q.contains(temp))
+				if(!q.contains(temp) && (!contains(path,index)))
 					q.add(temp);
 			}
 			
@@ -205,37 +208,19 @@ public class AdjacencyList<V> implements Graph<V>{
 		
 		ArrayList<Integer> adjacents = new ArrayList<Integer>();
 		
-		for (int i = 0; i < this.vertex.size(); i++) {
+		for (int i = 0; i < this.graph.size(); i++) {
 			
-			List<Double> temp = this.graph.get(i);
-			
-			if(this.directed == true) {
+			for (int j = 0; j < this.graph.get(i).size(); j++) {
 				
-				if(temp.get(0) == inde) {
-					
-					Integer element = (int) temp.get(1).doubleValue();
-					
-					if(!contains(adjacents, element))
-						adjacents.add(element);
-					
-				}
-			}
-			else {
+				Double temp = this.graph.get(i).get(j).get(0);
 				
-				if(temp.get(0) == inde) {
+				if( temp == inde) {
 					
-					Integer element = (int) temp.get(1).doubleValue();
+					if(!contains(adjacents, i)) {
+						
+						adjacents.add(temp.intValue());
+					}
 					
-					if(!contains(adjacents, element))
-						adjacents.add(element);
-				}
-				
-				if(temp.get(1) == inde) {
-					
-					Integer element = (int) temp.get(0).doubleValue();
-					
-					if(!contains(adjacents, element))
-						adjacents.add(element);
 				}
 				
 			}
@@ -265,7 +250,7 @@ public class AdjacencyList<V> implements Graph<V>{
 	/**
 	 * @return the graph
 	 */
-	List<List<Double>> getGraph() {
+	List<List<List<Double>>> getGraph() {
 		return graph;
 	}
 

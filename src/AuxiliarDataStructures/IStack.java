@@ -7,5 +7,6 @@ public interface IStack <T> {
 	T pop();
 	int size();
 	boolean isEmpty();
+	boolean contains(Integer temp);
 
 }
