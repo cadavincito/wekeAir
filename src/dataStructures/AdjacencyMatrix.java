@@ -252,11 +252,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
-<<<<<<< HEAD
-	public int [][] getGraph(){
-		return this.graph;
-	}
-=======
+
 	public void primInMatrix(Vertex<V> origin) {
 		
 		for (int i = 0; i < vertex.size(); i++) {
@@ -311,7 +307,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 //        
 //    }
 	
->>>>>>> 885da2ce27860bcfb253f698a85abe1eb3a84513
+
 	
 	
 	public List<Integer> bfs(Vertex<V> origin){

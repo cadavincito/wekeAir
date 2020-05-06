@@ -115,7 +115,7 @@ public class AdjacencyList<V> implements Graph<V>{
 		int a = searchIndex(vertex_1);
 		int b = searchIndex(vertex_2);
 				
-		System.out.println(a+" , "+b);
+		
 		
 		if(a != -1 && b != -1) {
 			

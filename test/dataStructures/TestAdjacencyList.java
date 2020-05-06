@@ -38,6 +38,55 @@ class TestAdjacencyList {
 			}
 		}
 		
+		//there are 4 edges in this graph
+		//the graph is directed
+		void setupScenario4() {
+		adjacencylist = new AdjacencyList<City>(true);
+		for(int i = 0; i<30; i++) {
+			Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+			adjacencylist.addVertex(vi);
+		}
+					
+		// 0 ---> 1 && 0 ----> 2
+		adjacencylist.addEdge(adjacencylist.getVertex().get(0), adjacencylist.getVertex().get(1));
+		adjacencylist.addEdge(adjacencylist.getVertex().get(0), adjacencylist.getVertex().get(2));
+		
+		// 1 ---> 3 && 1 ----> 4
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3));
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(4));
+	}
+						
+				
+				
+		//graph with 30 vertexes
+		//the graph is directed
+		//there are 8 edges in this graph
+		void setupScenario5() {
+			
+			adjacencylist = new AdjacencyList<City>(true);
+			for(int i = 0; i<10; i++) {
+				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				adjacencylist.addVertex(vi);
+			}
+			
+			// 0 ---> 1 && 0 ----> 2
+			adjacencylist.addEdge(adjacencylist.getVertex().get(0), adjacencylist.getVertex().get(1));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(0), adjacencylist.getVertex().get(2));
+			
+			// 1 ---> 3 && 1 ----> 4
+			adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(4));
+			
+			// 3 ---> 5 && 3 ----> 6
+			adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(5));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(6));
+			
+			// 4 ---> 7 && 4 ----> 8
+			adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(7));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(8));
+		}
+		
+		
 	@Test
 	void testAdjacencyList() {
 			
@@ -140,6 +189,32 @@ class TestAdjacencyList {
 		boolean b = adjacencylist.addEdge(vi,va);
 		assertTrue(b);
 	}
+	
+	//test for adding a unweighted edge
+			//when the matrix is full
+			//the graph is not directed
+			@Test
+			void addEdgeTest4() {
+				setupScenario3();
+				Vertex<City> vi = new Vertex<City>(new City(2+"",""));
+				Vertex<City> va = new Vertex<City>(new City(10+"",""));
+				boolean a = adjacencylist.addEdge(vi, va);
+				double  b = adjacencylist.getGraph().get(0).get(2).get(10);
+				
+				
+			}
+			
+			
+			//test for adding a unweighted edge
+			//when the matrix is full
+			//the graph is directed
+			@Test
+			void addEdgeTest5() {
+				setupScenario4();
+				//must be 1 if there is a connection
+				//must be 0 if there is not a connection
+
+			}
 
 	@Test
 	 void addEdgeWeightedTest1() {

@@ -37,6 +37,19 @@ class TestAdjacencyMatrix {
 				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
 				adjacencyMatrix.addVertex(vi);
 			}
+			// 1 ---> 1 && 2 ----> 1
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(2));
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(1));
+			
+			// 2 ---> 5 && 2 ----> 6
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(6));
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(5));	
+			
+			// 5 ---> 7 && 7 ----> 30
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(5), adjacencyMatrix.getVertex().get(7));
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(7), adjacencyMatrix.getVertex().get(23));	
+			
+			
 		}
 
 		//there are 4 edges in this graph
@@ -85,6 +98,34 @@ class TestAdjacencyMatrix {
 			// 4 ---> 7 && 4 ----> 8
 			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(3), adjacencyMatrix.getVertex().get(7));
 			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(3), adjacencyMatrix.getVertex().get(8));
+		}
+		
+		//graph with 30 vertexes
+		//the graph is directed
+		//there are 8 edges in this graph
+		void setupScenario6() {
+			
+			adjacencyMatrix = new AdjacencyMatrix<City>(true);
+			for(int i = 0; i<10; i++) {
+				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				adjacencyMatrix.addVertex(vi);
+			}
+			
+			// 0 ---> 1 && 0 ----> 2
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(0), adjacencyMatrix.getVertex().get(1),100);
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(0), adjacencyMatrix.getVertex().get(2),200);
+			
+			// 1 ---> 3 && 1 ----> 4
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(3),300);
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(4),250);
+			
+			// 2 ---> 5 && 2 ----> 6
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(5),500);
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(6),600);
+			
+			// 3 ---> 7 && 3 ----> 8
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(3), adjacencyMatrix.getVertex().get(7),250);
+			adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(3), adjacencyMatrix.getVertex().get(8),400);
 		}
 		
 		@Test
@@ -233,7 +274,7 @@ class TestAdjacencyMatrix {
 		//the graph is directed
 		@Test
 		void addEdgeTest6() {
-			setupScenario5();
+			setupScenario6();
 			
 			//must be 1 if there is a connection
 			//must be 0 if there is not a connection
@@ -285,59 +326,25 @@ class TestAdjacencyMatrix {
 		}
 		
 		
+		//test for adding a weighted edge
+		@Test
+		void addWeightedEdgeTest4() {
+			setupScenario4();
+			Vertex<City> vi = new Vertex<City>(new City(9+"",""));
+			Vertex<City> va = new Vertex<City>(new City(10+"",""));
+			boolean b = adjacencyMatrix.addEdge(vi, va,300);
+			assertTrue(b);
+		}
 		
-<<<<<<< HEAD
 		
-				
-//				@Test
-//				void bfsTest1() {
-//				setupScenario4();
-//		
-//				List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(0));
-//				
-//				List<Integer> b = new ArrayList<Integer>();	
-//				
-//				for(int i = 0; i<5;i++){
-//					b.add(i);
-//				}
-//					
-//				assertEquals(a,b);
-//				
-//				
-//				}
-//				
-//				
-//				@Test
-//				void bfsTest2() {
-//				setupScenario4();
-//		
-//				List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(0));
-//				
-//				List<Integer> b = new ArrayList<Integer>();	
-//				
-//				for(int i = 0; i<5;i++){
-//					b.add(i);
-//				}
-//					
-//				assertEquals(a,b);
-//				
-//				
-//				}
-				
+
 		
-						
-=======
 		@Test
 		void bfsTest1() {
 		setupScenario4();
 
 		List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(0));
 		
-		
-		for (int i = 0; i < adjacencyMatrix.getGraph()[0].length; i++) {
-			
-			System.out.println(Arrays.toString(adjacencyMatrix.getGraph()[i]));
-		}
 		
 		List<Integer> b = new ArrayList<Integer>();	
 		
@@ -347,51 +354,160 @@ class TestAdjacencyMatrix {
 		
 		System.out.println(a.toString());
 		System.out.println(b.toString());
+				
+		assertEquals(a,b);
 		
-		System.out.println("Estos sysos están en el test de bfs, Toño. Si quieres, los puedes borrar.");
+		
+		}
+		
+		
+		
+		
+		
+		@Test
+		void bfsTest2() {
+		setupScenario3();
+
+		List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(2));
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		b.add(2);
+		b.add(1);
+		b.add(5);
+		b.add(6);
+		b.add(7);
+		b.add(23);
+		
+		
+		System.out.println(a.toString());
+		System.out.println(b.toString());
+				
+		assertEquals(a,b);
+		
+		
+		}
+		
+		
+		@Test
+		void dfsTest1() {
+		setupScenario4();
+
+		List<Integer> a=adjacencyMatrix.dfs(adjacencyMatrix.getVertex().get(0));
+		
+		
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		b.add(0);
+		b.add(2);
+		b.add(1);
+		b.add(4);
+		b.add(3);
+	
+		
+		System.out.println("dfs "+a.toString());
+		System.out.println("dfs "+b.toString());
+				
+		assertEquals(a,b);
+		
+		
+		}
+		
+		
+		
+		
+		@Test
+		void dfsTest2() {
+		setupScenario3();
+
+		List<Integer> a=adjacencyMatrix.dfs(adjacencyMatrix.getVertex().get(2));
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		b.add(2);
+		b.add(6);
+		b.add(5);
+		b.add(7);
+		b.add(23);
+		b.add(1);
+		
+		
+		System.out.println("dfs "+a.toString());
+		System.out.println("dfs "+b.toString());
+				
+		assertEquals(a,b);
+		
+		
+		}
+		
+		@Test
+		void primsAlgorithmTest1() {
+		
+		}
+		
+		@Test
+		void primsAlgorithmTest2() {
+		
+		}
+		
+		
+		@Test
+		void adjacentsTest1() {
+		setupScenario6();
+		
+		List<Integer> a = adjacencyMatrix.adjacents(0);
+		List<Integer> b = new ArrayList<Integer>();
+		b.add(1);
+		b.add(2);
+		
+		System.out.println("adja"+a.toString());
+		System.out.println("adja "+b.toString());
+		assertEquals(a,b);
+		
+		}
+		
+		@Test
+		void adjacentsTest2() {
+		setupScenario6();
+		
+		List<Integer> a = adjacencyMatrix.adjacents(3);
+		List<Integer> b = new ArrayList<Integer>();
+		b.add(7);
+		b.add(8);
+		
+		System.out.println("adja"+a.toString());
+		System.out.println("adja "+b.toString());
+		assertEquals(a,b);
+		
+		}
+		
+		@Test
+		void searchIndexTest1() {
+		setupScenario2();
+		Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+		int a = adjacencyMatrix.searchIndex(vi);
+		int b = 0;
 		
 		assertEquals(a,b);
 		
 		
 		}
->>>>>>> 885da2ce27860bcfb253f698a85abe1eb3a84513
 		
+		@Test
+		void searchIndexTest2() {
+		setupScenario1();
+		Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+		int a = adjacencyMatrix.searchIndex(vi);
+		int b = -1;
+		assertEquals(a,b);
+		}
 		
-				@Test
-				void searchIndexTest1() {
-				setupScenario2();
-				Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-				int a = adjacencyMatrix.searchIndex(vi);
-				int b = 0;
-				
-				assertEquals(a,b);
-				
-				
-				}
-				
-				@Test
-				void searchIndexTest2() {
-				setupScenario1();
-				Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-				int a = adjacencyMatrix.searchIndex(vi);
-				int b = -1;
-				
-				assertEquals(a,b);
-				
-				
-				}
-				
-				@Test
-				void searchIndexTest3() {
-				setupScenario3();
-				Vertex<City> vi = new Vertex<City>(new City(19+"",""));
-				int a = adjacencyMatrix.searchIndex(vi);
-				int b = 19;
-				
-				assertEquals(a,b);
-				
-				
-				}
+		@Test
+		void searchIndexTest3() {
+		setupScenario3();
+		Vertex<City> vi = new Vertex<City>(new City(19+"",""));
+		int a = adjacencyMatrix.searchIndex(vi);
+		int b = 19;
+		assertEquals(a,b);
+		}
 
 
 }
