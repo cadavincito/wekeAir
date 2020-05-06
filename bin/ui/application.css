@@ -9,10 +9,10 @@
 
 .label{
 	/*-fx-text-fill:linear-gradient(to right, Yellow, DarkOrange, Red, DarkOrange, Tomato);*/
- 	-fx-text-fill: white;
+ 	-fx-text-fill: black;
 
 	-fx-font-family:Impact;
-	-fx-font-size:50;
+	-fx-font-size:20;
 	-fx-font-weight:bold;
 	-fx-text-alignment: center;
 }

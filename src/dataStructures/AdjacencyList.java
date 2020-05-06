@@ -238,7 +238,7 @@ public class AdjacencyList<V> implements Graph<V>{
 	
 	
 	
-	private ArrayList<Integer> adjacents(Integer index) {
+	public ArrayList<Integer> adjacents(Integer index) {
 		
 		Double inde = (double) index.intValue();
 		

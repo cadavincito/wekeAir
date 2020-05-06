@@ -339,17 +339,12 @@ class TestAdjacencyMatrix {
 		
 
 		
-<<<<<<< HEAD
-=======
-						
->>>>>>> 025157c301d9c1aee23936df0e431f4f50dcfb34
+
 		@Test
 		void bfsTest1() {
 		setupScenario4();
 
 		List<Integer> a=adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(0));
-		
-		
 		List<Integer> b = new ArrayList<Integer>();	
 		
 		for(int i = 0; i<5;i++){
@@ -454,9 +449,20 @@ class TestAdjacencyMatrix {
 		
 		
 		@Test
+		void djikstraTest1() {
+		
+		}
+		
+		@Test
+		void djikstraTest2() {
+		
+		}
+		
+		
+		@Test
 		void adjacentsTest1() {
 		setupScenario6();
-		
+		//get the adjacent vertexes to the vertex 0
 		List<Integer> a = adjacencyMatrix.adjacents(0);
 		List<Integer> b = new ArrayList<Integer>();
 		b.add(1);
@@ -471,7 +477,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void adjacentsTest2() {
 		setupScenario6();
-		
+		//get the adjacent vertexes to the vertex 3
 		List<Integer> a = adjacencyMatrix.adjacents(3);
 		List<Integer> b = new ArrayList<Integer>();
 		b.add(7);
@@ -480,6 +486,22 @@ class TestAdjacencyMatrix {
 		System.out.println("adja"+a.toString());
 		System.out.println("adja "+b.toString());
 		assertEquals(a,b);
+		
+		}
+		
+		
+		@Test
+		void adjacentsTest3() {
+		setupScenario6();
+		//get the adjacent vertexes to the vertex 3
+		List<Integer> a = adjacencyMatrix.adjacents(2);
+		List<Integer> b = new ArrayList<Integer>();
+		b.add(5);
+		b.add(8);
+		
+		System.out.println("adja"+a.toString());
+		System.out.println("adja "+b.toString());
+		assertNotEquals(a,b);
 		
 		}
 		

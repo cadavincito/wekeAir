@@ -2,6 +2,9 @@ package dataStructures;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -242,6 +245,107 @@ class TestAdjacencyList {
 		Vertex<City> va = new Vertex<City>(new City(10+"", ""));
 		boolean b = adjacencylist.addEdge(vi,va,1000);
 		assertTrue(b);
+	}
+	
+	@Test
+	void adjacentsTest1() {
+	setupScenario5();
+	//get the adjacent vertexes to the vertex 0
+	List<Integer> a = adjacencylist.adjacents(0);
+	List<Integer> b = new ArrayList<Integer>();
+	b.add(1);
+	b.add(2);
+	
+	System.out.println("adja list"+a.toString());
+	System.out.println("adja "+b.toString());
+	assertEquals(a,b);
+	
+	}
+	
+	
+	@Test
+	void adjacentsTest2() {
+	setupScenario5();
+	//get the adjacent vertexes to the vertex 3
+	List<Integer> a = adjacencylist.adjacents(3);
+	List<Integer> b = new ArrayList<Integer>();
+	b.add(7);
+	b.add(8);
+	
+	System.out.println("adja"+a.toString());
+	System.out.println("adja "+b.toString());
+	assertEquals(a,b);
+	
+	}
+	
+	
+	@Test
+	void adjacentsTest3() {
+	setupScenario5();
+	//get the adjacent vertexes to the vertex 3
+	List<Integer> a = adjacencylist.adjacents(2);
+	List<Integer> b = new ArrayList<Integer>();
+	b.add(5);
+	b.add(8);
+	
+	System.out.println("adja"+a.toString());
+	System.out.println("adja "+b.toString());
+	assertNotEquals(a,b);
+	
+	}
+	@Test
+	void bfsTest1() {
+	
+	
+	}
+	
+	
+	
+	
+	
+	@Test
+	void bfsTest2() {
+	
+	
+	
+	}
+	
+	
+	@Test
+	void dfsTest1() {
+	
+	
+	}
+	
+	
+	
+	
+	@Test
+	void dfsTest2() {
+	
+	
+	
+	}
+	
+	@Test
+	void primsAlgorithmTest1() {
+	
+	}
+	
+	@Test
+	void primsAlgorithmTest2() {
+	
+	}
+	
+	
+	@Test
+	void djikstraTest1() {
+	
+	}
+	
+	@Test
+	void djikstraTest2() {
+	
 	}
 	
 	

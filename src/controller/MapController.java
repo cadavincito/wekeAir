@@ -2,9 +2,11 @@ package controller;
 
 import java.util.ArrayList;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -22,6 +24,12 @@ public class MapController {
 	Circle origin;
 	@FXML
 	Circle destiny;
+	
+	 @FXML
+	 private ChoiceBox<String> origin_box;
+
+	 @FXML
+	 private ChoiceBox<String> destination_box;
 
 	private boolean originSelected;
 	private boolean destinySelected;
@@ -32,6 +40,10 @@ public class MapController {
 		
 		origin  = new Circle();
 		destiny = new Circle();
+		
+		origin_box.getItems().addAll("wikiti","Bogota","Quito","Brasilia");
+		
+		destination_box.getItems().addAll("wikiti","Bogota","Quito","Brasilia");
 
 	}
 
