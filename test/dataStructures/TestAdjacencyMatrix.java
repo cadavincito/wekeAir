@@ -339,6 +339,10 @@ class TestAdjacencyMatrix {
 		
 
 		
+<<<<<<< HEAD
+=======
+						
+>>>>>>> 025157c301d9c1aee23936df0e431f4f50dcfb34
 		@Test
 		void bfsTest1() {
 		setupScenario4();
