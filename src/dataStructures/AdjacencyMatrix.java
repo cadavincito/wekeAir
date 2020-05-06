@@ -252,6 +252,20 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
+	public void dijkstra(Vertex<V> origin, Vertex<V> destiny) {
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(); 
+		
+		for (int i = 0; i < vertex.size(); i++) {
+			vertex.get(i).setColor(Vertex.WHITE);
+			vertex.get(i).setDistance(-1);
+			vertex.get(i).setPrior(null);
+		}
+		
+		origin.setDistance(0);
+		//TODO
+		
+	}
+	
 	public void primInMatrix(Vertex<V> origin) {
 		
 		for (int i = 0; i < vertex.size(); i++) {
@@ -341,7 +355,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	}
 	
 	
-	//Está en revisión
+	//Estï¿½ en revisiï¿½n
 	public List<Integer> dfs(Vertex<V> origin){
 		
 		Integer index = searchIndex(origin);
