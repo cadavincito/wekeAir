@@ -42,6 +42,43 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		this.size = 0;
 		
 	}
+
+// IGNOREN ESTO PERO NO LO BORREN
+//	public class Main(){
+//	    
+//	    public static void main(String[] args){
+//	        
+//	    }          
+//	    
+//	    public IGraph prim(IGraph<Integer> g, int vertex){
+//	        IGraph<Integer> mst = new Graph<>();
+//	        mst.addVertex(vertex);
+//	        PriorityQueue<IEdge<Integer>> pq = new PriorityQueue<>();
+//	        List<Integer> adjVertex = g.getAdjacents(vertex);
+//	        for(Integer v:adjVertex){
+//	            IEdge<Integer> e = new Edge<>(vertex, v, g.getWeight(vertex,v));
+//	            pq.add(e);
+//	        }
+//	        int edgesAdded=0;
+//	        while(edgesAdded<g.size()-1){
+//	            IEdge<Integer> e = pq.poll();
+//	            Integer newVertex = e.getEnd();
+//	            if(!g.existVertex(newVertex)){
+//	                mst.addVertex(newVertex);
+//	                mst.addEdge(e.getStart(),e.getEnd(),e.getWeight());
+//	                edgesAdded++;
+//	                adjVertex = g.getAdjacents(newVertex);
+//	                for(Integer v:adjVertex){
+//	                    IEdge<Integer> e = new Edge<>(newVertex, v, g.getWeight(vertex,v));
+//	                    pq.add(e);
+//	                }
+//	            }
+//	        }
+//	        
+//	        return mst;
+//	    }
+//	    
+//	}//end of class
 	
 	public AdjacencyMatrix(boolean directed) {
 		
@@ -244,6 +281,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return index;
 	}
 	
+	
 	public int getSize() {
 		return this.size;
 	}
@@ -252,22 +290,79 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
-
-	public void dijkstra(Vertex<V> origin, Vertex<V> destiny) {
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(); 
+	//REVISAR
+	public void dijkstra(Vertex<V> origin) {
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		for (int i = 0; i < vertex.size(); i++) {
-			vertex.get(i).setColor(Vertex.WHITE);
-			vertex.get(i).setDistance(-1);
+			vertex.get(i).setDistance(Integer.MAX_VALUE);
 			vertex.get(i).setPrior(null);
 		}
 		
 		origin.setDistance(0);
+		
+		while (!(vertexes.isEmpty())) {
+			Vertex<V> front = vertexes.poll();
+			
+			int frontInt = searchIndex(front);
+			
+			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
+			
+			for (int i = 0; i < adjacentsInt.size(); i++) {
+				
+				double distance = vertex.get(frontInt).getDistance() + weights[frontInt][i];
+				
+				if (distance < vertex.get(i).getDistance()) {
+					vertex.get(i).setDistance((int)distance); //QUITAR CAST INT, ARREGLAR TIPO DE DATO
+					vertex.get(i).setPrior(vertex.get(frontInt));
+				}
+				
+			}
+			
+		}
+		
 		//TODO
 		
 	}
 	
-
+	//REVISAR
+	public double[][] floydWarshall() {
+		double[][] matrixDistances = getWeights();
+		
+		for (int i = 0; i < matrixDistances.length; i++) {
+			matrixDistances[i][i] = 0;
+		}
+		
+		for (int i = 0; i < matrixDistances.length; i++) {
+			for (int j = 0; j < matrixDistances[0].length; j++) {
+				
+				if (i !=j) {
+					if (matrixDistances[i][j] == 0) { //ask if there can be a 0 weighted edge  between != vertexes
+						matrixDistances[i][j] = Double.MAX_VALUE;
+					}
+				}
+				
+			}
+		}
+		
+		for (int k = 0; k < vertex.size(); k++) {
+			for (int i = 0; i < matrixDistances.length; i++) {
+				for (int j = 0; j < matrixDistances[0].length; j++) {
+					
+					if (matrixDistances[i][j] > matrixDistances[i][k] + matrixDistances[k][j]) {
+						matrixDistances[i][j] = matrixDistances[i][k] + matrixDistances[k][j];
+					}
+				
+					
+				}
+			}
+			
+		}
+		
+		return matrixDistances;
+		
+	}
+	
 	public void primInMatrix(Vertex<V> origin) {
 		
 		for (int i = 0; i < vertex.size(); i++) {
@@ -322,7 +417,6 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 //        
 //    }
 	
-
 	
 	
 	public List<Integer> bfs(Vertex<V> origin){

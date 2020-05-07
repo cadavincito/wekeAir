@@ -1,6 +1,6 @@
 package dataStructures;
 
-public class Vertex<E> {
+public class Vertex<E> implements Comparable<Vertex>{
 
 	public final static String BLACK = "B";
 	public final static String GREY = "G";
@@ -112,6 +112,11 @@ public class Vertex<E> {
 	 */
 	public void setPrior(Vertex prior) {
 		this.prior = prior;
+	}
+
+	@Override
+	public int compareTo(Vertex v1) {
+		return (getDistance()-v1.getDistance());
 	}
 	
 	

@@ -173,6 +173,110 @@ public class AdjacencyList<V> implements Graph<V>{
 		return index;
 	}
 	
+	//REVISAR
+	public double[][] floydWarshall() {
+		
+		double[][] matrixDistances = buildWeightsMatrix();
+		
+		for (int i = 0; i < matrixDistances.length; i++) {
+			matrixDistances[i][i] = 0;
+		}
+		
+		for (int i = 0; i < matrixDistances.length; i++) {
+			for (int j = 0; j < matrixDistances[0].length; j++) {
+				
+				if (i !=j) {
+					if (matrixDistances[i][j] == 0) { //ask if there can be a 0 weighted edge  between != vertexes
+						matrixDistances[i][j] = Double.MAX_VALUE;
+					}
+				}
+				
+			}
+		}
+		
+		for (int k = 0; k < vertex.size(); k++) {
+			for (int i = 0; i < matrixDistances.length; i++) {
+				for (int j = 0; j < matrixDistances[0].length; j++) {
+					
+					if (matrixDistances[i][j] > matrixDistances[i][k] + matrixDistances[k][j]) {
+						matrixDistances[i][j] = matrixDistances[i][k] + matrixDistances[k][j];
+					}
+				
+					
+				}
+			}
+			
+		}
+		
+		return matrixDistances;
+		
+	}
+	
+	public double[][] buildWeightsMatrix() {
+		double[][] weights = new double[vertex.size()][vertex.size()];
+		
+		for (int i = 0; i < graph.size(); i++) {
+			for (int j = 0; j < graph.get(i).size(); j++) {
+				
+				int y = graph.get(i).get(j).get(0).intValue();
+				double value = graph.get(i).get(j).get(1);
+				weights[i][y] = value;
+			}
+		}
+		
+		return weights;
+	}
+	
+	//REVISAR
+	public void dijkstra(Vertex<V> origin) {
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
+		
+		for (int i = 0; i < vertex.size(); i++) {
+			vertex.get(i).setDistance(Integer.MAX_VALUE);
+			vertex.get(i).setPrior(null);
+		}
+		
+		origin.setDistance(0);
+		
+		while (!(vertexes.isEmpty())) {
+			Vertex<V> front = vertexes.poll();
+			
+			int frontInt = searchIndex(front);
+			
+			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
+			
+			for (int i = 0; i < adjacentsInt.size(); i++) {
+				
+				double distance = vertex.get(frontInt).getDistance() + getEdgeWeight(frontInt, i);
+				
+				if (distance < vertex.get(i).getDistance()) {
+					vertex.get(i).setDistance((int)distance); //QUITAR CAST INT, ARREGLAR TIPO DE DATO
+					vertex.get(i).setPrior(vertex.get(frontInt));
+				}
+				
+			}
+			
+		}
+		
+		//TODO
+		
+	}
+	//always has to work
+	public double getEdgeWeight(int origin, int destiny) {
+		
+		double weight = Integer.MAX_VALUE;
+		
+		
+		for (int i = 0; i < graph.get(origin).size() && weight == Integer.MAX_VALUE; i++) {
+			
+			if (destiny == 	graph.get(origin).get(i).get(0)) {
+				weight = graph.get(origin).get(i).get(1);
+			}
+		}
+		return weight;
+		
+	}
+	
 	
 	public List<Integer> bfs(Vertex<V> origin){
 		
@@ -300,4 +404,4 @@ public class AdjacencyList<V> implements Graph<V>{
 	
 	
 	
-}
+} //end of class
