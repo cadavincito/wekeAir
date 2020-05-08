@@ -1,6 +1,5 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 #panecito{
-	-fx-background-image:url(../resources/turfcito.jpg);
   	-fx-background-position:center;
   	-fx-background-repeat: no-repeat;
   	-fx-background-color:#FFC0CB;
@@ -12,7 +11,7 @@
  	-fx-text-fill: black;
 
 	-fx-font-family:Impact;
-	-fx-font-size:20;
+	-fx-font-size:15;
 	-fx-font-weight:bold;
 	-fx-text-alignment: center;
 }
@@ -38,9 +37,14 @@
  	-fx-position-shape: center;
  }
  .button{
-	text:black;
+	text:white;
 	border:white;
-	background:linear-gradient(to right, Grey, White);
+	background:linear-gradient(to right, Grey, Transparent, Grey, Transparent
+		, Grey, Transparent, Grey, Transparent, Grey, Transparent, Grey, Transparent
+		, Grey, Transparent, Grey, 
+		Transparent, Grey, Transparent, Grey, Transparent
+	);
+	-fx-border-radius: 30px 30px 30px 30px;
 	
 	-fx-background-color:background;
 	-fx-text-fill:text;

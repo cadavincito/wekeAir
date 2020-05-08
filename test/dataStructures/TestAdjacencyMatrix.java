@@ -450,7 +450,9 @@ class TestAdjacencyMatrix {
 		
 		@Test
 		void djikstraTest1() {
-		
+			setupScenario3();
+
+
 		}
 		
 		@Test

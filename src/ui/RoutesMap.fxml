@@ -39,13 +39,14 @@
       <Circle fx:id="washington" accessibleRole="BUTTON" fill="#ff441f" layoutX="521.0" layoutY="171.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="otawa" accessibleRole="BUTTON" fill="#ff441f" layoutX="549.0" layoutY="133.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="lahabana" accessibleRole="BUTTON" fill="#ff441f" layoutX="496.0" layoutY="230.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#selectOrigin" prefHeight="25.0" prefWidth="76.0" text="Origin" />
-      <Button id="botones" layoutX="2.0" layoutY="115.0" mnemonicParsing="false" onAction="#selectDestiny" text="Destination">
+      <Button layoutX="21.0" layoutY="29.0" mnemonicParsing="false" onAction="#selectOrigin" prefHeight="25.0" prefWidth="76.0" text="Origin" />
+      <Button id="botones" layoutX="14.0" layoutY="115.0" mnemonicParsing="false" onAction="#selectDestiny" text="Destination">
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding></Button>
       <Circle fx:id="ciudaddemexico" accessibleRole="BUTTON" fill="#ff441f" layoutX="435.0" layoutY="248.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <ChoiceBox fx:id="origin_box" layoutX="157.0" layoutY="33.0" prefHeight="23.0" prefWidth="76.0" />
       <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" />
+      <Button fx:id="searchButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#search" text="Search" />
    </children>
 </Pane>

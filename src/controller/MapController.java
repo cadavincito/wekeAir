@@ -1,11 +1,17 @@
 package controller;
 
+
 import java.util.ArrayList;
+import java.util.Observable;
 
-
+import javafx.scene.shape.*;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -26,6 +32,9 @@ public class MapController {
 	Circle destiny;
 	
 	 @FXML
+	 private Button searchButton;
+	
+	 @FXML
 	 private ChoiceBox<String> origin_box;
 
 	 @FXML
@@ -41,11 +50,33 @@ public class MapController {
 		origin  = new Circle();
 		destiny = new Circle();
 		
-		origin_box.getItems().addAll("wikiti","Bogota","Quito","Brasilia");
-		
-		destination_box.getItems().addAll("wikiti","Bogota","Quito","Brasilia");
-
+		fillFligths();
 	}
+
+	private void fillFligths() {
+		origin_box.getItems().addAll("Bogota","Quito","Brasilia","La Paz","Lima","Asuncion","Bs.As","Montevideo","Santiago"
+				,"Guatemala","San Salvador","Tegucigalpa","Managua","San Jose","Panama","Belmopan","Caracas","Georgetown","Paramaribo"
+				,"Cayena","Washington","Otawa","La Habana");
+		
+		destination_box.getItems().addAll("Bogota","Quito","Brasilia","La Paz","Lima","Asuncion","Bs.As","Montevideo","Santiago"
+				,"Guatemala","San Salvador","Tegucigalpa","Managua","San Jose","Panama","Belmopan","Caracas","Georgetown","Paramaribo"
+				,"Cayena","Washington","Otawa","La Habana");
+
+//		ObservableList<Node> l = pane.getChildren();
+//		
+//		for(int i = 0; i< l.size();i++) {
+//			Circle n = new Circle();
+//			Node w = l.get(i);
+//			if(n.getClass().equals(w)) {
+//				String id = w.getId();
+//				origin_box.getItems().add(id);
+//				destination_box.getItems().add(id);
+//			}
+//		}
+	}
+	
+	
+	
 
 	public void clicked(MouseEvent e) {
 
@@ -81,6 +112,8 @@ public class MapController {
 			System.out.println("a");
 		});
 	}
+	
+	
 
 	public void selectOrigin() {
 
@@ -92,7 +125,17 @@ public class MapController {
 
 		this.destinySelected = true;
 		genericAlert("Destiny", "Please select your destiny node.");
+		
+		
 	}
+	
+	@FXML
+    void search(ActionEvent event) {
+		paintLine(origin, destiny);
+		System.out.println("aaaa");
+		System.out.println(origin.getLayoutX());
+		System.out.println(destiny.getLayoutX());
+    }
 	
 	public void genericAlert(String title, String context) {
 
@@ -103,5 +146,23 @@ public class MapController {
 		a.show();
 
 	}
+	
+	
 
-}
+	void paintLine(Node e1, Node e2) {
+		//Este es un metodo para pintar 
+		//una linea entre ambas ciudades
+		//por alguna razon no esta pintando
+		Line line = new Line();
+		line.setStartX(e1.getLayoutX());
+		line.setStartY(e1.getLayoutY());
+		line.setEndX(e2.getLayoutX());
+		line.setEndY(e2.getLayoutY());
+		line.setFill(Color.AQUA);
+		line.setStroke(Color.AQUA);
+		line.setStrokeWidth(50);
+		line.setVisible(true);
+		}
+	}
+
+

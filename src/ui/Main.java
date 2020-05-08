@@ -7,7 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-
+/**
+* <b>Description:</b> The class Main in the package view.<br>
+* @author Cadavinci, SrPinia & Zonitidus.
+*/
 
 public class Main extends Application {
 	@Override
@@ -18,7 +21,8 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image("file:./resources/wekelogo.png"));
+			Image a = new Image("file:../resources/pink_matte.jpg");
+			primaryStage.getIcons().add(a);
 			primaryStage.setTitle("WekeAir");
 			primaryStage.show();
 		} catch(Exception e) {
