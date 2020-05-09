@@ -13,6 +13,7 @@ import AuxiliarDataStructures.Queue;
 import AuxiliarDataStructures.Stack;
 import AuxiliarDataStructures.UnionFind;
 import exceptions.InvalidBaseNumber;
+import model.City;
 
 public class AdjacencyMatrix<V> implements Graph<V> {
 
@@ -493,8 +494,14 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		for (int i = 0; i < this.vertex.size(); i++) {
 			
 			if(this.graph[index][i] >= 1) {
-				if(!contains(adjacents,i))
+				if(!contains(adjacents,i)) {
+					
+					if(this.vertex.get(i).getPrior() != null) 
+						this.vertex.get(i).setPrior(this.vertex.get(index));
+					
+					
 					adjacents.add(i);
+				}
 			}
 		}
 		
@@ -515,6 +522,39 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		}
 		
 		return contains;
+	}
+
+	public ArrayList<V> bfsPath(V vertex_1, V vertex_2) {
+		
+		List<Integer> path = this.bfs(new Vertex<V>(vertex_1));
+		
+		ArrayList<V> ans = new ArrayList<V>();
+		
+		int itemp = searchIndex(new Vertex<V>(vertex_2));
+		
+		if(itemp != -1) {
+			
+			Vertex<V> temp = this.vertex.get(itemp);
+			ans.add(temp.getElement());
+			
+			boolean stop = false;
+			while(temp != null && !stop) {
+				
+				System.out.println(temp.getElement().toString());
+				
+				temp = temp.getPrior();
+				
+				if(temp != null) {
+					ans.add(temp.getElement());
+					if(temp.getElement().hashCode() == vertex_1.hashCode())
+						stop = true;
+				}
+			}
+			
+			
+		}
+		
+		return ans;
 	}
 
 	

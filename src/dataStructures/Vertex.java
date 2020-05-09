@@ -11,7 +11,7 @@ public class Vertex<E> implements Comparable<Vertex>{
 	private int timeStampf;
 	private String color;
 	private int distance;
-	private Vertex prior;
+	private Vertex<E> prior;
 	
 	/**
 	 * @param element

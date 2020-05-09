@@ -22,4 +22,10 @@ public class City {
 		return name.hashCode();
 	}
 	
+	@Override
+	public String toString() {
+
+		return name;
+	}
+	
 } //end of class

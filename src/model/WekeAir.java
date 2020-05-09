@@ -9,13 +9,14 @@ import dataStructures.Vertex;
 
 public class WekeAir {
 
-	private Graph<City> map;
+	private AdjacencyMatrix<City> map;
 	private Hashtable<String, Flight> fligths;
 
 	private ArrayList<Vertex<City>> cities;
 
 	public WekeAir() {
 		initialize();
+		System.out.println((fastestPath("bogota", "brasilia").toString()));
 	}
 
 	/**
@@ -156,6 +157,14 @@ public class WekeAir {
 		
 		this.map.dijkstra(new City(origin));
 		
+		return ans;
+	}
+	
+	
+	public ArrayList<City> fastestPath(String origin, String destination){
+		
+		ArrayList<City> ans = this.map.bfsPath(new City(origin), new City(destination));
+	
 		return ans;
 	}
 
