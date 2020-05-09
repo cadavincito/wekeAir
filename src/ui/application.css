@@ -1,94 +1,148 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-#panecito{
-  	-fx-background-position:center;
-  	-fx-background-repeat: no-repeat;
-  	-fx-background-color:#FFC0CB;
-}
-
-
-.label{
-	/*-fx-text-fill:linear-gradient(to right, Yellow, DarkOrange, Red, DarkOrange, Tomato);*/
- 	-fx-text-fill: black;
-
-	-fx-font-family:Impact;
-	-fx-font-size:15;
-	-fx-font-weight:bold;
-	-fx-text-alignment: center;
-}
- 
- #leibol{
- 	-fx-text-fill:linear-gradient(to right, White);
-	-fx-font-family:Sans, Arial;
-	-fx-font-size:40;
-	-fx-font-weight:bold;
-	-fx-text-alignment: center;
- }
- 
-
- .leibol{
- 	-fx-text-fill:linear-gradient(to right, White, Gray, Black);
-	-fx-font-family:Sans, Arial;
-	-fx-font-size:30;
-	-fx-font-weight:bold;
-	-fx-text-alignment: center;
- }
- 
- #field{
- 	-fx-position-shape: center;
- }
- .button{
-	text:white;
-	border:white;
-	background:linear-gradient(to right, Grey, Transparent, Grey, Transparent
-		, Grey, Transparent, Grey, Transparent, Grey, Transparent, Grey, Transparent
-		, Grey, Transparent, Grey, 
-		Transparent, Grey, Transparent, Grey, Transparent
-	);
-	-fx-border-radius: 30px 30px 30px 30px;
+/*Colors*/
+*{
 	
-	-fx-background-color:background;
-	-fx-text-fill:text;
-	-fx-border-color:border;
-	
-	-fx-font-family:Impact;
-	-fx-font-size:18;
-	-fx-font-weight:bold;
-	
-	-fx-background-position:center;
-  	-fx-background-repeat: no-repeat;
-  	
-}
-
-#botones{
+	base_color:white;
+	special_color:#FFC0CB;
+	text_color:black;
 	
 }
 
-.buttonA{
-	text:white;
-	border:white;
-	background:transparent;
-	
-	-fx-background-color:background;
-	-fx-text-fill:text;
-	-fx-border-color:border;
-	
-	-fx-font-family:Impact;
-	-fx-font-size:14;
-	-fx-font-weight:bold;
-	
-	-fx-background-position:center;
-  	-fx-background-repeat: no-repeat;
-  	
+/*Pane*/
+.pane {
+	-fx-background-color: White;
 }
 
-.prime{
-	-fx-background-color:green ;
-  	-fx-background-size:100% 100%;
+/*Button*/
+.button {
+	-fx-text-fill: White;
+	-fx-background-color: Black;
+	-fx-background-radius: 5;
+	-fx-font: bold 10pt "Arial";/*HFONT*/
 }
 
-.compound{
-	-fx-background-color:green ;
-  	-fx-background-size:100% 100%;
+.label {
+	-fx-text-fill: base_color;
+	-fx-font: bold 10pt "Arial";
 }
-.button:hover{background:linear-gradient(to bottom right, white, transparent);}
-.button:pressed{background:linear-gradient(to bottom right, Yellow, transparent);}/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+/*Text Field*/
+.text-field {
+	
+	-fx-focus-color: base_color;
+	-fx-highlight-fill: special_color;
+	-fx-font: bold 9pt "Arial";/*TFONT*/
+}
+
+/*Check Box*/
+.check-box{
+	
+	-fx-text-fill: base_color;
+}
+
+.check-box .box {
+	
+	-fx-background-color: base_color;
+}
+
+.check-box .box .mark {
+	
+	-fx-mark-color: special_color;
+}
+
+
+/*Choice Box*/
+.choice-box {
+	
+  -fx-background-color: Black;
+  -fx-mark-color: special_color;
+  
+}
+
+.choice-box > .label {
+	
+	-fx-text-fill: text_color;
+	-fx-font: bold 9pt "Arial";/*TFONT*/
+}
+
+.choice-box .context-menu { 
+	
+	-fx-background-color: base_color;
+	-fx-font: bold 9pt "Arial";/*TFONT*/
+}
+
+.choice-box .menu-item:focused { 
+	
+	-fx-background-color: special_color;
+}
+
+.choice-box .menu-item > .label { 
+	
+	-fx-text-fill: text_color;
+	-fx-font: bold 9pt "Arial";/*TFONT*/
+}
+
+.choice-box .menu-item:focused > .label { 
+	
+	-fx-text-fill: base_color;
+}
+
+/*Dialog Pane*/
+.dialog {
+	
+	-fx-background-color: base_color;
+}
+
+.dialog > *.buttonbar > *.container {
+	
+	-fx-background-color: base_color;/*BAD*/
+}
+
+.dialog > *.content.label {
+	
+	-fx-text-fill:text_color;
+	-fx-font: bold 9pt "Arial";/*TFONT*/
+}
+
+.dialog *.button {
+	
+	-fx-background-color: special_color;
+	-fx-font: bold 10pt "Arial";/*HFONT*/
+	-fx-border-radius: 5;
+	-fx-text-fill: text_color;
+
+}
+
+.dialog:header *.header-panel {
+	
+	-fx-background-color: base_color;/*BAD*/
+}
+
+.vehicle {
+	
+	-fx-background-color: transparent;
+	-fx-font: bold 9pt "Arial";
+}
+
+.delete {
+	
+	-fx-background-color: Aqua;
+	-fx-text-fill: text_color;
+}
+
+.register{
+	-fx-text-fill: text_color;
+}
+
+#logo {
+	
+	-fx-image: url(../../themes/CHEER_UP/images/TWICE_LOGO.png);
+	-fx-background-size:100% 100%;
+}
+
+/*Specials*/
+#log-out {
+	
+	-fx-background-color: special_color;
+	-fx-background-radius: 5;
+	
+}

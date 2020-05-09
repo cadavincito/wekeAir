@@ -154,13 +154,14 @@ public class MapController {
 		//una linea entre ambas ciudades
 		//por alguna razon no esta pintando
 		Line line = new Line();
+		pane.getChildren().add(line);
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());
 		line.setEndX(e2.getLayoutX());
 		line.setEndY(e2.getLayoutY());
 		line.setFill(Color.AQUA);
 		line.setStroke(Color.AQUA);
-		line.setStrokeWidth(50);
+		line.setStrokeWidth(5);
 		line.setVisible(true);
 		}
 	}

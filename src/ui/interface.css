@@ -1,0 +1,94 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#panecito{
+  	-fx-background-position:center;
+  	-fx-background-repeat: no-repeat;
+  	-fx-background-color:#FFC0CB;
+}
+
+
+.label{
+	/*-fx-text-fill:linear-gradient(to right, Yellow, DarkOrange, Red, DarkOrange, Tomato);*/
+ 	-fx-text-fill: black;
+
+	-fx-font-family:Impact;
+	-fx-font-size:15;
+	-fx-font-weight:bold;
+	-fx-text-alignment: center;
+}
+ 
+ #leibol{
+ 	-fx-text-fill:linear-gradient(to right, White);
+	-fx-font-family:Sans, Arial;
+	-fx-font-size:40;
+	-fx-font-weight:bold;
+	-fx-text-alignment: center;
+ }
+ 
+
+ .leibol{
+ 	-fx-text-fill:linear-gradient(to right, White, Gray, Black);
+	-fx-font-family:Sans, Arial;
+	-fx-font-size:30;
+	-fx-font-weight:bold;
+	-fx-text-alignment: center;
+ }
+ 
+ #field{
+ 	-fx-position-shape: center;
+ }
+ .button{
+	text:white;
+	border:white;
+	background:linear-gradient(to right, Grey, Transparent, Grey, Transparent
+		, Grey, Transparent, Grey, Transparent, Grey, Transparent, Grey, Transparent
+		, Grey, Transparent, Grey, 
+		Transparent, Grey, Transparent, Grey, Transparent
+	);
+	-fx-border-radius: 30px 30px 30px 30px;
+	
+	-fx-background-color:background;
+	-fx-text-fill:text;
+	-fx-border-color:border;
+	
+	-fx-font-family:Impact;
+	-fx-font-size:18;
+	-fx-font-weight:bold;
+	
+	-fx-background-position:center;
+  	-fx-background-repeat: no-repeat;
+  	
+}
+
+#botones{
+	
+}
+
+.buttonA{
+	text:white;
+	border:white;
+	background:transparent;
+	
+	-fx-background-color:background;
+	-fx-text-fill:text;
+	-fx-border-color:border;
+	
+	-fx-font-family:Impact;
+	-fx-font-size:14;
+	-fx-font-weight:bold;
+	
+	-fx-background-position:center;
+  	-fx-background-repeat: no-repeat;
+  	
+}
+
+.prime{
+	-fx-background-color:green ;
+  	-fx-background-size:100% 100%;
+}
+
+.compound{
+	-fx-background-color:green ;
+  	-fx-background-size:100% 100%;
+}
+.button:hover{background:linear-gradient(to bottom right, white, transparent);}
+.button:pressed{background:linear-gradient(to bottom right, Yellow, transparent);}/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */

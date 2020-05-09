@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 
-<Pane id="panecito" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="684.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MapController">
+<Pane id="panecito" fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="556.0" prefWidth="684.0" styleClass="pane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MapController">
    <children>
       <Circle fx:id="sansalvador" accessibleRole="BUTTON" fill="#ff441f" layoutX="463.0" layoutY="268.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView id="quto" fitHeight="556.0" fitWidth="533.0" layoutX="264.0" pickOnBounds="true" preserveRatio="true">
@@ -45,8 +45,8 @@
             <Insets bottom="10.0" top="10.0" />
          </padding></Button>
       <Circle fx:id="ciudaddemexico" accessibleRole="BUTTON" fill="#ff441f" layoutX="435.0" layoutY="248.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
-      <ChoiceBox fx:id="origin_box" layoutX="157.0" layoutY="33.0" prefHeight="23.0" prefWidth="76.0" />
-      <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" />
+      <ChoiceBox fx:id="origin_box" layoutX="157.0" layoutY="33.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
+      <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
       <Button fx:id="searchButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#search" text="Search" />
    </children>
 </Pane>
