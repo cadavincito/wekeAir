@@ -401,6 +401,13 @@ public class AdjacencyList<V> implements Graph<V>{
 	List<Vertex<V>> getVertex() {
 		return vertex;
 	}
+
+
+	@Override
+	public void dijkstra(V origin) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

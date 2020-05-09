@@ -290,8 +290,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
-	//REVISAR
-	public void dijkstra(Vertex<V> origin) {
+	@Override
+	public void dijkstra(V ori) {
+
+		Vertex<V> origin = new Vertex<V>(ori);
+		
 		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		for (int i = 0; i < vertex.size(); i++) {
@@ -320,12 +323,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			}
 			
 		}
-		
-		//TODO
-		
+
 	}
 	
-	//REVISAR
+	@Override
 	public double[][] floydWarshall() {
 		double[][] matrixDistances = getWeights();
 		
@@ -363,7 +364,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 	}
 	
-	public void primInMatrix(Vertex<V> origin) {
+	
+	public void prim(Vertex<V> origin) {
 		
 		for (int i = 0; i < vertex.size(); i++) {
 			vertex.get(i).setColor(Vertex.WHITE);
@@ -452,7 +454,6 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	}
 	
 	
-	//Est� en revisi�n
 	public List<Integer> dfs(Vertex<V> origin){
 		
 		Integer index = searchIndex(origin);
@@ -516,4 +517,6 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return contains;
 	}
 
+	
+	
 } //end of class
