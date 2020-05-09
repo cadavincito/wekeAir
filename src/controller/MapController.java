@@ -54,6 +54,7 @@ public class MapController {
 	}
 
 	private void fillFligths() {
+		
 		origin_box.getItems().addAll("Bogota","Quito","Brasilia","La Paz","Lima","Asuncion","Bs.As","Montevideo","Santiago"
 				,"Guatemala","San Salvador","Tegucigalpa","Managua","San Jose","Panama","Belmopan","Caracas","Georgetown","Paramaribo"
 				,"Cayena","Washington","Otawa","La Habana");
@@ -150,17 +151,18 @@ public class MapController {
 	
 
 	void paintLine(Node e1, Node e2) {
-		//Este es un metodo para pintar 
-		//una linea entre ambas ciudades
-		//por alguna razon no esta pintando
+		
 		Line line = new Line();
+		
+		pane.getChildren().add(line);
+		
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());
 		line.setEndX(e2.getLayoutX());
 		line.setEndY(e2.getLayoutY());
 		line.setFill(Color.AQUA);
 		line.setStroke(Color.AQUA);
-		line.setStrokeWidth(50);
+		line.setStrokeWidth(2);
 		line.setVisible(true);
 		}
 	}

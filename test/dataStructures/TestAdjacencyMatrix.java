@@ -24,7 +24,7 @@ class TestAdjacencyMatrix {
 		void setupScenario2() {
 			adjacencyMatrix = new AdjacencyMatrix<City>(false);
 			for(int i = 0; i<10; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
 			}
 		}
@@ -34,7 +34,7 @@ class TestAdjacencyMatrix {
 		void setupScenario3() {
 			adjacencyMatrix = new AdjacencyMatrix<City>(false);
 			for(int i = 0; i<30; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
 			}
 			// 1 ---> 1 && 2 ----> 1
@@ -57,7 +57,7 @@ class TestAdjacencyMatrix {
 		void setupScenario4() {
 			adjacencyMatrix = new AdjacencyMatrix<City>(true);
 			for(int i = 0; i<30; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
 			}
 			
@@ -79,7 +79,7 @@ class TestAdjacencyMatrix {
 			
 			adjacencyMatrix = new AdjacencyMatrix<City>(true);
 			for(int i = 0; i<10; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
 			}
 			
@@ -107,7 +107,7 @@ class TestAdjacencyMatrix {
 			
 			adjacencyMatrix = new AdjacencyMatrix<City>(true);
 			for(int i = 0; i<10; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
 			}
 			
@@ -149,7 +149,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void addVertexTest1() {
 			setupScenario1();
-			Vertex<City> vi = new Vertex<City>(new City(10+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(10+""));
 			boolean b = adjacencyMatrix.addVertex(vi);
 			
 			assertTrue(b&&(adjacencyMatrix.getSize()==1));
@@ -159,7 +159,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void addVertexTest2() {
 			setupScenario2();
-			Vertex<City> vi = new Vertex<City>(new City(10+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(10+""));
 			boolean b = adjacencyMatrix.addVertex(vi);
 			
 			assertTrue(b&&(adjacencyMatrix.getSize()==11));
@@ -169,7 +169,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void addVertexTest3() {
 			setupScenario3();
-			Vertex<City> vi = new Vertex<City>(new City(30+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(30+""));
 			boolean b = adjacencyMatrix.addVertex(vi);
 			assertTrue(b&&(adjacencyMatrix.getSize()==31));
 		}
@@ -178,7 +178,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void removeVertexTest1() {
 			setupScenario1();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
 			boolean b = adjacencyMatrix.removeVertex(vi);
 			assertTrue(!b);
 		
@@ -187,7 +187,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void removeVertexTest2() {
 			setupScenario2();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
 			boolean b = adjacencyMatrix.removeVertex(vi);
 			assertTrue(b&&adjacencyMatrix.getSize()==9);
 		}
@@ -195,7 +195,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void removeVertexTest3() {
 			setupScenario3();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
 			boolean b = adjacencyMatrix.removeVertex(vi);
 			assertTrue(b&&adjacencyMatrix.getSize()==29);
 		}
@@ -206,8 +206,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addEdgeTest1() {
 			setupScenario1();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-			Vertex<City> va = new Vertex<City>(new City(1+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
+			Vertex<City> va = new Vertex<City>(new City(1+""));
 			boolean b = adjacencyMatrix.addEdge(vi, va);
 			assertTrue(!b);
 		}
@@ -218,8 +218,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addEdgeTest2() {
 			setupScenario2();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-			Vertex<City> va = new Vertex<City>(new City(1+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
+			Vertex<City> va = new Vertex<City>(new City(1+""));
 			boolean a = adjacencyMatrix.addEdge(vi, va);
 			int b = adjacencyMatrix.getGraph()[0][1];
 			int c = adjacencyMatrix.getGraph()[0][1];
@@ -232,8 +232,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addEdgeTest3() {
 			setupScenario3();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-			Vertex<City> va = new Vertex<City>(new City(57+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
+			Vertex<City> va = new Vertex<City>(new City(57+""));
 			
 			boolean b = adjacencyMatrix.addEdge(vi, va);
 			assertTrue(!b);
@@ -245,8 +245,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addEdgeTest4() {
 			setupScenario3();
-			Vertex<City> vi = new Vertex<City>(new City(2+"",""));
-			Vertex<City> va = new Vertex<City>(new City(10+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(2+""));
+			Vertex<City> va = new Vertex<City>(new City(10+""));
 			boolean a = adjacencyMatrix.addEdge(vi, va);
 			int b = adjacencyMatrix.getGraph()[2][10];
 			int c = adjacencyMatrix.getGraph()[10][2];
@@ -299,8 +299,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addWeightedEdgeTest1() {
 			setupScenario1();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-			Vertex<City> va = new Vertex<City>(new City(1+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
+			Vertex<City> va = new Vertex<City>(new City(1+""));
 			boolean b = adjacencyMatrix.addEdge(vi, va,100);
 			assertTrue(!b);
 		}
@@ -309,8 +309,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addWeightedEdgeTest2() {
 			setupScenario2();
-			Vertex<City> vi = new Vertex<City>(new City(0+"",""));
-			Vertex<City> va = new Vertex<City>(new City(1+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(0+""));
+			Vertex<City> va = new Vertex<City>(new City(1+""));
 			boolean b = adjacencyMatrix.addEdge(vi, va,200);
 			assertTrue(b);
 		}
@@ -319,8 +319,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addWeightedEdgeTest3() {
 			setupScenario3();
-			Vertex<City> vi = new Vertex<City>(new City(9+"",""));
-			Vertex<City> va = new Vertex<City>(new City(10+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(9+""));
+			Vertex<City> va = new Vertex<City>(new City(10+""));
 			boolean b = adjacencyMatrix.addEdge(vi, va,300);
 			assertTrue(b);
 		}
@@ -330,8 +330,8 @@ class TestAdjacencyMatrix {
 		@Test
 		void addWeightedEdgeTest4() {
 			setupScenario4();
-			Vertex<City> vi = new Vertex<City>(new City(9+"",""));
-			Vertex<City> va = new Vertex<City>(new City(10+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(9+""));
+			Vertex<City> va = new Vertex<City>(new City(10+""));
 			boolean b = adjacencyMatrix.addEdge(vi, va,300);
 			assertTrue(b);
 		}
@@ -510,7 +510,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void searchIndexTest1() {
 		setupScenario2();
-		Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
 		int a = adjacencyMatrix.searchIndex(vi);
 		int b = 0;
 		
@@ -522,7 +522,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void searchIndexTest2() {
 		setupScenario1();
-		Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
 		int a = adjacencyMatrix.searchIndex(vi);
 		int b = -1;
 		assertEquals(a,b);
@@ -531,7 +531,7 @@ class TestAdjacencyMatrix {
 		@Test
 		void searchIndexTest3() {
 		setupScenario3();
-		Vertex<City> vi = new Vertex<City>(new City(19+"",""));
+		Vertex<City> vi = new Vertex<City>(new City(19+""));
 		int a = adjacencyMatrix.searchIndex(vi);
 		int b = 19;
 		assertEquals(a,b);

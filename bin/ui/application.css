@@ -39,7 +39,11 @@
  .button{
 	text:white;
 	border:white;
-	background:linear-gradient(to right, Grey, Transparent, Grey, Transparent, Grey, Transparent, Grey, Transparent);
+	background:linear-gradient(to right, Grey, Transparent, Grey, Transparent
+		, Grey, Transparent, Grey, Transparent, Grey, Transparent, Grey, Transparent
+		, Grey, Transparent, Grey, 
+		Transparent, Grey, Transparent, Grey, Transparent
+	);
 	-fx-border-radius: 30px 30px 30px 30px;
 	
 	-fx-background-color:background;

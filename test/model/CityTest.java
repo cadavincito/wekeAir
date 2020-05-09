@@ -9,7 +9,7 @@ class CityTest {
 	private City c;
 	
 	void setupScenario1() {
-		c = new City("Bogota", "Colombia");
+		c = new City("Bogota");
 	}
 	@Test
 	void test() {

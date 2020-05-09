@@ -26,7 +26,7 @@ class TestAdjacencyList {
 			
 			for(int i = 0; i<10; i++) {
 				
-				Vertex<City> vi = new Vertex<City>(new City(i+"", ""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencylist.addVertex(vi);
 			}
 		}
@@ -36,7 +36,7 @@ class TestAdjacencyList {
 			
 			adjacencylist = new AdjacencyList<City>(false);
 			for(int i = 0; i<30; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"", ""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencylist.addVertex(vi);
 			}
 		}
@@ -46,7 +46,7 @@ class TestAdjacencyList {
 		void setupScenario4() {
 		adjacencylist = new AdjacencyList<City>(true);
 		for(int i = 0; i<30; i++) {
-			Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+			Vertex<City> vi = new Vertex<City>(new City(i+""));
 			adjacencylist.addVertex(vi);
 		}
 					
@@ -68,7 +68,7 @@ class TestAdjacencyList {
 			
 			adjacencylist = new AdjacencyList<City>(true);
 			for(int i = 0; i<10; i++) {
-				Vertex<City> vi = new Vertex<City>(new City(i+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencylist.addVertex(vi);
 			}
 			
@@ -107,7 +107,7 @@ class TestAdjacencyList {
 		
 		setupScenario1();
 		
-		Vertex<City> vi = new Vertex<City>(new City(4+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(4+""));
 		boolean b = this.adjacencylist.addVertex(vi);
 		
 		boolean c = this.adjacencylist.getVertex().contains(vi);
@@ -119,7 +119,7 @@ class TestAdjacencyList {
 	@Test
 	void AddVertexTest2() {
 		setupScenario2();
-		Vertex<City> vi = new Vertex<City>(new City(47+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(47+""));
 		boolean b = this.adjacencylist.addVertex(vi);
 		
 		assertTrue(b&&adjacencylist.getSize()==11);
@@ -128,7 +128,7 @@ class TestAdjacencyList {
 	@Test
 	void AddVertexTest3() {
 		setupScenario3();
-		Vertex<City> vi = new Vertex<City>(new City(47+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(47+""));
 		boolean b = this.adjacencylist.addVertex(vi);
 		
 		assertTrue(b&&adjacencylist.getSize()==31);
@@ -138,7 +138,7 @@ class TestAdjacencyList {
 	@Test
 	 void removeVertexTest1() {
 		setupScenario1();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
 		boolean b = adjacencylist.removeVertex(vi);
 		assertTrue(!b);
 		
@@ -147,7 +147,7 @@ class TestAdjacencyList {
 	@Test
 	 void removeVertexTest2() {
 		setupScenario2();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
 		boolean b = adjacencylist.removeVertex(vi);
 		assertTrue(b&&adjacencylist.getSize()==9);
 		
@@ -156,7 +156,7 @@ class TestAdjacencyList {
 	@Test
 	 void removeVertexTest3() {
 		setupScenario3();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
 		boolean b = adjacencylist.removeVertex(vi);
 		assertTrue(b&&adjacencylist.getSize()==29);
 	}
@@ -167,8 +167,8 @@ class TestAdjacencyList {
 	@Test
 	 void addEdgeTest1() {
 		setupScenario1();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
-		Vertex<City> va = new Vertex<City>(new City(1+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		Vertex<City> va = new Vertex<City>(new City(1+""));
 		boolean b = adjacencylist.addEdge(vi,va);
 		assertTrue(!b);
 	}
@@ -178,8 +178,8 @@ class TestAdjacencyList {
 	@Test
 	 void addEdgeTest2() {
 		setupScenario2();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
-		Vertex<City> va = new Vertex<City>(new City(1+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		Vertex<City> va = new Vertex<City>(new City(1+""));
 		boolean b = adjacencylist.addEdge(vi,va);
 		assertTrue(b);
 	}
@@ -187,8 +187,8 @@ class TestAdjacencyList {
 	@Test
 	 void addEdgeTest3() {
 		setupScenario3();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
-		Vertex<City> va = new Vertex<City>(new City(1+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		Vertex<City> va = new Vertex<City>(new City(1+""));
 		boolean b = adjacencylist.addEdge(vi,va);
 		assertTrue(b);
 	}
@@ -199,8 +199,8 @@ class TestAdjacencyList {
 			@Test
 			void addEdgeTest4() {
 				setupScenario3();
-				Vertex<City> vi = new Vertex<City>(new City(2+"",""));
-				Vertex<City> va = new Vertex<City>(new City(10+"",""));
+				Vertex<City> vi = new Vertex<City>(new City(2+""));
+				Vertex<City> va = new Vertex<City>(new City(10+""));
 				boolean a = adjacencylist.addEdge(vi, va);
 				double  b = adjacencylist.getGraph().get(0).get(2).get(10);
 				
@@ -222,8 +222,8 @@ class TestAdjacencyList {
 	@Test
 	 void addEdgeWeightedTest1() {
 		setupScenario1();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
-		Vertex<City> va = new Vertex<City>(new City(1+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		Vertex<City> va = new Vertex<City>(new City(1+""));
 		boolean b = adjacencylist.addEdge(vi,va,100);
 		assertTrue(!b);
 	}
@@ -231,8 +231,8 @@ class TestAdjacencyList {
 	@Test
 	 void addEdgeWeightedTest2() {
 		setupScenario2();
-		Vertex<City> vi = new Vertex<City>(new City(0+"", ""));
-		Vertex<City> va = new Vertex<City>(new City(1+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		Vertex<City> va = new Vertex<City>(new City(1+""));
 		boolean b = adjacencylist.addEdge(vi,va,200);
 		assertTrue(b);
 		
@@ -241,8 +241,8 @@ class TestAdjacencyList {
 	@Test
 	 void addEdgeWeightedTest3() {
 		setupScenario3();
-		Vertex<City> vi = new Vertex<City>(new City(4+"", ""));
-		Vertex<City> va = new Vertex<City>(new City(10+"", ""));
+		Vertex<City> vi = new Vertex<City>(new City(4+""));
+		Vertex<City> va = new Vertex<City>(new City(10+""));
 		boolean b = adjacencylist.addEdge(vi,va,1000);
 		assertTrue(b);
 	}
@@ -352,7 +352,7 @@ class TestAdjacencyList {
 	@Test
 	void searchIndexTest1() {
 	setupScenario2();
-	Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+	Vertex<City> vi = new Vertex<City>(new City(0+""));
 	int a = adjacencylist.searchIndex(vi);
 	int b = 0;
 	
@@ -364,7 +364,7 @@ class TestAdjacencyList {
 	@Test
 	void searchIndexTest2() {
 	setupScenario1();
-	Vertex<City> vi = new Vertex<City>(new City(0+"",""));
+	Vertex<City> vi = new Vertex<City>(new City(0+""));
 	int a = adjacencylist.searchIndex(vi);
 	int b = -1;
 	
@@ -376,7 +376,7 @@ class TestAdjacencyList {
 	@Test
 	void searchIndexTest3() {
 	setupScenario3();
-	Vertex<City> vi = new Vertex<City>(new City(19+"",""));
+	Vertex<City> vi = new Vertex<City>(new City(19+""));
 	int a = adjacencylist.searchIndex(vi);
 	int b = 19;
 	
