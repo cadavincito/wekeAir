@@ -295,15 +295,18 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public void dijkstra(V ori) {
 
 		Vertex<V> origin = new Vertex<V>(ori);
+		double[] distance = new double[vertex.size()];
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(vertex.size());
 		
 		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		for (int i = 0; i < vertex.size(); i++) {
-			vertex.get(i).setDistance(Integer.MAX_VALUE);
-			vertex.get(i).setPrior(null);
+			distance[i]= Double.MAX_VALUE;
+			prior.set(i, null);
 		}
 		
-		origin.setDistance(0);
+		int posOri = searchIndex(origin);
+		distance[posOri] = 0;
 		
 		while (!(vertexes.isEmpty())) {
 			Vertex<V> front = vertexes.poll();
@@ -314,11 +317,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			
 			for (int i = 0; i < adjacentsInt.size(); i++) {
 				
-				double distance = vertex.get(frontInt).getDistance() + weights[frontInt][i];
+				double distanceMin = vertex.get(frontInt).getDistance() + weights[frontInt][i];
 				
-				if (distance < vertex.get(i).getDistance()) {
-					vertex.get(i).setDistance((int)distance); //QUITAR CAST INT, ARREGLAR TIPO DE DATO
-					vertex.get(i).setPrior(vertex.get(frontInt));
+				if (distanceMin < distance[i]) {
+					distance[i] = distanceMin;
+					prior.set(i, getVertex().get(i));
 				}
 				
 			}
