@@ -144,30 +144,28 @@ public class MapController {
 
 		Line line = new Line();
 
-<<<<<<< HEAD
+
 		pane.getChildren().add(line);
-=======
+
 		pane.getChildren().add(line);
 
 		pane.getChildren().add(line);
 
->>>>>>> 966eef1f9eab372572b206812f439592fd81ae94
+
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());
 		line.setEndX(e2.getLayoutX());
 		line.setEndY(e2.getLayoutY());
 		line.setFill(Color.AQUA);
 		line.setStroke(Color.AQUA);
-<<<<<<< HEAD
-		line.setStrokeWidth(5);
-		line.setStrokeWidth(2);
-=======
 
 		line.setStrokeWidth(5);
+		line.setStrokeWidth(2);
+
+		line.setStrokeWidth(5);
 
 		line.setStrokeWidth(2);
 
->>>>>>> 966eef1f9eab372572b206812f439592fd81ae94
 		line.setVisible(true);
 	}
 }
