@@ -153,24 +153,16 @@ public class MapController {
 	void paintLine(Node e1, Node e2) {
 		
 		Line line = new Line();
-<<<<<<< HEAD
+
 		pane.getChildren().add(line);
-=======
-		
-		pane.getChildren().add(line);
-		
->>>>>>> ef31754dcf88ac3ad63ea35060105b71dc2e5320
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());
 		line.setEndX(e2.getLayoutX());
 		line.setEndY(e2.getLayoutY());
 		line.setFill(Color.AQUA);
 		line.setStroke(Color.AQUA);
-<<<<<<< HEAD
 		line.setStrokeWidth(5);
-=======
 		line.setStrokeWidth(2);
->>>>>>> ef31754dcf88ac3ad63ea35060105b71dc2e5320
 		line.setVisible(true);
 		}
 	}
