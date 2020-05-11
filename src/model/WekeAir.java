@@ -9,13 +9,14 @@ import dataStructures.Vertex;
 
 public class WekeAir {
 
-	private Graph<City> map;
+	private AdjacencyMatrix<City> map;
 	private Hashtable<String, Flight> fligths;
 
 	private ArrayList<Vertex<City>> cities;
 
 	public WekeAir() {
 		initialize();
+		System.out.println((fastestPath("bogota", "brasilia").toString()));
 	}
 
 	/**
@@ -34,33 +35,33 @@ public class WekeAir {
 
 	public void initializeVertex() {
 
-		this.cities.add(new Vertex<City>(new City("Bogotá")));
-		this.cities.add(new Vertex<City>(new City("Quito")));
-		this.cities.add(new Vertex<City>(new City("Caracas")));
-		this.cities.add(new Vertex<City>(new City("Ciudad de Panamá")));
-		this.cities.add(new Vertex<City>(new City("Lima"))); //4
-		this.cities.add(new Vertex<City>(new City("La Paz")));
-		this.cities.add(new Vertex<City>(new City("Brasilia")));
-		this.cities.add(new Vertex<City>(new City("Asunción")));
-		this.cities.add(new Vertex<City>(new City("Buenos Aires")));
-		this.cities.add(new Vertex<City>(new City("Montevideo")));
-		this.cities.add(new Vertex<City>(new City("Santiago"))); //10
-		this.cities.add(new Vertex<City>(new City("Georgetown")));
-		this.cities.add(new Vertex<City>(new City("Paramribo")));
-		this.cities.add(new Vertex<City>(new City("Cayena")));
+		this.cities.add(new Vertex<City>(new City("bogota")));
+		this.cities.add(new Vertex<City>(new City("quito")));
+		this.cities.add(new Vertex<City>(new City("caracas")));
+		this.cities.add(new Vertex<City>(new City("ciudaddePanamá")));
+		this.cities.add(new Vertex<City>(new City("lima"))); //4
+		this.cities.add(new Vertex<City>(new City("lapaz")));
+		this.cities.add(new Vertex<City>(new City("brasilia")));
+		this.cities.add(new Vertex<City>(new City("asunción")));
+		this.cities.add(new Vertex<City>(new City("buenosaires")));
+		this.cities.add(new Vertex<City>(new City("montevideo")));
+		this.cities.add(new Vertex<City>(new City("santiago"))); //10
+		this.cities.add(new Vertex<City>(new City("georgetown")));
+		this.cities.add(new Vertex<City>(new City("paramaribo")));
+		this.cities.add(new Vertex<City>(new City("cayena")));
 		
-		this.cities.add(new Vertex<City>(new City("San José")));
-		this.cities.add(new Vertex<City>(new City("Managua"))); //15
-		this.cities.add(new Vertex<City>(new City("Tegucigalpa")));
-		this.cities.add(new Vertex<City>(new City("San Salvador")));
-		this.cities.add(new Vertex<City>(new City("Belmopan")));
-		this.cities.add(new Vertex<City>(new City("Ciudad de Guatemala")));
+		this.cities.add(new Vertex<City>(new City("sanjose")));
+		this.cities.add(new Vertex<City>(new City("managua"))); //15
+		this.cities.add(new Vertex<City>(new City("tegucigalpa")));
+		this.cities.add(new Vertex<City>(new City("sansalvador")));
+		this.cities.add(new Vertex<City>(new City("belmopan")));
+		this.cities.add(new Vertex<City>(new City("ciudaddeguatemala")));
 		
-		this.cities.add(new Vertex<City>(new City("Washington"))); //20
-		this.cities.add(new Vertex<City>(new City("Otawa")));
-		this.cities.add(new Vertex<City>(new City("La Habana")));
+		this.cities.add(new Vertex<City>(new City("washington"))); //20
+		this.cities.add(new Vertex<City>(new City("otawa")));
+		this.cities.add(new Vertex<City>(new City("lahabana")));
 		
-		this.cities.add(new Vertex<City>(new City("Ciudad de México")));
+		this.cities.add(new Vertex<City>(new City("ciudaddemexico")));
 		
 		for (int i = 0; i < cities.size(); i++) {
 			
@@ -146,6 +147,25 @@ public class WekeAir {
 		this.map.addEdge(cities.get(20), cities.get(21), 1000);
 		this.map.addEdge(cities.get(20), cities.get(23), 400);
 		
+	}
+	
+	
+	//Gonzo's path missing
+	public ArrayList<City> cheapestPath(String origin, String destination) {
+		
+		ArrayList<City> ans = new ArrayList<City>();
+		
+		this.map.dijkstra(new City(origin));
+		
+		return ans;
+	}
+	
+	
+	public ArrayList<City> fastestPath(String origin, String destination){
+		
+		ArrayList<City> ans = this.map.bfsPath(new City(origin), new City(destination));
+	
+		return ans;
 	}
 
 }

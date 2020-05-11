@@ -227,40 +227,53 @@ public class AdjacencyList<V> implements Graph<V>{
 		return weights;
 	}
 	
-	//REVISAR
-	public void dijkstra(Vertex<V> origin) {
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
+	@Override
+	public ArrayList<Vertex<V>> dijkstra(V ori) {
+
+		Vertex<V> origin = new Vertex<V>(ori);
+		double[] distance = new double[vertex.size()];
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
+		
 		
 		for (int i = 0; i < vertex.size(); i++) {
-			vertex.get(i).setDistance(Integer.MAX_VALUE);
-			vertex.get(i).setPrior(null);
+			distance[i]= Double.MAX_VALUE;
+			prior.set(i, null);
+			getVertex().get(i).setWeight(Double.MAX_VALUE);
 		}
 		
-		origin.setDistance(0);
+		int posOri = searchIndex(origin);
+		distance[posOri] = 0;
+		getVertex().get(posOri).setWeight(0);
+		
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		while (!(vertexes.isEmpty())) {
-			Vertex<V> front = vertexes.poll();
 			
+			Vertex<V> front = vertexes.poll();
 			int frontInt = searchIndex(front);
 			
 			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
 			
 			for (int i = 0; i < adjacentsInt.size(); i++) {
+				int posAdjacent = adjacentsInt.get(i);
+				double distanceMin = distance[frontInt] + getEdgeWeight(frontInt, posAdjacent); //beware of max double limit
 				
-				double distance = vertex.get(frontInt).getDistance() + getEdgeWeight(frontInt, i);
-				
-				if (distance < vertex.get(i).getDistance()) {
-					vertex.get(i).setDistance((int)distance); //QUITAR CAST INT, ARREGLAR TIPO DE DATO
-					vertex.get(i).setPrior(vertex.get(frontInt));
+				if (distanceMin < distance[posAdjacent]) {
+					
+					distance[posAdjacent] = distanceMin;
+					prior.set(posAdjacent, getVertex().get(frontInt));
+					getVertex().get(posAdjacent).setWeight(distanceMin);
+					
 				}
 				
 			}
 			
 		}
 		
-		//TODO
-		
+		return prior;
+
 	}
+	
 	//always has to work
 	public double getEdgeWeight(int origin, int destiny) {
 		
@@ -401,7 +414,7 @@ public class AdjacencyList<V> implements Graph<V>{
 	List<Vertex<V>> getVertex() {
 		return vertex;
 	}
-	
+
 	
 	
 } //end of class

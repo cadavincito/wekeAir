@@ -13,6 +13,7 @@ import AuxiliarDataStructures.Queue;
 import AuxiliarDataStructures.Stack;
 import AuxiliarDataStructures.UnionFind;
 import exceptions.InvalidBaseNumber;
+import model.City;
 
 public class AdjacencyMatrix<V> implements Graph<V> {
 
@@ -290,42 +291,55 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 	
-	//REVISAR
-	public void dijkstra(Vertex<V> origin) {
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
+	@Override
+	public ArrayList<Vertex<V>> dijkstra(V ori) {
+
+		Vertex<V> origin = new Vertex<V>(ori);
+		double[] distance = new double[vertex.size()];
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
+		
 		
 		for (int i = 0; i < vertex.size(); i++) {
-			vertex.get(i).setDistance(Integer.MAX_VALUE);
-			vertex.get(i).setPrior(null);
+			distance[i]= Double.MAX_VALUE;
+			prior.set(i, null);
+			getVertex().get(i).setWeight(Double.MAX_VALUE);
 		}
 		
-		origin.setDistance(0);
+		int posOri = searchIndex(origin);
+		distance[posOri] = 0;
+		getVertex().get(posOri).setWeight(0);
+		
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		while (!(vertexes.isEmpty())) {
-			Vertex<V> front = vertexes.poll();
 			
+			Vertex<V> front = vertexes.poll();
 			int frontInt = searchIndex(front);
 			
 			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
 			
 			for (int i = 0; i < adjacentsInt.size(); i++) {
+				int posAdjacent = adjacentsInt.get(i);
+				double distanceMin = distance[frontInt] + weights[frontInt][posAdjacent]; //beware of max double limit
 				
-				double distance = vertex.get(frontInt).getDistance() + weights[frontInt][i];
-				
-				if (distance < vertex.get(i).getDistance()) {
-					vertex.get(i).setDistance((int)distance); //QUITAR CAST INT, ARREGLAR TIPO DE DATO
-					vertex.get(i).setPrior(vertex.get(frontInt));
+				if (distanceMin < distance[posAdjacent]) {
+					
+					distance[posAdjacent] = distanceMin;
+					prior.set(posAdjacent, getVertex().get(frontInt));
+					getVertex().get(posAdjacent).setWeight(distanceMin);
+					
 				}
 				
 			}
 			
 		}
 		
-		//TODO
-		
+		return prior;
+
 	}
+
 	
-	//REVISAR
+	@Override
 	public double[][] floydWarshall() {
 		double[][] matrixDistances = getWeights();
 		
@@ -363,7 +377,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 	}
 	
-	public void primInMatrix(Vertex<V> origin) {
+	
+	public void prim(Vertex<V> origin) {
 		
 		for (int i = 0; i < vertex.size(); i++) {
 			vertex.get(i).setColor(Vertex.WHITE);
@@ -452,7 +467,6 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	}
 	
 	
-	//Est� en revisi�n
 	public List<Integer> dfs(Vertex<V> origin){
 		
 		Integer index = searchIndex(origin);
@@ -492,8 +506,14 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		for (int i = 0; i < this.vertex.size(); i++) {
 			
 			if(this.graph[index][i] >= 1) {
-				if(!contains(adjacents,i))
+				if(!contains(adjacents,i)) {
+					
+					if(this.vertex.get(i).getPrior() != null) 
+						this.vertex.get(i).setPrior(this.vertex.get(index));
+					
+					
 					adjacents.add(i);
+				}
 			}
 		}
 		
@@ -516,4 +536,39 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return contains;
 	}
 
+	public ArrayList<V> bfsPath(V vertex_1, V vertex_2) {
+		
+		List<Integer> path = this.bfs(new Vertex<V>(vertex_1));
+		
+		ArrayList<V> ans = new ArrayList<V>();
+		
+		int itemp = searchIndex(new Vertex<V>(vertex_2));
+		
+		if(itemp != -1) {
+			
+			Vertex<V> temp = this.vertex.get(itemp);
+			ans.add(temp.getElement());
+			
+			boolean stop = false;
+			while(temp != null && !stop) {
+				
+				System.out.println(temp.getElement().toString());
+				
+				temp = temp.getPrior();
+				
+				if(temp != null) {
+					ans.add(temp.getElement());
+					if(temp.getElement().hashCode() == vertex_1.hashCode())
+						stop = true;
+				}
+			}
+			
+			
+		}
+		
+		return ans;
+	}
+
+	
+	
 } //end of class
