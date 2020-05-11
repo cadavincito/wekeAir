@@ -292,43 +292,52 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	}
 	
 	@Override
-	public void dijkstra(V ori) {
+	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
 		Vertex<V> origin = new Vertex<V>(ori);
 		double[] distance = new double[vertex.size()];
-		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(vertex.size());
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
 		
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		for (int i = 0; i < vertex.size(); i++) {
 			distance[i]= Double.MAX_VALUE;
 			prior.set(i, null);
+			getVertex().get(i).setWeight(Double.MAX_VALUE);
 		}
 		
 		int posOri = searchIndex(origin);
 		distance[posOri] = 0;
+		getVertex().get(posOri).setWeight(0);
+		
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
 		
 		while (!(vertexes.isEmpty())) {
-			Vertex<V> front = vertexes.poll();
 			
+			Vertex<V> front = vertexes.poll();
 			int frontInt = searchIndex(front);
 			
 			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
 			
 			for (int i = 0; i < adjacentsInt.size(); i++) {
+				int posAdjacent = adjacentsInt.get(i);
+				double distanceMin = distance[frontInt] + weights[frontInt][posAdjacent]; //beware of max double limit
 				
-				double distanceMin = vertex.get(frontInt).getDistance() + weights[frontInt][i];
-				
-				if (distanceMin < distance[i]) {
-					distance[i] = distanceMin;
-					prior.set(i, getVertex().get(i));
+				if (distanceMin < distance[posAdjacent]) {
+					
+					distance[posAdjacent] = distanceMin;
+					prior.set(posAdjacent, getVertex().get(frontInt));
+					getVertex().get(posAdjacent).setWeight(distanceMin);
+					
 				}
 				
 			}
 			
 		}
+		
+		return prior;
 
 	}
+
 	
 	@Override
 	public double[][] floydWarshall() {

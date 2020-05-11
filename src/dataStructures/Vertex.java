@@ -11,6 +11,7 @@ public class Vertex<E> implements Comparable<Vertex>{
 	private int timeStampf;
 	private String color;
 	private int distance;
+	private double weight;
 	private Vertex<E> prior;
 	
 	/**
@@ -28,6 +29,7 @@ public class Vertex<E> implements Comparable<Vertex>{
 		this.color = WHITE;
 		this.distance = -1;
 		this.prior = null;
+		this.weight = 0;
 	}
 
 	/**
@@ -113,14 +115,24 @@ public class Vertex<E> implements Comparable<Vertex>{
 	public void setPrior(Vertex prior) {
 		this.prior = prior;
 	}
+	
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
 
 	@Override
 	public int compareTo(Vertex v1) {
-		return (getDistance()-v1.getDistance());
+		
+		double x = getWeight()-v1.getWeight();
+		int y = (int)x;
+		
+		return y;
 	}
-	
-	
-	
 	
 	
 	

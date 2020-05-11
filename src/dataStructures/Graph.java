@@ -9,7 +9,7 @@ public interface Graph<V> {
 	boolean addEdge(Vertex<V> vertex_1, Vertex<V> vertex_2);
 	boolean addEdge(Vertex<V> vertex_1, Vertex<V> vertex_2, double weight);
 	double[][] floydWarshall();
-	void dijkstra(V origin);
+	ArrayList<Vertex<V>> dijkstra(V origin);
 	
 	
 }
