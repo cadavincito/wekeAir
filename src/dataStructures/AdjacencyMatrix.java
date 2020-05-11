@@ -290,11 +290,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public List<Vertex<V>> getVertex(){
 		return this.vertex;
 	}
-	
+
 	@Override
 	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
-		Vertex<V> origin = new Vertex<V>(ori);
+		Vertex<V> origin =  new Vertex<V>(ori);
 		double[] distance = new double[vertex.size()];
 		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
 		
@@ -568,6 +568,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 		return ans;
 	}
+
+	
 
 	
 	

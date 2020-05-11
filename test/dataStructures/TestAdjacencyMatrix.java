@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import exceptions.InvalidBaseNumber;
 import model.City;
 
 class TestAdjacencyMatrix {
@@ -105,7 +106,12 @@ class TestAdjacencyMatrix {
 		//there are 8 edges in this graph
 		void setupScenario6() {
 			
-			adjacencyMatrix = new AdjacencyMatrix<City>(true);
+			try {
+				adjacencyMatrix = new AdjacencyMatrix<City>(true,10);
+			} catch (InvalidBaseNumber e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for(int i = 0; i<10; i++) {
 				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
@@ -133,7 +139,12 @@ class TestAdjacencyMatrix {
 		//there are 9 edges in this graph
 		void setupScenario7() {
 					
-			adjacencyMatrix = new AdjacencyMatrix<City>(false);
+			try {
+				adjacencyMatrix = new AdjacencyMatrix<City>(false,10);
+			} catch (InvalidBaseNumber e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for(int i = 0; i<7; i++) {
 				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencyMatrix.addVertex(vi);
@@ -373,6 +384,86 @@ class TestAdjacencyMatrix {
 
 		
 
+	
+		
+		
+		@Test
+		void adjacentsTest1() {
+		setupScenario6();
+		//get the adjacent vertexes to the vertex 0
+		List<Integer> a = adjacencyMatrix.adjacents(0);
+		List<Integer> b = new ArrayList<Integer>();
+		b.add(1);
+		b.add(2);
+		
+		System.out.println("adja"+a.toString());
+		System.out.println("adja "+b.toString());
+		assertEquals(a,b);
+		
+		}
+		
+		@Test
+		void adjacentsTest2() {
+		setupScenario6();
+		//get the adjacent vertexes to the vertex 3
+		List<Integer> a = adjacencyMatrix.adjacents(3);
+		List<Integer> b = new ArrayList<Integer>();
+		b.add(7);
+		b.add(8);
+		
+		System.out.println("adja"+a.toString());
+		System.out.println("adja "+b.toString());
+		assertEquals(a,b);
+		
+		}
+		
+		
+		@Test
+		void adjacentsTest3() {
+		setupScenario6();
+		//get the adjacent vertexes to the vertex 3
+		List<Integer> a = adjacencyMatrix.adjacents(2);
+		List<Integer> b = new ArrayList<Integer>();
+		b.add(5);
+		b.add(8);
+		
+		System.out.println("adja"+a.toString());
+		System.out.println("adja "+b.toString());
+		assertNotEquals(a,b);
+		
+		}
+		
+		@Test
+		void searchIndexTest1() {
+		setupScenario2();
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		int a = adjacencyMatrix.searchIndex(vi);
+		int b = 0;
+		
+		assertEquals(a,b);
+		
+		
+		}
+		
+		@Test
+		void searchIndexTest2() {
+		setupScenario1();
+		Vertex<City> vi = new Vertex<City>(new City(0+""));
+		int a = adjacencyMatrix.searchIndex(vi);
+		int b = -1;
+		assertEquals(a,b);
+		}
+		
+		@Test
+		void searchIndexTest3() {
+		setupScenario3();
+		Vertex<City> vi = new Vertex<City>(new City(9+""));
+		int a = adjacencyMatrix.searchIndex(vi);
+		int b = 9;
+		assertEquals(a,b);
+		}
+
+		
 		@Test
 		void bfsTest1() {
 		setupScenario4();
@@ -470,6 +561,8 @@ class TestAdjacencyMatrix {
 		
 		
 		
+		
+		
 		@Test
 		void dfsTest2() {
 		setupScenario3();
@@ -518,11 +611,23 @@ class TestAdjacencyMatrix {
 		
 		@Test
 		void primsAlgorithmTest1() {
-		
+		setupScenario7();
 		}
 		
 		@Test
 		void primsAlgorithmTest2() {
+		setupScenario3();
+		
+		}
+		
+		@Test
+		void kruskalTest1() {
+		setupScenario7();
+		}
+		
+		@Test
+		void kruskalTest2() {
+		setupScenario3();
 		
 		}
 		
@@ -530,23 +635,24 @@ class TestAdjacencyMatrix {
 		@Test
 		void djikstraTest1() {
 			setupScenario7();
-			
-
+			List<Vertex<City>> a = adjacencyMatrix.dijkstra(adjacencyMatrix.getVertex().get(3).getElement());
+			System.out.println("djikstra: "+a);
 		}
 		
 		@Test
 		void djikstraTest2() {
+			setupScenario7();
 		
 		}
 		
 		@Test
 		void fWTest1() {
-			setupScenario4();
+			setupScenario6();
 			int d = adjacencyMatrix.getWeights().length;
 			double [][] a = new double[d][d]; 
 			double [][] b = adjacencyMatrix.floydWarshall();
 			
-				System.out.println(Arrays.deepToString(b));
+			System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
 				assertEquals(a,b);
 			
 			
@@ -554,94 +660,16 @@ class TestAdjacencyMatrix {
 		}
 		
 		
-		@Test
-		void fWTest2() {
-			setupScenario7();
-			int d = adjacencyMatrix.getWeights().length;
-			double [][] a = new double[d][d]; 
-			double [][] b = adjacencyMatrix.floydWarshall();
-			
-		
-			assertEquals(a,b);
-			
-		}
-		
-		
-		@Test
-		void adjacentsTest1() {
-		setupScenario6();
-		//get the adjacent vertexes to the vertex 0
-		List<Integer> a = adjacencyMatrix.adjacents(0);
-		List<Integer> b = new ArrayList<Integer>();
-		b.add(1);
-		b.add(2);
-		
-		System.out.println("adja"+a.toString());
-		System.out.println("adja "+b.toString());
-		assertEquals(a,b);
-		
-		}
-		
-		@Test
-		void adjacentsTest2() {
-		setupScenario6();
-		//get the adjacent vertexes to the vertex 3
-		List<Integer> a = adjacencyMatrix.adjacents(3);
-		List<Integer> b = new ArrayList<Integer>();
-		b.add(7);
-		b.add(8);
-		
-		System.out.println("adja"+a.toString());
-		System.out.println("adja "+b.toString());
-		assertEquals(a,b);
-		
-		}
-		
-		
-		@Test
-		void adjacentsTest3() {
-		setupScenario6();
-		//get the adjacent vertexes to the vertex 3
-		List<Integer> a = adjacencyMatrix.adjacents(2);
-		List<Integer> b = new ArrayList<Integer>();
-		b.add(5);
-		b.add(8);
-		
-		System.out.println("adja"+a.toString());
-		System.out.println("adja "+b.toString());
-		assertNotEquals(a,b);
-		
-		}
-		
-		@Test
-		void searchIndexTest1() {
-		setupScenario2();
-		Vertex<City> vi = new Vertex<City>(new City(0+""));
-		int a = adjacencyMatrix.searchIndex(vi);
-		int b = 0;
-		
-		assertEquals(a,b);
-		
-		
-		}
-		
-		@Test
-		void searchIndexTest2() {
-		setupScenario1();
-		Vertex<City> vi = new Vertex<City>(new City(0+""));
-		int a = adjacencyMatrix.searchIndex(vi);
-		int b = -1;
-		assertEquals(a,b);
-		}
-		
-		@Test
-		void searchIndexTest3() {
-		setupScenario3();
-		Vertex<City> vi = new Vertex<City>(new City(9+""));
-		int a = adjacencyMatrix.searchIndex(vi);
-		int b = 9;
-		assertEquals(a,b);
-		}
-
+//		@Test
+//		void fWTest2() {
+//			setupScenario7();
+//			int d = adjacencyMatrix.getWeights().length;
+//			double [][] a = new double[d][d]; 
+//			double [][] b = adjacencyMatrix.floydWarshall();
+//			
+//		
+//			assertEquals(a,b);
+//			
+//		}
 
 }

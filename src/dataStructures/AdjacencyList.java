@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import org.junit.internal.runners.model.EachTestNotifier;
-
 import AuxiliarDataStructures.IQueue;
 import AuxiliarDataStructures.IStack;
 import AuxiliarDataStructures.Queue;

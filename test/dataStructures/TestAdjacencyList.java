@@ -14,6 +14,7 @@ class TestAdjacencyList {
 
 	private AdjacencyList<City> adjacencylist;
 	
+	//empty graph
 	private void setupScenario1() {
 		
 		this.adjacencylist = new AdjacencyList<City>(false);
@@ -234,8 +235,7 @@ class TestAdjacencyList {
 				Vertex<City> vi = new Vertex<City>(new City(2+""));
 				Vertex<City> va = new Vertex<City>(new City(10+""));
 				boolean a = adjacencylist.addEdge(vi, va);
-				double  b = adjacencylist.getGraph().get(0).get(2).get(10);
-				
+				assertTrue(a);
 				
 			}
 			
@@ -325,72 +325,7 @@ class TestAdjacencyList {
 	assertNotEquals(a,b);
 	
 	}
-	@Test
-	void bfsTest1() {
-		setupScenario4();
-
-		List<Integer> a=AdjacencyList.bfs(adjacencylist.getVertex().get(0)));
-		List<Integer> b = new ArrayList<Integer>();	
-		
-		for(int i = 0; i<5;i++){
-			b.add(i);
-		}
-		
-		System.out.println(a.toString());
-		System.out.println(b.toString());
-				
-		assertEquals(a,b);
 	
-	}
-	
-	
-	
-	
-	
-	@Test
-	void bfsTest2() {
-	
-	
-	
-	}
-	
-	
-	@Test
-	void dfsTest1() {
-	
-	
-	}
-	
-	
-	
-	
-	@Test
-	void dfsTest2() {
-	
-	
-	
-	}
-	
-	@Test
-	void primsAlgorithmTest1() {
-	
-	}
-	
-	@Test
-	void primsAlgorithmTest2() {
-	
-	}
-	
-	
-	@Test
-	void djikstraTest1() {
-	
-	}
-	
-	@Test
-	void djikstraTest2() {
-	
-	}
 	
 	
 	@Test
@@ -428,5 +363,81 @@ class TestAdjacencyList {
 	
 	
 	}
+	
+	@Test
+	void bfsTest1() {
+		setupScenario4();
+		
+		Vertex<City> z =adjacencylist.getVertex().get(0);
+		
+		List<City> a=adjacencylist.bfs(z);
+		
+		
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		for(int i = 0; i<5;i++){
+			b.add(i);
+		}
+		
+		System.out.println(a.toString());
+		System.out.println(b.toString());
+				
+		assertEquals(a,b);
+	
+	}
+	
+	
+	@Test
+	void bfsTest2() {
+	
+	
+	
+	}
+	
+	
+	@Test
+	void dfsTest1() {
+	
+	
+	}
+	
+	
+	@Test
+	void dfsTest2() {
+	
+	
+	
+	}
+	
+	@Test
+	void primsAlgorithmTest1() {
+	
+	}
+	
+	@Test
+	void kruskalAlgorithmTest1() {
+	
+	}
+	@Test
+	void kruskalAlgorithmTest2() {
+	
+	}
+	
+	@Test
+	void primsAlgorithmTest2() {
+	
+	}
+	
+	
+	@Test
+	void djikstraTest1() {
+	
+	}
+	
+	@Test
+	void djikstraTest2() {
+	
+	}
+	
 
 }
