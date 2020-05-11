@@ -290,7 +290,44 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public List<Vertex<V>> getVertex(){
 		return this.vertex;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	
+	//The first element of path is the destination vertex and the last element is the origin.
+	//so you gotta do a backwards search
+	public ArrayList<Vertex<V>> findShortestPathBetweenVertexes(V ori, V destination){
+		
+		ArrayList<Vertex<V>> pre = dijkstra(ori);
+		ArrayList<Vertex<V>> path = new ArrayList<Vertex<V>>();
+		Vertex<V> dest = new Vertex<V>(destination);
+		boolean stop = false;
+		int destPos = searchIndex(dest);
+		
+		for (int i = 0; i < pre.size() && !stop; i++) {
+			if (i == destPos) {
+				stop = true;
+			}
+		}
+		path.add(getVertex().get(destPos));
+		
+		Vertex<V>  backwards = pre.get(destPos);
+		
+		while (backwards != null) {
+			path.add(backwards);
+			
+			int indexPrev = searchIndex(backwards);
+			
+			backwards = pre.get(indexPrev);
+			
+		}
+		
+		
+		return path;
+	}
+	
+>>>>>>> 74a254a8c35022054c3138862df4f63d810087d7
 	@Override
 	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
@@ -298,7 +335,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		double[] distance = new double[vertex.size()];
 		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
 		
-		
+		 
 		for (int i = 0; i < vertex.size(); i++) {
 			distance[i]= Double.MAX_VALUE;
 			prior.set(i, null);
@@ -337,6 +374,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return prior;
 
 	}
+
 
 	
 	@Override
