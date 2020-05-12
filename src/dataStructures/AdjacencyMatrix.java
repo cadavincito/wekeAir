@@ -290,9 +290,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public List<Vertex<V>> getVertex(){
 		return this.vertex;
 	}
-<<<<<<< HEAD
 
-=======
 	
 	
 	//The first element of path is the destination vertex and the last element is the origin.
@@ -327,7 +325,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return path;
 	}
 	
->>>>>>> 74a254a8c35022054c3138862df4f63d810087d7
+
 	@Override
 	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
