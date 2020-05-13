@@ -403,11 +403,11 @@ class TestAdjacencyMatrix {
 			boolean a = adjacencyMatrix.addEdge(vi, va,200);
 			boolean b = adjacencyMatrix.addEdge(va, ve,100);
 			boolean c = adjacencyMatrix.addEdge(ve, vo,300);
-			boolean d = adjacencyMatrix.addEdge(ve, vo,300);
+			boolean d = adjacencyMatrix.addEdge(vo, vu,300);
 			assertTrue(a);
 			assertTrue(b);
 			assertTrue(c);
-			
+			assertTrue(d);
 			int g = adjacencyMatrix.getGraph()[0][1];//1
 			int gg = adjacencyMatrix.getGraph()[1][0];//0
 			
@@ -686,12 +686,18 @@ class TestAdjacencyMatrix {
 			setupScenario7();
 			List<Vertex<City>> a = adjacencyMatrix.dijkstra(adjacencyMatrix.getVertex().get(3).getElement());
 			System.out.println("djikstra: "+a);
+			
+			
+			
+			
+			
 		}
 		
 		@Test
 		void djikstraTest2() {
-			setupScenario7();
-		
+			setupScenario4();
+			List<Vertex<City>> a = adjacencyMatrix.dijkstra(adjacencyMatrix.getVertex().get(3).getElement());
+			System.out.println("djikstra 2: "+a);
 		}
 		
 		@Test
@@ -708,10 +714,10 @@ class TestAdjacencyMatrix {
 					
 			double [][] b = adjacencyMatrix.floydWarshall();
 			
-			System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+			//System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
 				assertEquals(a,b);
 			
-				System.out.println("totot");
+			
 				System.out.println();
 			
 				
@@ -730,7 +736,7 @@ class TestAdjacencyMatrix {
 				   {d, 3.0, 4.0, 0.0}};
 		double [][] b = adjacencyMatrix.floydWarshall();
 		
-		System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+		//System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
 			assertEquals(a,b);
 		
 		

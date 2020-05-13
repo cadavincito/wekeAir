@@ -3,6 +3,7 @@ package dataStructures;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -60,18 +61,23 @@ class TestAdjacencyList {
 		//the graph is directed
 		void setupScenario4() {
 		adjacencylist = new AdjacencyList<City>(true);
-		for(int i = 0; i<10; i++) {
+		
+					
+		for(int i = 0; i<6; i++) {
 			Vertex<City> vi = new Vertex<City>(new City(i+""));
 			adjacencylist.addVertex(vi);
 		}
-					
-		// 0 ---> 1 && 0 ----> 2
-		adjacencylist.addEdge(adjacencylist.getVertex().get(0), adjacencylist.getVertex().get(1));
-		adjacencylist.addEdge(adjacencylist.getVertex().get(0), adjacencylist.getVertex().get(2));
 		
-		// 1 ---> 3 && 1 ----> 4
-		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3));
-		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(4));
+		
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3),13);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(2),17);
+		
+	
+		adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(3),14);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(4),5);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(4),16);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(5), adjacencylist.getVertex().get(4),4);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(5), adjacencylist.getVertex().get(2),3);
 	}
 						
 				
@@ -446,6 +452,9 @@ class TestAdjacencyList {
 		Vertex<City> vi = new Vertex<City>(new City(4+""));
 		Vertex<City> va = new Vertex<City>(new City(0+""));
 		boolean b = adjacencylist.addEdge(vi,va,1000);
+		
+		Double t =adjacencylist.getGraph().get(4).get(0).get(0);//must be 0
+		Double tt =adjacencylist.getGraph().get(4).get(0).get(1);//must be 1000
 		assertTrue(b);
 	}
 	
@@ -570,8 +579,8 @@ class TestAdjacencyList {
 			b.add(i);
 		}
 		
-		System.out.println("bfs"+a.toString());
-		System.out.println("bfs"+b.toString());
+		System.out.println("bfs2"+a.toString());
+		System.out.println("bfs2"+b.toString());
 				
 		assertEquals(a,b);
 	
@@ -582,33 +591,108 @@ class TestAdjacencyList {
 	
 	@Test
 	void dfsTest1() {
-		
-    setupScenario6();
-		
-		Vertex<City> z =adjacencylist.getVertex().get(0);
-		
-		List<Integer> a=adjacencylist.bfs(z);
-		
-		
-		List<Integer> b = new ArrayList<Integer>();	
-		
-		for(int i = 0; i<5;i++){
-			b.add(i);
-		}
-		
-		System.out.println("dfs"+a.toString());
-		System.out.println("dfs"+b.toString());
-				
-		assertEquals(a,b);
+	setupScenario4();
+
+	List<Integer> a=adjacencylist.dfs(adjacencylist.getVertex().get(1));
+	
+	
+	List<Integer> b = new ArrayList<Integer>();	
+	
+	b.add(1);
+	b.add(3);
+	b.add(4);
+	b.add(5);
+	b.add(2);
+
+	assertEquals(a,b);
+	
 	
 	}
 	
 	
+	
+	
+	
+	
 	@Test
 	void dfsTest2() {
+	setupScenario3();
+
+	List<Integer> a=adjacencylist.dfs(adjacencylist.getVertex().get(2));
+	List<Integer> b = new ArrayList<Integer>();	
+	
+	b.add(2);
+	b.add(6);
+	b.add(5);
+	b.add(7);
+	b.add(9);
+	b.add(1);
+	
+	assertEquals(a,b);
 	
 	
+	}
 	
+	@Test
+	void dfsTest3() {
+	setupScenario7();
+
+	List<Integer> a=adjacencylist.dfs(adjacencylist.getVertex().get(1));
+	List<Integer> b = new ArrayList<Integer>();	
+	
+	b.add(1);
+	b.add(3);
+	b.add(5);
+	b.add(6);
+	b.add(4);
+	b.add(2);
+	
+	assertEquals(a,b);
+	
+	
+	}
+	
+	@Test
+	void fWTest1() {
+		setupScenario4();
+
+		double[][] a= {
+				    {0.0,17.0,13.0,18.0,20.0},
+				   {17.0, 0.0, 12.0, 7.0, 3.0},
+				   {13.0, 12.0, 0.0, 5.0, 9.0},
+				   {18.0, 7.0, 5.0, 0.0, 4.0},
+				   {20.0, 3.0, 9.0, 4.0, 0.0},};
+		
+				
+		double [][] b = adjacencylist.floydWarshall();
+		
+		System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+			assertEquals(a,b);
+		
+		
+			System.out.println();
+		
+			
+	}
+	
+	
+	@Test
+	void fWTest2() {
+		setupScenario7();
+	double d = Double.MAX_VALUE;
+	//the resulting matrix must be like this one
+	double[][] a= {
+			   {0.0,5.0,6.0,8.0},
+			   {d, 0.0, 1.0, 3.0},
+			   {d, 5.0, 0.0, 2.0},
+			   {d, 3.0, 4.0, 0.0}};
+	double [][] b = adjacencylist.floydWarshall();
+	
+	//System.out.println(Arrays.deepToString(b).replace("], ", "]\n").replace("[[", "[").replace("]]", "]"));
+		assertEquals(a,b);
+	
+	
+		
 	}
 	
 	@Test
@@ -633,7 +717,9 @@ class TestAdjacencyList {
 	
 	@Test
 	void djikstraTest1() {
-		
+		setupScenario7();
+		List<Vertex<City>> a = adjacencylist.dijkstra(adjacencylist.getVertex().get(1).getElement());
+		System.out.println("djikstra: "+a);
 	}
 	
 	@Test

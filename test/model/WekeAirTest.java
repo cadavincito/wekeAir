@@ -34,5 +34,26 @@ class WekeAirTest {
 	}
 	
 	
+	@Test
+	void cheapestPathTest1() {
+	
+	}
+	
+	@Test
+	void cheapestPathTest2() {
+	
+	}
+	
+	@Test
+	void fastestPathTest1() {
+	
+	}
+	
+	@Test
+	void fastestPathTest2() {
+	
+	}
+	
+	
 
 }

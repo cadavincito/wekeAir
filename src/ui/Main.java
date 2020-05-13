@@ -21,7 +21,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			Image a = new Image("file:../resources/pink_matte.jpg");
+			Image a = new Image("file:../resources/wekelogo.png");
 			primaryStage.getIcons().add(a);
 			primaryStage.setTitle("WekeAir");
 			primaryStage.show();
