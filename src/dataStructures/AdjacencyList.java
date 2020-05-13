@@ -329,6 +329,19 @@ public class AdjacencyList<V> implements Graph<V>{
 		return path;
 	}
 	
+	//This a predecesor list, where every position of ArrayList pre is the predecesor of the vertex of the index
+	public ArrayList<Vertex<V>> buildMSTPrim(V ori){
+		prim(new Vertex<V>(ori));
+		
+		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
+		
+		for (int i = 0; i < getVertex().size(); i++) {
+			pre.add(getVertex().get(i).getPrior());
+		}
+		
+		return pre;
+	}
+	
 	//check
 	public void prim(Vertex<V> origin) {
 		
