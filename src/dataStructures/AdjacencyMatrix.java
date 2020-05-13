@@ -291,6 +291,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 
+
 	//The first element of path is the destination vertex and the last element is the origin.
 	//so you gotta do a backwards search
 	public ArrayList<Vertex<V>> findShortestPathBetweenVertexes(V ori, V destination){
