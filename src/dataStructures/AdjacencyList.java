@@ -225,17 +225,21 @@ public class AdjacencyList<V> implements Graph<V>{
 		return weights;
 	}
 	
+
+	
 	@Override
 	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
-		Vertex<V> origin = new Vertex<V>(ori);
-		double[] distance = new double[vertex.size()];
-		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
+		Vertex<V> origin =  new Vertex<V>(ori);
+		double[] distance = new double[getVertex().size()];
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>();
+		
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex().size(), new Vertex<V>()); 
 		
 		
-		for (int i = 0; i < vertex.size(); i++) {
+		for (int i = 0; i < getVertex().size(); i++) {
 			distance[i]= Double.MAX_VALUE;
-			prior.set(i, null);
+			prior.add(null);
 			getVertex().get(i).setWeight(Double.MAX_VALUE);
 		}
 		
@@ -243,8 +247,11 @@ public class AdjacencyList<V> implements Graph<V>{
 		distance[posOri] = 0;
 		getVertex().get(posOri).setWeight(0);
 		
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
+		for (int i = 0; i < getVertex().size(); i++) {
+			vertexes.add(getVertex().get(i));
+		}
 		
+	
 		while (!(vertexes.isEmpty())) {
 			
 			Vertex<V> front = vertexes.poll();
@@ -261,6 +268,7 @@ public class AdjacencyList<V> implements Graph<V>{
 					distance[posAdjacent] = distanceMin;
 					prior.set(posAdjacent, getVertex().get(frontInt));
 					getVertex().get(posAdjacent).setWeight(distanceMin);
+					vertexes = updatePQ(vertexes);
 					
 				}
 				
@@ -271,6 +279,17 @@ public class AdjacencyList<V> implements Graph<V>{
 		return prior;
 
 	}
+	
+	public PriorityQueue<Vertex<V>> updatePQ(PriorityQueue<Vertex<V>> vertexes){
+		vertexes.clear();
+		for (int i = 0; i < getVertex().size(); i++) {
+			vertexes.add(getVertex().get(i));
+		}
+		
+		return vertexes;
+		
+	}
+	
 	
 	//The first element of path is the destination vertex and the last element is the origin.
 	//so you gotta do a backwards search

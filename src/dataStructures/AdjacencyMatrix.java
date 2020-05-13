@@ -290,11 +290,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public List<Vertex<V>> getVertex(){
 		return this.vertex;
 	}
-<<<<<<< HEAD
 
-=======
-	
-	
 	//The first element of path is the destination vertex and the last element is the origin.
 	//so you gotta do a backwards search
 	public ArrayList<Vertex<V>> findShortestPathBetweenVertexes(V ori, V destination){
@@ -327,18 +323,20 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return path;
 	}
 	
->>>>>>> 74a254a8c35022054c3138862df4f63d810087d7
+
 	@Override
 	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
 		Vertex<V> origin =  new Vertex<V>(ori);
-		double[] distance = new double[vertex.size()];
-		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
+		double[] distance = new double[getVertex().size()];
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>();
 		
-		 
-		for (int i = 0; i < vertex.size(); i++) {
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex().size(), new Vertex<V>()); 
+		
+		
+		for (int i = 0; i < getVertex().size(); i++) {
 			distance[i]= Double.MAX_VALUE;
-			prior.set(i, null);
+			prior.add(null);
 			getVertex().get(i).setWeight(Double.MAX_VALUE);
 		}
 		
@@ -346,8 +344,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		distance[posOri] = 0;
 		getVertex().get(posOri).setWeight(0);
 		
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
+		for (int i = 0; i < getVertex().size(); i++) {
+			vertexes.add(getVertex().get(i));
+		}
 		
+	
 		while (!(vertexes.isEmpty())) {
 			
 			Vertex<V> front = vertexes.poll();
@@ -364,6 +365,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 					distance[posAdjacent] = distanceMin;
 					prior.set(posAdjacent, getVertex().get(frontInt));
 					getVertex().get(posAdjacent).setWeight(distanceMin);
+					vertexes = updatePQ(vertexes);
 					
 				}
 				
@@ -373,6 +375,16 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 		return prior;
 
+	}
+	
+	public PriorityQueue<Vertex<V>> updatePQ(PriorityQueue<Vertex<V>> vertexes){
+		vertexes.clear();
+		for (int i = 0; i < getVertex().size(); i++) {
+			vertexes.add(getVertex().get(i));
+		}
+		
+		return vertexes;
+		
 	}
 
 

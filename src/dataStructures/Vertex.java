@@ -1,6 +1,8 @@
 package dataStructures;
 
-public class Vertex<E> implements Comparable<Vertex>{
+import java.util.Comparator;
+
+public class Vertex<E> implements Comparator<Vertex<E>>{
 
 	public final static String BLACK = "B";
 	public final static String GREY = "G";
@@ -30,6 +32,10 @@ public class Vertex<E> implements Comparable<Vertex>{
 		this.distance = -1;
 		this.prior = null;
 		this.weight = 0;
+	}
+	
+	public Vertex() {
+		
 	}
 
 	/**
@@ -126,12 +132,12 @@ public class Vertex<E> implements Comparable<Vertex>{
 	}
 
 	@Override
-	public int compareTo(Vertex v1) {
-		
-		double x = getWeight()-v1.getWeight();
-		int y = (int)x;
-		
-		return y;
+	public int compare(Vertex<E> o1, Vertex<E> o2) {
+		if (o1.getWeight() < o2.getWeight()) 
+            return -1; 
+        if (o1.getWeight() > o2.getWeight()) 
+            return 1; 
+        return 0;
 	}
 	
 	
