@@ -1,10 +1,15 @@
 package dataStructures;
 
-public class Edge<E> {
+import java.util.Comparator;
+
+public class Edge<E> implements Comparator<Edge<E>>{
 
 	private Vertex<E> origin;
 	private Vertex<E> destination;
 	private double weight;
+	
+	public Edge(){
+	}
 	
 	public Edge(Vertex<E> origin, Vertex<E> destination, double weight) {
 		super();
@@ -41,6 +46,15 @@ public class Edge<E> {
 
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+
+	@Override
+	public int compare(Edge<E> o1, Edge<E> o2) {
+		if (o1.getWeight() < o2.getWeight()) 
+            return -1; 
+        if (o1.getWeight() > o2.getWeight()) 
+            return 1; 
+        return 0;
 	}
 	
 	
