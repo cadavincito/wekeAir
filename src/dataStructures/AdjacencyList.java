@@ -280,9 +280,16 @@ public class AdjacencyList<V> implements Graph<V>{
 	}
 	
 	public PriorityQueue<Vertex<V>> updatePQ(PriorityQueue<Vertex<V>> vertexes){
-		vertexes.clear();
-		for (int i = 0; i < getVertex().size(); i++) {
-			vertexes.add(getVertex().get(i));
+		
+		ArrayList<Vertex<V>> temp = new ArrayList<Vertex<V>>();
+		
+		
+		while (!(vertexes.isEmpty())) {
+			temp.add(vertexes.poll());
+		}
+		
+		for (int i = 0; i < temp.size(); i++) {
+			vertexes.add(temp.get(i));
 		}
 		
 		return vertexes;
@@ -320,6 +327,56 @@ public class AdjacencyList<V> implements Graph<V>{
 		
 		
 		return path;
+	}
+	
+	//check
+	public void prim(Vertex<V> origin) {
+		
+		for (int i = 0; i < vertex.size(); i++) {
+			vertex.get(i).setColor(Vertex.WHITE);
+			vertex.get(i).setDistance(Integer.MAX_VALUE);
+			vertex.get(i).setPrior(null);
+		}
+		
+		int foundOriginIndex = searchIndex(origin);
+		
+		getVertex().get(foundOriginIndex).setDistance(0);
+		
+		PriorityQueue<Vertex<V>> pq = new PriorityQueue<Vertex<V>>(getVertex().size(), new Vertex<V>()); 
+		
+		for (int i = 0; i < getVertex().size(); i++) {
+			pq.add(getVertex().get(i));
+		}
+		
+		while (!(pq.isEmpty())) {
+			
+			Vertex<V> head = pq.poll();
+			
+			int frontInt = searchIndex(head);
+			
+			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
+			
+			for (int i = 0; i < adjacentsInt.size(); i++) {
+				
+				int posAdjacent = adjacentsInt.get(i);
+				Vertex<V> vertexInMatter = getVertex().get(posAdjacent);
+				double distanceBetweenV = getEdgeWeight(frontInt,posAdjacent);
+				if (vertexInMatter.getColor().equalsIgnoreCase(Vertex.WHITE) && (distanceBetweenV < vertexInMatter.getDistance())) {
+					int distanceInt = (int)distanceBetweenV; //watch out for similar distances
+					vertexInMatter.setDistance(distanceInt);
+					vertexInMatter.setPrior(head);
+					pq = updatePQ(pq);
+				}
+				
+				
+			}
+			
+			head.setColor(Vertex.BLACK);
+			
+			
+		}
+		
+		
 	}
 	
 	//always has to work
