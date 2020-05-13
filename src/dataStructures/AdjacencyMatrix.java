@@ -291,8 +291,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return this.vertex;
 	}
 
-	
-	
+
 	//The first element of path is the destination vertex and the last element is the origin.
 	//so you gotta do a backwards search
 	public ArrayList<Vertex<V>> findShortestPathBetweenVertexes(V ori, V destination){
@@ -330,13 +329,15 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public ArrayList<Vertex<V>> dijkstra(V ori) {
 
 		Vertex<V> origin =  new Vertex<V>(ori);
-		double[] distance = new double[vertex.size()];
-		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>(getVertex().size());
+		double[] distance = new double[getVertex().size()];
+		ArrayList<Vertex<V>> prior = new ArrayList<Vertex<V>>();
 		
-		 
-		for (int i = 0; i < vertex.size(); i++) {
+		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex().size(), new Vertex<V>()); 
+		
+		
+		for (int i = 0; i < getVertex().size(); i++) {
 			distance[i]= Double.MAX_VALUE;
-			prior.set(i, null);
+			prior.add(null);
 			getVertex().get(i).setWeight(Double.MAX_VALUE);
 		}
 		
@@ -344,8 +345,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		distance[posOri] = 0;
 		getVertex().get(posOri).setWeight(0);
 		
-		PriorityQueue<Vertex<V>> vertexes = new PriorityQueue<Vertex<V>>(getVertex()); 
+		for (int i = 0; i < getVertex().size(); i++) {
+			vertexes.add(getVertex().get(i));
+		}
 		
+	
 		while (!(vertexes.isEmpty())) {
 			
 			Vertex<V> front = vertexes.poll();
@@ -362,6 +366,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 					distance[posAdjacent] = distanceMin;
 					prior.set(posAdjacent, getVertex().get(frontInt));
 					getVertex().get(posAdjacent).setWeight(distanceMin);
+					vertexes = updatePQ(vertexes);
 					
 				}
 				
@@ -371,6 +376,23 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 		return prior;
 
+	}
+	
+	public PriorityQueue<Vertex<V>> updatePQ(PriorityQueue<Vertex<V>> vertexes){
+		
+		ArrayList<Vertex<V>> temp = new ArrayList<Vertex<V>>();
+		
+		
+		while (!(vertexes.isEmpty())) {
+			temp.add(vertexes.poll());
+		}
+		
+		for (int i = 0; i < temp.size(); i++) {
+			vertexes.add(temp.get(i));
+		}
+		
+		return vertexes;
+		
 	}
 
 
@@ -413,24 +435,51 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		
 	}
 	
-	
+	//check
 	public void prim(Vertex<V> origin) {
 		
 		for (int i = 0; i < vertex.size(); i++) {
 			vertex.get(i).setColor(Vertex.WHITE);
-			vertex.get(i).setDistance(-1);
+			vertex.get(i).setDistance(Integer.MAX_VALUE);
 			vertex.get(i).setPrior(null);
 		}
 		
 		int foundOriginIndex = searchIndex(origin);
 		
-		origin = null;
+		getVertex().get(foundOriginIndex).setDistance(0);
 		
-		if (foundOriginIndex != -1) {
-			origin = vertex.get(foundOriginIndex); 
+		PriorityQueue<Vertex<V>> pq = new PriorityQueue<Vertex<V>>(getVertex().size(), new Vertex<V>()); 
+		
+		for (int i = 0; i < getVertex().size(); i++) {
+			pq.add(getVertex().get(i));
 		}
-		//TODO
 		
+		while (!(pq.isEmpty())) {
+			
+			Vertex<V> head = pq.poll();
+			
+			int frontInt = searchIndex(head);
+			
+			ArrayList<Integer> adjacentsInt = adjacents(frontInt);
+			
+			for (int i = 0; i < adjacentsInt.size(); i++) {
+				
+				int posAdjacent = adjacentsInt.get(i);
+				Vertex<V> vertexInMatter = getVertex().get(posAdjacent);
+				if (vertexInMatter.getColor().equalsIgnoreCase(Vertex.WHITE) && (weights[frontInt][posAdjacent] < vertexInMatter.getDistance())) {
+					int distanceInt = (int) weights[frontInt][posAdjacent]; //watch out for similar distances
+					vertexInMatter.setDistance(distanceInt);
+					vertexInMatter.setPrior(head);
+					pq = updatePQ(pq);
+				}
+				
+				
+			}
+			
+			head.setColor(Vertex.BLACK);
+			
+			
+		}
 		
 		
 	}
