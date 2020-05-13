@@ -41,6 +41,19 @@ class TestAdjacencyList {
 				Vertex<City> vi = new Vertex<City>(new City(i+""));
 				adjacencylist.addVertex(vi);
 			}
+			
+			// 1 ---> 2 && 2 ----> 1
+			adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(2));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(1));
+			
+			// 2 ---> 5 && 2 ----> 6
+			adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(6));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(5));	
+			
+			// 5 ---> 7 && 7 ----> 30
+			adjacencylist.addEdge(adjacencylist.getVertex().get(5), adjacencylist.getVertex().get(7));
+			adjacencylist.addEdge(adjacencylist.getVertex().get(7), adjacencylist.getVertex().get(9));
+			
 		}
 		
 		//there are 4 edges in this graph
@@ -118,6 +131,41 @@ class TestAdjacencyList {
 					// 3 ---> 7 && 3 ----> 8
 					adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(7),250);
 					adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(8),400);
+					
+				}
+				
+				
+				//graph with 7 vertexes
+				//the graph is undirected
+				//there are 9 edges in this graph
+				void setupScenario7() {
+							
+					adjacencylist = new AdjacencyList<City>(false);
+					
+					for(int i = 0; i<10; i++) {
+						Vertex<City> vi = new Vertex<City>(new City(i+""));
+						adjacencylist.addVertex(vi);
+					}
+					
+					// 1 ---> 2 && 1 ----> 3
+					adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(2),4);
+					adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3),2);
+					
+					// 2 ---> 3 && 2 ----> 4 
+					adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(3),1);
+					adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(4),5);
+				
+
+					// 3 ---> 5 && 3 ----> 4
+					adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(5),10);
+					adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(4),8);
+					
+					// 5 ---> 4 && 3 ----> 8
+					adjacencylist.addEdge(adjacencylist.getVertex().get(5), adjacencylist.getVertex().get(4),2);
+					adjacencylist.addEdge(adjacencylist.getVertex().get(5), adjacencylist.getVertex().get(6),3);
+					
+					// 6 ---> 4
+					adjacencylist.addEdge(adjacencylist.getVertex().get(6), adjacencylist.getVertex().get(4),6);
 					
 				}
 		
@@ -426,8 +474,6 @@ class TestAdjacencyList {
 	b.add(7);
 	b.add(8);
 	
-	System.out.println("adja"+a.toString());
-	System.out.println("adja "+b.toString());
 	assertEquals(a,b);
 	
 	}
@@ -501,8 +547,8 @@ class TestAdjacencyList {
 			b.add(i);
 		}
 		
-		System.out.println(a.toString());
-		System.out.println(b.toString());
+		System.out.println("bfs"+a.toString());
+		System.out.println("bfs"+b.toString());
 				
 		assertEquals(a,b);
 	
@@ -511,6 +557,23 @@ class TestAdjacencyList {
 	
 	@Test
 	void bfsTest2() {
+		setupScenario6();
+		
+		Vertex<City> z =adjacencylist.getVertex().get(0);
+		
+		List<Integer> a=adjacencylist.bfs(z);
+		
+		
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		for(int i = 0; i<5;i++){
+			b.add(i);
+		}
+		
+		System.out.println("bfs"+a.toString());
+		System.out.println("bfs"+b.toString());
+				
+		assertEquals(a,b);
 	
 	
 	
@@ -519,7 +582,24 @@ class TestAdjacencyList {
 	
 	@Test
 	void dfsTest1() {
-	
+		
+    setupScenario6();
+		
+		Vertex<City> z =adjacencylist.getVertex().get(0);
+		
+		List<Integer> a=adjacencylist.bfs(z);
+		
+		
+		List<Integer> b = new ArrayList<Integer>();	
+		
+		for(int i = 0; i<5;i++){
+			b.add(i);
+		}
+		
+		System.out.println("dfs"+a.toString());
+		System.out.println("dfs"+b.toString());
+				
+		assertEquals(a,b);
 	
 	}
 	
@@ -553,7 +633,7 @@ class TestAdjacencyList {
 	
 	@Test
 	void djikstraTest1() {
-	
+		
 	}
 	
 	@Test

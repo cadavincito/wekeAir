@@ -29,7 +29,6 @@ public class AdjacencyList<V> implements Graph<V>{
 		this.size = 0;
 	}
 
-
 	@Override
 	public boolean addVertex(Vertex<V> vertex) {
 		
