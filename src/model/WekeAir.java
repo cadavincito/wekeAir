@@ -167,5 +167,13 @@ public class WekeAir {
 	
 		return ans;
 	}
+	
+	public ArrayList<Vertex<City>> getCities(){
+		return this.cities;
+	}
+	
+	public AdjacencyMatrix<City> getMap(){
+		return this.map;
+	}
 
 }

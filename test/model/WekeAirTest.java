@@ -25,12 +25,14 @@ class WekeAirTest {
 	
 	@Test
 	void initializeVertexTest1() {
-	
+	 setupScenario1();
+	 assertTrue(weke.getCities()!=null);
 	}
 	
 	@Test
 	void initializeEdgesTest1() {
-	
+		 setupScenario1();
+		 assertTrue(weke.getMap()!=null);
 	}
 	
 	
