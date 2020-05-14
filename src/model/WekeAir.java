@@ -17,6 +17,7 @@ public class WekeAir {
 	public WekeAir() {
 		initialize();
 		System.out.println((cheapestPath("bogota", "paramaribo").toString()));
+		System.out.println((fastestPath("bogota", "paramaribo").toString()));
 	}
 
 	/**
