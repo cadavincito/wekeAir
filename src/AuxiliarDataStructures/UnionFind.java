@@ -5,13 +5,13 @@ import java.util.List;
 
 import dataStructures.Vertex;
 
-public class UnionFind<E> implements IUnionFind<E>{
+public class UnionFind<V> implements IUnionFind<V>{
 	
-	private ArrayList<Vertex<E>> vertexes;
+	private ArrayList<Vertex<V>> vertexes;
 	private int[] parents;
 	
-	public UnionFind(List<Vertex<E>> list) {
-		this.vertexes = (ArrayList<Vertex<E>>) list;
+	public UnionFind(List<Vertex<V>> list) {
+		this.vertexes = (ArrayList<Vertex<V>>) list;
 		parents = new int[list.size()];
 	}
 

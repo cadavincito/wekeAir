@@ -224,6 +224,39 @@ public class AdjacencyList<V> implements Graph<V>{
 		return weights;
 	}
 	
+//  public void kruskalInMatrix(){
+//	//TODO
+//	//Missing fill all edges, edges ha
+//    PriorityQueue<Edge> pq = new PriorityQueue<Edge>(getEdges().size(),new Edge());
+//
+//    //add all the edges to priority queue, //sort the edges on weights
+//    for (int i = 0; i <getEdges().size() ; i++) {
+//        pq.add(getEdges().get(i));
+//    }
+//
+//    UnionFind<Vertex<V>> unionFind = new  UnionFind(getVertex());
+//    //makeset
+//    unionFind.makeSet();
+//
+//    ArrayList<Edge> mst = new ArrayList<>();
+//
+//    //process vertices - 1 edges
+//    int index = 0;
+//    while( index < vertex.size()-1){
+//        Edge edge = pq.remove();
+//      
+//        int origin = unionFind.find(searchIndex(edge.getOrigin()));
+//        int destination = unionFind.find(searchIndex(edge.getDestination()));
+//
+//        if(origin != destination){
+//            mst.add(edge);
+//            index++;
+//            unionFind.union(origin,destination);
+//        }
+//    }
+//    
+//}
+	
 
 	
 	@Override

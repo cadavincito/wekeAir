@@ -25,6 +25,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	private List<Vertex<V>> vertex;
 	private boolean directed;
 	private int size;
+	private List<Edge<V>> edges; //every edge here is considered as NOT DIRECTED so its the same edge for a-b as b-a
 
 	public AdjacencyMatrix(boolean directed, int m) throws InvalidBaseNumber {
 
@@ -40,45 +41,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		this.vertex = new ArrayList<Vertex<V>>();
 		this.directed = directed;
 		this.size = 0;
+		this.edges = new ArrayList<Edge<V>>();
 
 	}
 
-// IGNOREN ESTO PERO NO LO BORREN
-//	public class Main(){
-//	    
-//	    public static void main(String[] args){
-//	        
-//	    }          
-//	    
-//	    public IGraph prim(IGraph<Integer> g, int vertex){
-//	        IGraph<Integer> mst = new Graph<>();
-//	        mst.addVertex(vertex);
-//	        PriorityQueue<IEdge<Integer>> pq = new PriorityQueue<>();
-//	        List<Integer> adjVertex = g.getAdjacents(vertex);
-//	        for(Integer v:adjVertex){
-//	            IEdge<Integer> e = new Edge<>(vertex, v, g.getWeight(vertex,v));
-//	            pq.add(e);
-//	        }
-//	        int edgesAdded=0;
-//	        while(edgesAdded<g.size()-1){
-//	            IEdge<Integer> e = pq.poll();
-//	            Integer newVertex = e.getEnd();
-//	            if(!g.existVertex(newVertex)){
-//	                mst.addVertex(newVertex);
-//	                mst.addEdge(e.getStart(),e.getEnd(),e.getWeight());
-//	                edgesAdded++;
-//	                adjVertex = g.getAdjacents(newVertex);
-//	                for(Integer v:adjVertex){
-//	                    IEdge<Integer> e = new Edge<>(newVertex, v, g.getWeight(vertex,v));
-//	                    pq.add(e);
-//	                }
-//	            }
-//	        }
-//	        
-//	        return mst;
-//	    }
-//	    
-//	}//end of class
 
 	public AdjacencyMatrix(boolean directed) {
 
@@ -125,6 +91,14 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	public List<Edge<V>> getEdges() {
+		return edges;
+	}
+
+	public void setEdges(List<Edge<V>> edges) {
+		this.edges = edges;
 	}
 
 	@Override
@@ -230,7 +204,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			return false;
 
 	}
-
+	//MISSING ADD EDGE TO EDGE LIST
 	@Override
 	public boolean addEdge(Vertex<V> vertex_1, Vertex<V> vertex_2, double weight) {
 
@@ -488,17 +462,17 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 	}
 
-//    public  <E> void kruskalInMatrix(){
+//    public void kruskalInMatrix(){
 //    	//TODO
-//    	//Missing fill all edges
-//        PriorityQueue<Edge> pq = new PriorityQueue<Edge>(allEdges.size(), Comparator.comparingInt(o -> o.weight));
+//    	//Missing fill all edges, edges ha
+//        PriorityQueue<Edge> pq = new PriorityQueue<Edge>(getEdges().size(),new Edge());
 //
 //        //add all the edges to priority queue, //sort the edges on weights
-//        for (int i = 0; i <allEdges.size() ; i++) {
-//            pq.add(allEdges.get(i));
+//        for (int i = 0; i <getEdges().size() ; i++) {
+//            pq.add(getEdges().get(i));
 //        }
 //
-//        UnionFind<Vertex<E>> unionFind = new  UnionFind<Vertex<E>>(getVertex());
+//        UnionFind<Vertex<V>> unionFind = new  UnionFind(getVertex());
 //        //makeset
 //        unionFind.makeSet();
 //
