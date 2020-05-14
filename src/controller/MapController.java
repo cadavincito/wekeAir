@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import model.City;
 import model.WekeAir;
 
 public class MapController {
@@ -124,10 +125,38 @@ public class MapController {
 
 	@FXML
 	void search(ActionEvent event) {
-		paintLine(origin, destiny);
-		System.out.println("aaaa");
-		System.out.println(origin.getLayoutX());
-		System.out.println(destiny.getLayoutX());
+
+		ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+
+		for (int i = 0; i < path.size() - 1; i++) {
+
+			paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+		}
+	}
+
+	public Circle circleId(String id) {
+
+		boolean stop = false;
+		Circle res = null;
+
+		for (int i = 0; i < pane.getChildren().size() && !stop; i++) {
+
+			if (pane.getChildren().get(i) instanceof Circle) {
+
+				System.out.println(id +" = "+pane.getChildren().get(i).getId());
+				
+				if (pane.getChildren().get(i).getId().equals(id)) {
+					
+					res = (Circle) pane.getChildren().get(i);
+					res.setFill(Color.YELLOW);
+					stop = true;
+				}
+
+			}
+
+		}
+
+		return res;
 	}
 
 	public void genericAlert(String title, String context) {
@@ -144,13 +173,7 @@ public class MapController {
 
 		Line line = new Line();
 
-
 		pane.getChildren().add(line);
-
-		pane.getChildren().add(line);
-
-		pane.getChildren().add(line);
-
 
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());

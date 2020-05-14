@@ -17,7 +17,7 @@ public class WekeAir {
 	public WekeAir() {
 		initialize();
 		System.out.println((cheapestPath("bogota", "paramaribo").toString()));
-		System.out.println((fastestPath("bogota", "paramaribo").toString()));
+		System.out.println((fastestPath("bogota", "brasilia").toString()));
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class WekeAir {
 		this.cities.add(new Vertex<City>(new City("bogota")));
 		this.cities.add(new Vertex<City>(new City("quito")));
 		this.cities.add(new Vertex<City>(new City("caracas")));
-		this.cities.add(new Vertex<City>(new City("ciudaddePanamá")));
+		this.cities.add(new Vertex<City>(new City("ciudaddepanama")));
 		this.cities.add(new Vertex<City>(new City("lima"))); // 4
 		this.cities.add(new Vertex<City>(new City("lapaz")));
 		this.cities.add(new Vertex<City>(new City("brasilia")));

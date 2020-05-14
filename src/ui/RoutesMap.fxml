@@ -16,7 +16,7 @@
             <Image url="@../resources/mapImage.png" />
          </image>
       </ImageView>
-      <Circle fx:id="bogota" accessibleRole="BUTTON" fill="#ff441f" layoutX="517.0" layoutY="305.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="bogota" accessibleRole="BUTTON" fill="#ff441f" layoutX="517.0" layoutY="309.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="quito" accessibleRole="BUTTON" fill="#ff441f" layoutX="500.0" layoutY="325.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="brasilia" accessibleRole="BUTTON" fill="#ff441f" layoutX="609.0" layoutY="392.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="lapaz" accessibleRole="BUTTON" fill="#ff441f" layoutX="541.0" layoutY="388.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
