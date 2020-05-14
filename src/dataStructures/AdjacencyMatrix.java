@@ -294,34 +294,42 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 	//The first element of path is the destination vertex and the last element is the origin.
 	//so you gotta do a backwards search
-	public ArrayList<Vertex<V>> findShortestPathBetweenVertexes(V ori, V destination){
-		
+	public ArrayList<V> dijkstraPath(V ori, V destination) {
+
 		ArrayList<Vertex<V>> pre = dijkstra(ori);
 		ArrayList<Vertex<V>> path = new ArrayList<Vertex<V>>();
 		Vertex<V> dest = new Vertex<V>(destination);
 		boolean stop = false;
 		int destPos = searchIndex(dest);
-		
+
 		for (int i = 0; i < pre.size() && !stop; i++) {
 			if (i == destPos) {
 				stop = true;
 			}
 		}
-		path.add(getVertex().get(destPos));
-		
-		Vertex<V>  backwards = pre.get(destPos);
-		
-		while (backwards != null) {
-			path.add(backwards);
-			
-			int indexPrev = searchIndex(backwards);
-			
-			backwards = pre.get(indexPrev);
-			
+
+		if (destPos != -1) {
+			path.add(getVertex().get(destPos));
+
+			Vertex<V> backwards = pre.get(destPos);
+
+			while (backwards != null) {
+				path.add(backwards);
+
+				int indexPrev = searchIndex(backwards);
+
+				backwards = pre.get(indexPrev);
+
+			}
 		}
-		
-		
-		return path;
+		ArrayList<V> temp = new ArrayList<V>();
+
+		for (int i = path.size()-1; i >= 0; i--) {
+
+			temp.add(path.get(i).getElement());
+		}
+
+		return temp;
 	}
 	
 
