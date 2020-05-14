@@ -637,21 +637,58 @@ class TestAdjacencyList {
 	void primsAlgorithmTest1() {
 
 	}
-
-	@Test
-	void kruskalAlgorithmTest1() {
-
-	}
-
-	@Test
-	void kruskalAlgorithmTest2() {
-
-	}
-
+	
 	@Test
 	void primsAlgorithmTest2() {
 
 	}
+
+	@Test
+	void kruskalTest1() {
+		setupScenario1();
+		for (int i = 0; i < 6; i++) {
+			Vertex<City> vi = new Vertex<City>(new City(i + ""));
+			adjacencylist.addVertex(vi);
+		}
+
+		// 1 ---> 2 && 1 ----> 3 && 1 ----> 5
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(2), 2);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3), 4);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(5), 2);
+		// 3 ---> 5 && 3 ----> 4 
+		adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(5), 3);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(3), adjacencylist.getVertex().get(4), 1);
+		
+		// 2 ---> 4 && 2 ----> 5
+		adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(4), 3);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(5), 3);
+		
+		// 5 ---> 4
+		adjacencylist.addEdge(adjacencylist.getVertex().get(5), adjacencylist.getVertex().get(4), 2);
+
+
+
+
+	}
+
+	@Test
+	void kruskalTest2() {
+		setupScenario1();
+		for (int i = 0; i < 5; i++) {
+			Vertex<City> vi = new Vertex<City>(new City(i + ""));
+			adjacencylist.addVertex(vi);
+		}
+
+		// 1 ---> 2 && 1 ----> 3 && 1 ----> 5
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(2), 10);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(1), adjacencylist.getVertex().get(3), 7);
+		adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(3), 5);
+		//  3 ----> 4 
+		adjacencylist.addEdge(adjacencylist.getVertex().get(2), adjacencylist.getVertex().get(4), 5);
+
+	}
+
+	
 
 	@Test
 	void djikstraTest1() {

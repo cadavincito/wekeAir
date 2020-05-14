@@ -625,12 +625,46 @@ class TestAdjacencyMatrix {
 
 	@Test
 	void kruskalTest1() {
-		setupScenario7();
+		setupScenario1();
+		for (int i = 0; i < 6; i++) {
+			Vertex<City> vi = new Vertex<City>(new City(i + ""));
+			adjacencyMatrix.addVertex(vi);
+		}
+
+		// 1 ---> 2 && 1 ----> 3 && 1 ----> 5
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(2), 2);
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(3), 4);
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(5), 2);
+		// 3 ---> 5 && 3 ----> 4 
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(3), adjacencyMatrix.getVertex().get(5), 3);
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(3), adjacencyMatrix.getVertex().get(4), 1);
+		
+		// 2 ---> 4 && 2 ----> 5
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(4), 3);
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(5), 3);
+		
+		// 5 ---> 4
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(5), adjacencyMatrix.getVertex().get(4), 2);
+
+
+
+
 	}
 
 	@Test
 	void kruskalTest2() {
-		setupScenario3();
+		setupScenario1();
+		for (int i = 0; i < 5; i++) {
+			Vertex<City> vi = new Vertex<City>(new City(i + ""));
+			adjacencyMatrix.addVertex(vi);
+		}
+
+		// 1 ---> 2 && 1 ----> 3 && 1 ----> 5
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(2), 10);
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(1), adjacencyMatrix.getVertex().get(3), 7);
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(3), 5);
+		//  3 ----> 4 
+		adjacencyMatrix.addEdge(adjacencyMatrix.getVertex().get(2), adjacencyMatrix.getVertex().get(4), 5);
 
 	}
 
