@@ -615,6 +615,17 @@ class TestAdjacencyMatrix {
 	@Test
 	void primsAlgorithmTest1() {
 		setupScenario7();
+		System.out.println("prim");
+		List <Vertex<City>>a = adjacencyMatrix.buildMSTPrim(adjacencyMatrix.getVertex().get(1).getElement());
+		for (int i = 0; i < a.size(); i++) {
+			try {
+				System.out.println(adjacencyMatrix.searchIndex(a.get(i)));
+			} catch (NullPointerException e) {
+				System.out.println("null");
+
+				continue;
+			}
+		}
 	}
 
 	@Test

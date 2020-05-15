@@ -635,7 +635,18 @@ class TestAdjacencyList {
 
 	@Test
 	void primsAlgorithmTest1() {
+		setupScenario7();
+		System.out.println("prim");
+		List <Vertex<City>>a = adjacencylist.buildMSTPrim(adjacencylist.getVertex().get(0).getElement());
+		for (int i = 0; i < a.size(); i++) {
+			try {
+				System.out.println(adjacencylist.searchIndex(a.get(i)));
+			} catch (NullPointerException e) {
+				System.out.println("null");
 
+				continue;
+			}
+		}
 	}
 	
 	@Test

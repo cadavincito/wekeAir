@@ -10,19 +10,30 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import model.City;
 import model.WekeAir;
 
 public class MapController {
 
 	private WekeAir wekete;
+	
+	private Line line;
+	
+	private boolean routeDisplayed;
 
 	@FXML
 	Pane pane;
@@ -40,6 +51,12 @@ public class MapController {
 	@FXML
 	private ChoiceBox<String> destination_box;
 
+	@FXML
+	private RadioButton matrixRadioButton;
+
+	@FXML
+	private RadioButton listRadioButton;
+
 	private boolean originSelected;
 	private boolean destinySelected;
 
@@ -48,7 +65,10 @@ public class MapController {
 		wekete = new WekeAir();
 
 		origin = new Circle();
+
 		destiny = new Circle();
+
+		routeDisplayed = false;
 
 		fillFligths();
 	}
@@ -111,21 +131,28 @@ public class MapController {
 	}
 
 	public void selectOrigin() {
-
+		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
 		this.originSelected = true;
-		genericAlert("Origin", "Please select your origin node.");
+		genericAlert("Origin",
+				"Please select your origin node.\nBy clicking it on the map or selecting it from the menu");
 	}
 
 	public void selectDestiny() {
-
+		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
 		this.destinySelected = true;
-		genericAlert("Destiny", "Please select your destiny node.");
+		genericAlert("Destiny",
+				"Please select your destiny node. \nBy clicking it on the map or selecting it from the menu");
 
 	}
 
 	@FXML
 	void search(ActionEvent event) {
-
+		
+		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+		
 		ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
 
 		for (int i = 0; i < path.size() - 1; i++) {
@@ -133,6 +160,8 @@ public class MapController {
 			paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
 		}
 	}
+
+	
 
 	public Circle circleId(String id) {
 
@@ -143,10 +172,10 @@ public class MapController {
 
 			if (pane.getChildren().get(i) instanceof Circle) {
 
-				System.out.println(id +" = "+pane.getChildren().get(i).getId());
-				
+				System.out.println(id + " = " + pane.getChildren().get(i).getId());
+
 				if (pane.getChildren().get(i).getId().equals(id)) {
-					
+
 					res = (Circle) pane.getChildren().get(i);
 					res.setFill(Color.YELLOW);
 					stop = true;
@@ -162,19 +191,29 @@ public class MapController {
 	public void genericAlert(String title, String context) {
 
 		Alert a = new Alert(AlertType.INFORMATION);
+		//style
+//		DialogPane dialogPane = a.getDialogPane();
+//		dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//		dialogPane.getStyleClass().add("dialog");
 		a.setTitle(title);
 		a.setHeaderText("");
 		a.setContentText(context);
+		a.initOwner(pane.getScene().getWindow());
+		// Remove default ButtonTypes
+		a.getButtonTypes().clear();
+		ButtonType accept = new ButtonType("accept");
+		a.getButtonTypes().addAll(accept);
+
 		a.show();
 
 	}
 
 	void paintLine(Node e1, Node e2) {
-
-		Line line = new Line();
+		
+		line = new Line();
 
 		pane.getChildren().add(line);
-
+		
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());
 		line.setEndX(e2.getLayoutX());
@@ -182,13 +221,48 @@ public class MapController {
 		line.setFill(Color.AQUA);
 		line.setStroke(Color.AQUA);
 
-		line.setStrokeWidth(5);
-		line.setStrokeWidth(2);
+		line.setStrokeWidth(3);
 
-		line.setStrokeWidth(5);
-
-		line.setStrokeWidth(2);
-
-		line.setVisible(true);
 	}
+
+	private void resetRoute() {
+		System.out.println("limpia");
+		// pane.getChildren().remove(line);
+
+//		line.setStartX(0.0f);
+//		line.setStartY(0.0f);
+//		line.setEndX(0.0f);
+//		line.setEndY(0.0f);
+
+		// pane.getChildren().add(line);
+	}
+
+	    // if the user chooses this option
+		// the information of the graph must
+		// be managed using an adjacencyMatrix
+		@FXML
+		void listImplementation(ActionEvent event) {
+			
+			
+			if (matrixRadioButton.isSelected()) {
+				matrixRadioButton.setSelected(false);
+			}
+
+			// TODO
+		}
+
+		// if the user chooses this option
+		// the information of the graph must
+		// be managed using an adjacencyMatrix
+		@FXML
+		void matrixImplementation(ActionEvent event) {
+		
+			
+			if (listRadioButton.isSelected()) {
+				listRadioButton.setSelected(false);
+			}
+
+			// TODO
+		}
+	
 }

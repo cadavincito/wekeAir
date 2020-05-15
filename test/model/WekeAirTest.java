@@ -38,7 +38,7 @@ class WekeAirTest {
 	
 	@Test
 	void cheapestPathTest1() {
-	
+		 setupScenario1();
 	}
 	
 	@Test
@@ -48,7 +48,7 @@ class WekeAirTest {
 	
 	@Test
 	void fastestPathTest1() {
-	
+		 setupScenario1();
 	}
 	
 	@Test

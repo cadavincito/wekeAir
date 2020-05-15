@@ -1,8 +1,5 @@
-/AuxiliarDataStructures/
 /controller/
-/dataStructures/
-/exceptions/
 /model/
-/resources/
-/test/
 /ui/
+/dataStructures/
+/resources/
