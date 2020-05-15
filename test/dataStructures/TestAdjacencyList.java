@@ -362,6 +362,11 @@ class TestAdjacencyList {
 		assertTrue(s == 6);
 		assertTrue(t == 7);
 		assertTrue(u == 8);
+		
+		
+		ArrayList<Integer> xd = adjacencylist.adjacents(0);
+		
+		System.out.println("\n\n\n" + xd.toString() + "\n\n\n");
 
 	}
 
