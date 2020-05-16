@@ -127,11 +127,13 @@ public class MapController {
 	@FXML
 	void findCheapestFlight(ActionEvent event) {
 
-		eraseRoute();
+		
 		
 		try {
-
-			if (origin != null && destiny != null) {
+			
+			eraseRoute();
+			
+			if (origin.getId() != null && destiny.getId() != null) {
 
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
 
@@ -158,7 +160,7 @@ public class MapController {
 		
 		try {
 
-			if (origin != null && destiny != null) {
+			if (origin.getId() != null && destiny.getId() != null) {
 
 				ArrayList<City> path = this.wekete.fastestPath(origin.getId(), destiny.getId());
 
