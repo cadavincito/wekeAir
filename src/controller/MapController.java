@@ -42,8 +42,11 @@ public class MapController {
 	Circle destiny;
 
 	@FXML
-	private Button searchButton;
-
+	private Button fastest;
+	
+	@FXML
+	private Button cheapest;
+	
 	@FXML
 	private ChoiceBox<String> origin_box;
 
