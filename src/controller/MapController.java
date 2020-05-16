@@ -133,6 +133,7 @@ public class MapController {
 					message +="["+path.get(i).getName()+" , "+path.get(i + 1).getName()+"]\n";
 				}
 				
+				message+="\n"+"Cost: "+this.wekete.cheapestPathCost(origin.getId(), destiny.getId());
 				genericAlert("Route", message);
 			} else {
 

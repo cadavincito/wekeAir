@@ -248,6 +248,25 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		return index;
 	}
 
+	public int searchIndex(V vertex) {
+
+		int index = -1;
+		int hashcode = vertex.hashCode();
+		boolean stop = false;
+
+		for (int i = 0; i < this.vertex.size() && !stop; i++) {
+
+			if (this.vertex.get(i).getElement().hashCode() == hashcode) {
+
+				index = i;
+
+				stop = true;
+			}
+		}
+
+		return index;
+	}
+	
 	public int getSize() {
 		return this.size;
 	}
