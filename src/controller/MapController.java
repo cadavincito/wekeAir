@@ -127,12 +127,10 @@ public class MapController {
 	@FXML
 	void findCheapestFlight(ActionEvent event) {
 
-		
-		
 		try {
-			
-			eraseRoute();
-			
+
+			eraseRoutePaths();
+
 			if (origin.getId() != null && destiny.getId() != null) {
 
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
@@ -155,9 +153,9 @@ public class MapController {
 
 	@FXML
 	void findFastestFlight(ActionEvent event) {
-		
-		eraseRoute();
-		
+
+		eraseRoutePaths();
+
 		try {
 
 			if (origin.getId() != null && destiny.getId() != null) {
@@ -240,20 +238,60 @@ public class MapController {
 	void eraseRoute() {
 
 		Circle temp = null;
-		
+
 		try {
-			pane.getChildren().remove(33, pane.getChildren().size());
-		}catch(Exception e) {
-			
-		}
 
-		for (int i = 0; i < pane.getChildren().size(); i++) {
-
-			if (pane.getChildren().get(i) instanceof Circle) {
-				temp = (Circle) (pane.getChildren().get(i));
-				temp.setFill(Color.RED);
+			if ((pane.getChildren().size() > 33) || (origin.getId() != null && destiny.getId() != null)) {
+				
+				
+				if(pane.getChildren().size() > 33)
+					pane.getChildren().remove(33, pane.getChildren().size());
+				else
+					throw new RouteNotSelectedException(33);
 			}
+			else
+				throw new RouteNotSelectedException(33);
+
+			for (int i = 0; i < pane.getChildren().size(); i++) {
+
+				if (pane.getChildren().get(i) instanceof Circle) {
+					temp = (Circle) (pane.getChildren().get(i));
+					temp.setFill(Color.RED);
+				}
+			}
+
+		} catch (RouteNotSelectedException e) {
+
+			genericAlert("Error", e.getMessage());
 		}
 
 	}
+
+	private void eraseRoutePaths() {
+
+		Circle temp = null;
+
+		try {
+			if (origin.getId() != null && destiny.getId() != null) {
+
+				if ((pane.getChildren().size() > 33))
+					pane.getChildren().remove(33, pane.getChildren().size());
+				else
+					throw new RouteNotSelectedException(33);
+
+				for (int i = 0; i < pane.getChildren().size(); i++) {
+
+					if (pane.getChildren().get(i) instanceof Circle) {
+						temp = (Circle) (pane.getChildren().get(i));
+						temp.setFill(Color.RED);
+					}
+				}
+			}
+
+		} catch (RouteNotSelectedException e) {
+
+		}
+
+	}
+
 }

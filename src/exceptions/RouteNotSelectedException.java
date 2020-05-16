@@ -11,4 +11,10 @@ public class RouteNotSelectedException extends Exception {
 		
 	}
 
+	public RouteNotSelectedException(int i) {
+		
+		
+		super("You must create a route first.");
+		
+	}
 }
