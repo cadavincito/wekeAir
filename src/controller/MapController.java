@@ -129,7 +129,7 @@ public class MapController {
 
 		try {
 
-			if (originSelected && destinySelected) {
+			if (origin != null && destiny != null) {
 
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
 
@@ -154,7 +154,7 @@ public class MapController {
 
 		try {
 
-			if (originSelected && destinySelected) {
+			if (origin != null && destiny != null) {
 
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
 
@@ -183,8 +183,6 @@ public class MapController {
 
 			if (pane.getChildren().get(i) instanceof Circle) {
 
-				System.out.println(id + " = " + pane.getChildren().get(i).getId());
-
 				if (pane.getChildren().get(i).getId().equals(id)) {
 
 					res = (Circle) pane.getChildren().get(i);
@@ -209,7 +207,7 @@ public class MapController {
 
 	}
 
-	void paintLine(Node e1, Node e2) {
+	private void paintLine(Node e1, Node e2) {
 
 		Line line = new Line();
 
@@ -230,5 +228,21 @@ public class MapController {
 		line.setStrokeWidth(2);
 
 		line.setVisible(true);
+	}
+
+	@FXML
+	void eraseRoute() {
+
+		Circle temp = null;
+		pane.getChildren().remove(33, pane.getChildren().size());
+
+		for (int i = 0; i < pane.getChildren().size(); i++) {
+
+			if (pane.getChildren().get(i) instanceof Circle) {
+				temp = (Circle) (pane.getChildren().get(i));
+				temp.setFill(Color.RED);
+			}
+		}
+
 	}
 }
