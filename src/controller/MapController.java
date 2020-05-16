@@ -31,10 +31,10 @@ import model.WekeAir;
 public class MapController {
 
 	private WekeAir wekete;
+
+	//private Line line;
+
 	
-	private Line line;
-	
-	private boolean routeDisplayed;
 
 	@FXML
 	Pane pane;
@@ -69,13 +69,68 @@ public class MapController {
 
 		destiny = new Circle();
 
-		routeDisplayed = false;
 
 		fillFligths();
 	}
 
+	// this method fills up the
+	// ChoiceBox menus with all
+	// the possible destinations
 	private void fillFligths() {
 
+<<<<<<< HEAD
+		for (int i = 0; i < pane.getChildren().size(); i++) {
+
+			if (pane.getChildren().get(i) instanceof Circle) {
+
+				String a = pane.getChildren().get(i).getId();
+				origin_box.getItems().add(a);
+				destination_box.getItems().add(a);
+
+			}
+
+			origin_box.setOnAction(event -> setOrigin());
+			destination_box.setOnAction(event -> setDestination());
+
+		}
+	}
+
+	// this method is called when
+	// the user chooses the origin
+	// from the ChoiceBox Menu
+	private void setOrigin() {
+		System.out.println("entra a escoger destino");
+		Circle c = (Circle) pane.lookup("#" + origin_box.getValue());
+		System.out.println(c.getId());
+
+		if (originSelected == true) {
+
+			this.originSelected = false;
+			origin.setFill(Color.RED);
+
+			origin = c;
+			origin.setFill(Color.GREEN);
+		}
+	}
+
+	// this method is called when
+	// the user chooses the destination
+	// from the ChoiceBox Menu
+	private void setDestination() {
+		System.out.println("entra a escoger destino");
+		Circle c = (Circle) pane.lookup("#" + destination_box.getValue());
+		System.out.println(c.getId());
+
+		if (destinySelected == true) {
+
+			this.destinySelected = false;
+			destiny.setFill(Color.RED);
+
+			destiny = c;
+			destiny.setFill(Color.GREEN);
+
+		}
+=======
 		origin_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As", "Montevideo",
 				"Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama", "Belmopan",
 				"Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
@@ -83,6 +138,7 @@ public class MapController {
 		destination_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As",
 				"Montevideo", "Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama",
 				"Belmopan", "Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
+>>>>>>> f20df33119cb3ad29ee8aae66763c52bb8dcf24b
 
 	}
 
@@ -121,7 +177,7 @@ public class MapController {
 	}
 
 	public void selectOrigin() {
-		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
 		sound.play();
 		this.originSelected = true;
 		genericAlert("Origin",
@@ -129,7 +185,7 @@ public class MapController {
 	}
 
 	public void selectDestiny() {
-		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
 		sound.play();
 		this.destinySelected = true;
 		genericAlert("Destiny",
@@ -138,6 +194,15 @@ public class MapController {
 	}
 
 	@FXML
+<<<<<<< HEAD
+	void search(ActionEvent event) {
+
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+		reset();
+
+		ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+=======
 	void findCheapestFlight(ActionEvent event) {
 		
 		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
@@ -148,6 +213,7 @@ public class MapController {
 			if(originSelected && destinySelected) {
 				
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+>>>>>>> f20df33119cb3ad29ee8aae66763c52bb8dcf24b
 
 				for (int i = 0; i < path.size() - 1; i++) {
 
@@ -165,8 +231,8 @@ public class MapController {
 			genericAlert("Error", e.getMessage());
 			
 		}
-	}
 
+<<<<<<< HEAD
 	@FXML
 	void findFastestFlight(ActionEvent event) {
 		
@@ -197,6 +263,9 @@ public class MapController {
 		}
 	}
 	
+=======
+	}
+>>>>>>> fda6766a7e1001fa94cdde77e97a27f6c18b61ff
 
 	public Circle circleId(String id) {
 
@@ -226,7 +295,7 @@ public class MapController {
 	public void genericAlert(String title, String context) {
 
 		Alert a = new Alert(AlertType.INFORMATION);
-		//style
+		// style
 //		DialogPane dialogPane = a.getDialogPane();
 //		dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 //		dialogPane.getStyleClass().add("dialog");
@@ -234,7 +303,7 @@ public class MapController {
 		a.setTitle(title);
 		a.setHeaderText("");
 		a.setContentText(context);
-		a.initOwner(pane.getScene().getWindow());
+		//a.initOwner(pane.getScene().getWindow());
 		// Remove default ButtonTypes
 		a.getButtonTypes().clear();
 		ButtonType accept = new ButtonType("accept");
@@ -245,11 +314,11 @@ public class MapController {
 	}
 
 	void paintLine(Node e1, Node e2) {
-		
-		line = new Line();
+
+		Line line = new Line();
 
 		pane.getChildren().add(line);
-		
+
 		line.setStartX(e1.getLayoutX());
 		line.setStartY(e1.getLayoutY());
 		line.setEndX(e2.getLayoutX());
@@ -260,45 +329,69 @@ public class MapController {
 		line.setStrokeWidth(3);
 
 	}
-
-	private void resetRoute() {
-		System.out.println("limpia");
-		// pane.getChildren().remove(line);
-
-//		line.setStartX(0.0f);
-//		line.setStartY(0.0f);
-//		line.setEndX(0.0f);
-//		line.setEndY(0.0f);
-
-		// pane.getChildren().add(line);
+	
+	private void reset() {
+		resetCities();
+		resetRoute();
 	}
 
-	    // if the user chooses this option
-		// the information of the graph must
-		// be managed using an adjacencyMatrix
-		@FXML
-		void listImplementation(ActionEvent event) {
-			
-			
-			if (matrixRadioButton.isSelected()) {
-				matrixRadioButton.setSelected(false);
-			}
-
-			// TODO
-		}
-
-		// if the user chooses this option
-		// the information of the graph must
-		// be managed using an adjacencyMatrix
-		@FXML
-		void matrixImplementation(ActionEvent event) {
+	private void resetRoute() {
 		
+		Line res = null;
+		
+		for (int i = 0; i < pane.getChildren().size(); i++) {
 			
-			if (listRadioButton.isSelected()) {
-				listRadioButton.setSelected(false);
+			if (pane.getChildren().get(i) instanceof Line) {
+				System.out.println(i);
+			
+				res = (Line) pane.getChildren().get(i);
+				res.setStroke(Color.TRANSPARENT);
+				//pane.getChildren().remove(res);
 			}
 
-			// TODO
 		}
+	}
 	
+
+	private void resetCities() {
+		Circle res = null;
+		for (int i = 0; i < pane.getChildren().size(); i++) {
+
+			if (pane.getChildren().get(i) instanceof Circle) {
+
+				res = (Circle) pane.getChildren().get(i);
+				res.setFill(Color.RED);
+			}
+
+		}
+	}
+
+	// if the user chooses this option
+	// the information of the graph must
+	// be managed using an adjacencyMatrix
+	@FXML
+	void listImplementation(ActionEvent event) {
+
+		if (matrixRadioButton.isSelected()) {
+			matrixRadioButton.setSelected(false);
+		}
+
+		// TODO
+		resetCities();
+		resetRoute();
+	}
+
+	// if the user chooses this option
+	// the information of the graph must
+	// be managed using an adjacencyMatrix
+	@FXML
+	void matrixImplementation(ActionEvent event) {
+
+		if (listRadioButton.isSelected()) {
+			listRadioButton.setSelected(false);
+		}
+
+		// TODO
+	}
+
 }
