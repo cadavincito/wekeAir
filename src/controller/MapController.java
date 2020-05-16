@@ -167,6 +167,35 @@ public class MapController {
 		}
 	}
 
+	@FXML
+	void findFastestFlight(ActionEvent event) {
+		
+		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+		
+		try {
+		
+			if(originSelected && destinySelected) {
+				
+				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+
+				for (int i = 0; i < path.size() - 1; i++) {
+
+					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+				}
+			}
+			else {
+				
+				throw new RouteNotSelectedException("cheapest");
+			}
+			
+		}
+		catch(RouteNotSelectedException e) {
+		
+			genericAlert("Error", e.getMessage());
+			
+		}
+	}
 	
 
 	public Circle circleId(String id) {
@@ -201,6 +230,7 @@ public class MapController {
 //		DialogPane dialogPane = a.getDialogPane();
 //		dialogPane.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 //		dialogPane.getStyleClass().add("dialog");
+		
 		a.setTitle(title);
 		a.setHeaderText("");
 		a.setContentText(context);
