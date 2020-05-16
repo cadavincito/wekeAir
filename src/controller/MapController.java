@@ -64,17 +64,6 @@ public class MapController {
 				"Montevideo", "Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama",
 				"Belmopan", "Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
 
-//		ObservableList<Node> l = pane.getChildren();
-//		
-//		for(int i = 0; i< l.size();i++) {
-//			Circle n = new Circle();
-//			Node w = l.get(i);
-//			if(n.getClass().equals(w)) {
-//				String id = w.getId();
-//				origin_box.getItems().add(id);
-//				destination_box.getItems().add(id);
-//			}
-//		}
 	}
 
 	public void clicked(MouseEvent e) {
@@ -135,15 +124,22 @@ public class MapController {
 
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
 
+				String message = "";
+				
 				for (int i = 0; i < path.size() - 1; i++) {
 
 					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+					
+					message +="["+path.get(i).getName()+" , "+path.get(i + 1).getName()+"]\n";
 				}
+				
+				genericAlert("Route", message);
 			} else {
 
 				throw new RouteNotSelectedException("cheapest");
 			}
-
+		
+			
 		} catch (RouteNotSelectedException e) {
 
 			genericAlert("Error", e.getMessage());
@@ -162,13 +158,20 @@ public class MapController {
 
 				ArrayList<City> path = this.wekete.fastestPath(origin.getId(), destiny.getId());
 
+				String message = "";
+			
 				for (int i = 0; i < path.size() - 1; i++) {
 
 					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+					
+					message +="["+path.get(i).getName()+" , "+path.get(i + 1).getName()+"]\n";
 				}
+				
+				genericAlert("Route", message);
+				
 			} else {
 
-				throw new RouteNotSelectedException("cheapest");
+				throw new RouteNotSelectedException("fastest");
 			}
 
 		} catch (RouteNotSelectedException e) {
@@ -242,14 +245,12 @@ public class MapController {
 		try {
 
 			if ((pane.getChildren().size() > 33) || (origin.getId() != null && destiny.getId() != null)) {
-				
-				
-				if(pane.getChildren().size() > 33)
+
+				if (pane.getChildren().size() > 33)
 					pane.getChildren().remove(33, pane.getChildren().size());
 				else
 					throw new RouteNotSelectedException(33);
-			}
-			else
+			} else
 				throw new RouteNotSelectedException(33);
 
 			for (int i = 0; i < pane.getChildren().size(); i++) {
