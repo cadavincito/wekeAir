@@ -264,7 +264,8 @@ class TestAdjacencyMatrix {
 		setupScenario2();
 		Vertex<City> vi = new Vertex<City>(new City(0 + ""));
 		boolean b = adjacencyMatrix.removeVertex(vi);
-		assertTrue(b && adjacencyMatrix.getSize() == 9);
+		boolean c = this.adjacencyMatrix.getVertex().contains(vi);
+		assertTrue(!c&&b && adjacencyMatrix.getSize() == 9);
 	}
 
 	@Test
@@ -272,7 +273,8 @@ class TestAdjacencyMatrix {
 		setupScenario3();
 		Vertex<City> vi = new Vertex<City>(new City(0 + ""));
 		boolean b = adjacencyMatrix.removeVertex(vi);
-		assertTrue(b && adjacencyMatrix.getSize() == 9);
+		boolean c = this.adjacencyMatrix.getVertex().contains(vi);
+		assertTrue(!c&&b && adjacencyMatrix.getSize() == 9);
 	}
 
 	// test for adding an unweighted edge
@@ -297,8 +299,8 @@ class TestAdjacencyMatrix {
 		Vertex<City> va = new Vertex<City>(new City(1 + ""));
 		boolean a = adjacencyMatrix.addEdge(vi, va);
 		int b = adjacencyMatrix.getGraph()[0][1];
-		int c = adjacencyMatrix.getGraph()[0][1];
-		assertTrue(a && (b == 1) && (c == 1));
+		int c = adjacencyMatrix.getGraph()[1][0];
+		assertTrue(a && (b == 1) && (c == 0));
 	}
 
 	// test for adding a unweighted edge
@@ -393,26 +395,38 @@ class TestAdjacencyMatrix {
 		boolean b = adjacencyMatrix.addEdge(va, ve, 100);
 		boolean c = adjacencyMatrix.addEdge(ve, vo, 300);
 		boolean d = adjacencyMatrix.addEdge(vo, vu, 300);
+		
+		int g = adjacencyMatrix.getGraph()[0][1];// 1
+		int gg = adjacencyMatrix.getGraph()[1][0];// 0
+		int ggg = (int)adjacencyMatrix.getWeights()[0][1];// 0
+
+
+		int h = adjacencyMatrix.getGraph()[1][2];// 1
+		int hh = adjacencyMatrix.getGraph()[2][1];// 0
+		int hhh = (int)adjacencyMatrix.getWeights()[1][2];// 0
+
+		int l = adjacencyMatrix.getGraph()[2][3];// 1
+		int ll = adjacencyMatrix.getGraph()[3][2];// 0
+		int lll = (int)adjacencyMatrix.getWeights()[2][3];// 0
+
+		int t = adjacencyMatrix.getGraph()[3][4];// 1
+		int tt = adjacencyMatrix.getGraph()[4][3];// 0
+		int ttt = (int)adjacencyMatrix.getWeights()[3][4];// 0
+		
+		
 		assertTrue(a);
 		assertTrue(b);
 		assertTrue(c);
 		assertTrue(d);
-		int g = adjacencyMatrix.getGraph()[0][1];// 1
-		int gg = adjacencyMatrix.getGraph()[1][0];// 0
-
-		int h = adjacencyMatrix.getGraph()[1][2];// 1
-		int hh = adjacencyMatrix.getGraph()[2][1];// 0
-
-		int l = adjacencyMatrix.getGraph()[2][3];// 1
-		int ll = adjacencyMatrix.getGraph()[3][2];// 0
-
-		int t = adjacencyMatrix.getGraph()[3][4];// 1
-		int tt = adjacencyMatrix.getGraph()[4][3];// 0
-
+		
 		assertTrue((g == 1) && (gg == 0));
+		assertTrue(ggg==200);
 		assertTrue((h == 1) && (hh == 0));
+		assertTrue(hhh==100);
 		assertTrue((l == 1) && (ll == 0));
+		assertTrue(lll==300);
 		assertTrue((t == 1) && (tt == 0));
+		assertTrue(ttt==300);
 
 	}
 
@@ -466,13 +480,19 @@ class TestAdjacencyMatrix {
 
 	@Test
 	void adjacentsTest3() {
-		setupScenario6();
+		setupScenario5();
 		// get the adjacent vertexes to the vertex 3
-		List<Integer> a = adjacencyMatrix.adjacents(2);
+		
+		List<Integer> a = adjacencyMatrix.adjacents(1);
 		List<Integer> b = new ArrayList<Integer>();
-		b.add(5);
-		b.add(6);
-
+		b.add(3);
+		b.add(4);
+		
+		List<Integer> c = adjacencyMatrix.adjacents(4);
+		List<Integer> d = new ArrayList<Integer>();
+		
+		
+		assertEquals(c, d);
 		assertEquals(a, b);
 
 	}
@@ -506,56 +526,87 @@ class TestAdjacencyMatrix {
 		assertEquals(a, b);
 	}
 
-//	@Test
-//	void bfsTest1() {
-//		setupScenario4();
-//
-//		List<Integer> a = adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(1));
-//		List<Integer> b = new ArrayList<Integer>();
-//
-//		for (int i = 1; i < 6; i++) {
-//			b.add(i);
-//		}
-//
-//		assertEquals(a, b);
-//
-//	}
-//
-//	@Test
-//	void bfsTest2() {
-//		setupScenario3();
-//
-//		List<Integer> a = adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(2));
-//		List<Integer> b = new ArrayList<Integer>();
-//
-//		b.add(2);
-//		b.add(1);
-//		b.add(5);
-//		b.add(6);
-//		b.add(7);
-//		b.add(9);
-//
-//		assertEquals(a, b);
-//
-//	}
-//
-//	@Test
-//	void bfsTest3() {
-//		setupScenario7();
-//
-//		List<Integer> a = adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(1));
-//		List<Integer> b = new ArrayList<Integer>();
-//
-//		b.add(1);
-//		b.add(2);
-//		b.add(3);
-//		b.add(4);
-//		b.add(5);
-//		b.add(6);
-//
-//		assertEquals(a, b);
-//
-//	}
+	@Test
+	void bfsTest1() {
+		setupScenario4();
+
+		List<Vertex<City>> a = adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(1));
+		List<Vertex<City>> b = new ArrayList<Vertex<City>>();
+
+		for (int i = 1; i < 6; i++) {
+			b.add(new Vertex<City>(new City(i+ "")));
+		}
+
+		System.out.println("bfs");
+		for (int i = 0; i < a.size(); i++) {
+			try {
+				System.out.println(adjacencyMatrix.searchIndex(a.get(i)));
+			} catch (NullPointerException e) {
+				System.out.println("null");
+
+				continue;
+			}
+		}
+		
+		assertEquals(a, b);
+
+	}
+
+	@Test
+	void bfsTest2() {
+		setupScenario3();
+
+		List<Vertex<City>> a = adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(2));
+		List<Integer> b = new ArrayList<Integer>();
+
+		b.add(2);
+		b.add(1);
+		b.add(5);
+		b.add(6);
+		b.add(7);
+		b.add(9);
+
+		System.out.println("bfs2");
+		for (int i = 0; i < a.size(); i++) {
+			try {
+				System.out.println(adjacencyMatrix.searchIndex(a.get(i)));
+			} catch (NullPointerException e) {
+				System.out.println("null");
+
+				continue;
+			}
+		}
+		assertEquals(a, b);
+
+	}
+
+	@Test
+	void bfsTest3() {
+		setupScenario7();
+
+		List<Vertex<City>> a = adjacencyMatrix.bfs(adjacencyMatrix.getVertex().get(1));
+		List<Integer> b = new ArrayList<Integer>();
+
+		b.add(1);
+		b.add(2);
+		b.add(3);
+		b.add(4);
+		b.add(5);
+		b.add(6);
+
+		System.out.println("bfs3");
+		for (int i = 0; i < a.size(); i++) {
+			try {
+				System.out.println(adjacencyMatrix.searchIndex(a.get(i)));
+			} catch (NullPointerException e) {
+				System.out.println("null");
+
+				continue;
+			}
+		}
+		assertEquals(a, b);
+
+	}
 
 	@Test
 	void dfsTest1() {
@@ -626,11 +677,25 @@ class TestAdjacencyMatrix {
 				continue;
 			}
 		}
+		
+		
 	}
 
 	@Test
 	void primsAlgorithmTest2() {
-		setupScenario3();
+		setupScenario4();
+		
+		System.out.println("prim2");
+		List <Vertex<City>>a = adjacencyMatrix.buildMSTPrim(adjacencyMatrix.getVertex().get(1).getElement());
+		for (int i = 0; i < a.size(); i++) {
+			try {
+				System.out.println(adjacencyMatrix.searchIndex(a.get(i)));
+			} catch (NullPointerException e) {
+				System.out.println("null");
+
+				continue;
+			}
+		}
 
 	}
 
@@ -743,14 +808,7 @@ class TestAdjacencyMatrix {
 		List<Vertex<City>> a = adjacencyMatrix.dijkstra(adjacencyMatrix.getVertex().get(1).getElement());
 		System.out.println("djikstra 2: " + a);
 
-		for (int i = 0; i < a.size(); i++) {
-			try {
-				System.out.println(adjacencyMatrix.searchIndex(a.get(i)));
-			} catch (NullPointerException e) {
-				System.out.println("null");
-				continue;
-			}
-		}
+		
 		// la lista de los indices de predecesores
 		// esta deberia ser asi si es correcto el algoritmo
 		// b = {null, null, 1, 1, 5, 2, 4}

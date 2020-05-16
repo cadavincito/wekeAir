@@ -56,6 +56,18 @@ class WekeAirTest {
 	
 	}
 	
+
+	@Test
+	void getCitiesTest() {
+	
+	}
+	
+	
+	@Test
+	void getMapTest() {
+	
+	}
+
 	
 
 }
