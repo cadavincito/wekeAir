@@ -96,7 +96,6 @@ public class WekeAir {
 		this.map.addEdge(cities.get(5), cities.get(8), 500);
 
 		// Brasilia
-		this.map.addEdge(cities.get(6), cities.get(7), 700);
 		this.map.addEdge(cities.get(6), cities.get(8), 300);
 		this.map.addEdge(cities.get(6), cities.get(3), 550);
 		this.map.addEdge(cities.get(6), cities.get(9), 200);
@@ -107,7 +106,6 @@ public class WekeAir {
 		// Santiago
 		this.map.addEdge(cities.get(10), cities.get(8), 350);
 		this.map.addEdge(cities.get(10), cities.get(9), 250);
-		this.map.addEdge(cities.get(10), cities.get(7), 200);
 
 		// Caracas
 		this.map.addEdge(cities.get(2), cities.get(11), 100);
@@ -147,6 +145,7 @@ public class WekeAir {
 		// Washington
 		this.map.addEdge(cities.get(20), cities.get(21), 1000);
 		this.map.addEdge(cities.get(20), cities.get(23), 400);
+		this.map.addEdge(cities.get(0), cities.get(7), 1500);
 
 	}
 

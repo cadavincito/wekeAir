@@ -639,6 +639,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			Vertex<V> backwards = pre.get(destPos);
 
 			while (backwards != null) {
+				
 				path.add(backwards);
 
 				int indexPrev = searchIndex(backwards);

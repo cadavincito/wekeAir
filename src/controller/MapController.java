@@ -127,6 +127,8 @@ public class MapController {
 	@FXML
 	void findCheapestFlight(ActionEvent event) {
 
+		eraseRoute();
+		
 		try {
 
 			if (origin != null && destiny != null) {
@@ -151,7 +153,9 @@ public class MapController {
 
 	@FXML
 	void findFastestFlight(ActionEvent event) {
-
+		
+		eraseRoute();
+		
 		try {
 
 			if (origin != null && destiny != null) {
@@ -234,7 +238,12 @@ public class MapController {
 	void eraseRoute() {
 
 		Circle temp = null;
-		pane.getChildren().remove(33, pane.getChildren().size());
+		
+		try {
+			pane.getChildren().remove(33, pane.getChildren().size());
+		}catch(Exception e) {
+			
+		}
 
 		for (int i = 0; i < pane.getChildren().size(); i++) {
 
