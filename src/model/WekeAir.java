@@ -43,7 +43,7 @@ public class WekeAir {
 		this.cities.add(new Vertex<City>(new City("lima"))); // 4
 		this.cities.add(new Vertex<City>(new City("lapaz")));
 		this.cities.add(new Vertex<City>(new City("brasilia")));
-		this.cities.add(new Vertex<City>(new City("asunción")));
+		this.cities.add(new Vertex<City>(new City("asuncion")));
 		this.cities.add(new Vertex<City>(new City("buenosaires")));
 		this.cities.add(new Vertex<City>(new City("montevideo")));
 		this.cities.add(new Vertex<City>(new City("santiago"))); // 10
