@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import exceptions.RouteNotSelectedException;
 import javafx.scene.shape.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -124,13 +125,52 @@ public class MapController {
 	}
 
 	@FXML
-	void search(ActionEvent event) {
+	void findCheapestFlight(ActionEvent event) {
 
-		ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+		try {
 
-		for (int i = 0; i < path.size() - 1; i++) {
+			if (originSelected && destinySelected) {
 
-			paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+
+				for (int i = 0; i < path.size() - 1; i++) {
+
+					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+				}
+			} else {
+
+				throw new RouteNotSelectedException("cheapest");
+			}
+
+		} catch (RouteNotSelectedException e) {
+
+			genericAlert("Error", e.getMessage());
+
+		}
+	}
+
+	@FXML
+	void findFastestFlight(ActionEvent event) {
+
+		try {
+
+			if (originSelected && destinySelected) {
+
+				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+
+				for (int i = 0; i < path.size() - 1; i++) {
+
+					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+				}
+			} else {
+
+				throw new RouteNotSelectedException("cheapest");
+			}
+
+		} catch (RouteNotSelectedException e) {
+
+			genericAlert("Error", e.getMessage());
+
 		}
 	}
 
@@ -143,10 +183,10 @@ public class MapController {
 
 			if (pane.getChildren().get(i) instanceof Circle) {
 
-				System.out.println(id +" = "+pane.getChildren().get(i).getId());
-				
+				System.out.println(id + " = " + pane.getChildren().get(i).getId());
+
 				if (pane.getChildren().get(i).getId().equals(id)) {
-					
+
 					res = (Circle) pane.getChildren().get(i);
 					res.setFill(Color.YELLOW);
 					stop = true;

@@ -47,6 +47,7 @@
       <Circle fx:id="ciudaddemexico" accessibleRole="BUTTON" fill="#ff441f" layoutX="435.0" layoutY="248.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <ChoiceBox fx:id="origin_box" layoutX="157.0" layoutY="33.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
       <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
-      <Button fx:id="searchButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#search" text="Search" />
+      <Button fx:id="fastest" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#findFastestFlight" text="Fastest flight" />
+      <Button layoutX="138.0" layoutY="239.0" mnemonicParsing="false" text="Cheapest flight" fx:id="cheapest" onAction="#findCheapestFlight"/>
    </children>
 </Pane>
