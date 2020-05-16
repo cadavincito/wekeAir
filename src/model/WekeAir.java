@@ -156,12 +156,17 @@ public class WekeAir {
 
 		return ans;
 	}
-	
+
 	public double cheapestPathCost(String origin, String destination) {
-		
+
 		double[][] fw = this.map.floydWarshall();
-		
+
 		return fw[this.map.searchIndex(new City(origin))][this.map.searchIndex(new City(destination))];
+	}
+
+	public double fastesPathCost(String origin, String destination) {
+
+		return this.map.pathCost(new City(origin), new City(destination));
 	}
 
 	public ArrayList<City> fastestPath(String origin, String destination) {

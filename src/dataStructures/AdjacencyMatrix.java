@@ -25,7 +25,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	private List<Vertex<V>> vertex;
 	private boolean directed;
 	private int size;
-	private List<Edge<V>> edges; //every edge here is considered as NOT DIRECTED so its the same edge for a-b as b-a
+	private List<Edge<V>> edges; // every edge here is considered as NOT DIRECTED so its the same edge for a-b as
+									// b-a
 
 	public AdjacencyMatrix(boolean directed, int m) throws InvalidBaseNumber {
 
@@ -44,7 +45,6 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		this.edges = new ArrayList<Edge<V>>();
 
 	}
-
 
 	public AdjacencyMatrix(boolean directed) {
 
@@ -204,7 +204,8 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			return false;
 
 	}
-	//MISSING ADD EDGE TO EDGE LIST
+
+	// MISSING ADD EDGE TO EDGE LIST
 	@Override
 	public boolean addEdge(Vertex<V> vertex_1, Vertex<V> vertex_2, double weight) {
 
@@ -266,7 +267,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 		return index;
 	}
-	
+
 	public int getSize() {
 		return this.size;
 	}
@@ -520,11 +521,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 		ArrayList<Vertex<V>> path = new ArrayList<Vertex<V>>();
 		ArrayList<Vertex<V>> priors = new ArrayList<Vertex<V>>();
-		
+
 		for (int i = 0; i < this.vertex.size(); i++) {
 			priors.add(null);
 		}
-		
+
 		IQueue<Integer> q = new Queue<Integer>();
 		q.add(index);
 
@@ -533,8 +534,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			index = q.poll();
 			if (!containsV(path, index)) {
 				path.add(this.vertex.get(index));
-				
-				
+
 			}
 			ArrayList<Integer> adjacents = adjacents(index);
 
@@ -544,7 +544,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 				if ((!q.contains(temp)) && (!containsV(path, temp))) {
 					q.add(temp);
-					
+
 					priors.set(adjacents.get(i), this.vertex.get(index));
 				}
 			}
@@ -658,7 +658,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 			Vertex<V> backwards = pre.get(destPos);
 
 			while (backwards != null) {
-				
+
 				path.add(backwards);
 
 				int indexPrev = searchIndex(backwards);
@@ -675,6 +675,24 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		}
 
 		return temp;
+	}
+
+
+
+	public double pathCost(V ori, V destination) {
+
+		ArrayList<V> temp  = bfsPath(ori, destination);
+		double cost = 0;
+		
+		double [][] fw = floydWarshall();
+				
+		
+		for (int i = 0; i < temp.size()-1; i++) {
+			
+			cost+= fw[searchIndex(ori)][searchIndex(destination)];
+		}
+		
+		return cost;
 	}
 
 } // end of class
