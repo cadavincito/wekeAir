@@ -156,7 +156,7 @@ public class MapController {
 
 			if (origin != null && destiny != null) {
 
-				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+				ArrayList<City> path = this.wekete.fastestPath(origin.getId(), destiny.getId());
 
 				for (int i = 0; i < path.size() - 1; i++) {
 
