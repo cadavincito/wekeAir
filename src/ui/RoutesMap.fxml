@@ -48,11 +48,8 @@
       <Circle fx:id="MexicoDF" accessibleRole="BUTTON" fill="#ff441f" layoutX="435.0" layoutY="248.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <ChoiceBox fx:id="origin_box" layoutX="157.0" layoutY="33.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
       <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
-<<<<<<< HEAD
-      <Button fx:id="searchButton" layoutX="19.0" layoutY="194.0" mnemonicParsing="false" onAction="#search" text="Search" />
-=======
+      <Button fx:id="searchButton" layoutX="19.0" layoutY="194.0" mnemonicParsing="false" onAction="#findFastestFlight" text="Search" />
       <Button fx:id="searchButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#findCheapestFlight" text="Search" />
->>>>>>> f20df33119cb3ad29ee8aae66763c52bb8dcf24b
       <RadioButton fx:id="matrixRadioButton" layoutX="20.0" layoutY="521.0" mnemonicParsing="false" onAction="#matrixImplementation" text="adjacencyMatrix" />
       <RadioButton fx:id="listRadioButton" layoutX="20.0" layoutY="488.0" mnemonicParsing="false" onAction="#listImplementation" text="adjacencyList" />
    </children>
