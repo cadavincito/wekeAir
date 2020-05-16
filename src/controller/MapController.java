@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import exceptions.RouteNotSelectedException;
 import javafx.scene.shape.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,6 +78,7 @@ public class MapController {
 	// the possible destinations
 	private void fillFligths() {
 
+<<<<<<< HEAD
 		for (int i = 0; i < pane.getChildren().size(); i++) {
 
 			if (pane.getChildren().get(i) instanceof Circle) {
@@ -128,6 +130,15 @@ public class MapController {
 			destiny.setFill(Color.GREEN);
 
 		}
+=======
+		origin_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As", "Montevideo",
+				"Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama", "Belmopan",
+				"Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
+
+		destination_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As",
+				"Montevideo", "Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama",
+				"Belmopan", "Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
+>>>>>>> f20df33119cb3ad29ee8aae66763c52bb8dcf24b
 
 	}
 
@@ -183,6 +194,7 @@ public class MapController {
 	}
 
 	@FXML
+<<<<<<< HEAD
 	void search(ActionEvent event) {
 
 		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
@@ -190,10 +202,34 @@ public class MapController {
 		reset();
 
 		ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+=======
+	void findCheapestFlight(ActionEvent event) {
+		
+		AudioClip sound=new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+		
+		try {
+		
+			if(originSelected && destinySelected) {
+				
+				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
+>>>>>>> f20df33119cb3ad29ee8aae66763c52bb8dcf24b
 
-		for (int i = 0; i < path.size() - 1; i++) {
+				for (int i = 0; i < path.size() - 1; i++) {
 
-			paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
+				}
+			}
+			else {
+				
+				throw new RouteNotSelectedException("cheapest");
+			}
+			
+		}
+		catch(RouteNotSelectedException e) {
+		
+			genericAlert("Error", e.getMessage());
+			
 		}
 
 	}
