@@ -322,10 +322,12 @@ public class AdjacencyList<V> implements Graph<V> {
 	// The first element of path is the destination vertex and the last element is
 	// the origin.
 	// so you gotta do a backwards search
-	public ArrayList<Vertex<V>> findShortestPathBetweenVertexes(V ori, V destination) {
+	public ArrayList<V> dijkstraPath(V ori, V destination) {
 
 		ArrayList<Vertex<V>> pre = dijkstra(ori);
 		ArrayList<Vertex<V>> path = new ArrayList<Vertex<V>>();
+		ArrayList<V> temp = new ArrayList<V>();
+		
 		Vertex<V> dest = new Vertex<V>(destination);
 		boolean stop = false;
 		int destPos = searchIndex(dest);
@@ -347,8 +349,13 @@ public class AdjacencyList<V> implements Graph<V> {
 			backwards = pre.get(indexPrev);
 
 		}
+		
+		for (int i = 0; i < path.size(); i++) {
+			
+			temp.add(path.get(i).getElement());
+		}
 
-		return path;
+		return temp;
 	}
 
 	// This a predecesor list, where every position of ArrayList pre is the
@@ -428,11 +435,16 @@ public class AdjacencyList<V> implements Graph<V> {
 
 	}
 
-	public List<Integer> bfs(Vertex<V> origin) {
+	public ArrayList<Vertex<V>> bfs(Vertex<V> origin) {
 
 		Integer index = searchIndex(origin);
 
-		ArrayList<Integer> path = new ArrayList<Integer>();
+		ArrayList<Vertex<V>> path = new ArrayList<Vertex<V>>();
+		ArrayList<Vertex<V>> priors = new ArrayList<Vertex<V>>();
+
+		for (int i = 0; i < this.vertex.size(); i++) {
+			priors.add(null);
+		}
 
 		IQueue<Integer> q = new Queue<Integer>();
 		q.add(index);
@@ -440,22 +452,26 @@ public class AdjacencyList<V> implements Graph<V> {
 		while (!q.isEmpty()) {
 
 			index = q.poll();
-			if (!contains(path, index))
-				path.add(index);
+			if (!containsV(path, index)) {
+				path.add(this.vertex.get(index));
 
+			}
 			ArrayList<Integer> adjacents = adjacents(index);
 
 			for (int i = 0; i < adjacents.size(); i++) {
 
 				Integer temp = adjacents.get(i);
 
-				if (!q.contains(temp) && (!contains(path, index)))
+				if ((!q.contains(temp)) && (!containsV(path, temp))) {
 					q.add(temp);
+
+					priors.set(adjacents.get(i), this.vertex.get(index));
+				}
 			}
 
 		}
 
-		return path;
+		return priors;
 	}
 
 	public List<Integer> dfs(Vertex<V> origin) {
@@ -530,6 +546,114 @@ public class AdjacencyList<V> implements Graph<V> {
 	 */
 	List<Vertex<V>> getVertex() {
 		return vertex;
+	}
+
+	public ArrayList<V> bfsPath(V ori, V destination) {
+
+		ArrayList<Vertex<V>> pre = bfs(new Vertex(ori));
+		ArrayList<Vertex<V>> path = new ArrayList<Vertex<V>>();
+		Vertex<V> dest = new Vertex<V>(destination);
+		boolean stop = false;
+		int destPos = searchIndex(dest);
+
+		for (int i = 0; i < pre.size() && !stop; i++) {
+			if (i == destPos) {
+				stop = true;
+			}
+		}
+
+		if (destPos != -1) {
+			path.add(getVertex().get(destPos));
+
+			Vertex<V> backwards = pre.get(destPos);
+
+			while (backwards != null) {
+
+				path.add(backwards);
+
+				int indexPrev = searchIndex(backwards);
+
+				backwards = pre.get(indexPrev);
+
+			}
+		}
+		ArrayList<V> temp = new ArrayList<V>();
+
+		for (int i = path.size() - 1; i >= 0; i--) {
+
+			temp.add(path.get(i).getElement());
+		}
+
+		return temp;
+	}
+
+	public double pathCost(V ori, V destination) {
+
+		ArrayList<V> temp = bfsPath(ori, destination);
+		double cost = 0;
+
+		double[][] fw = floydWarshall();
+
+		for (int i = 0; i < temp.size() - 1; i++) {
+
+			cost += fw[searchIndex(ori)][searchIndex(destination)];
+		}
+
+		return cost;
+	}
+
+	public boolean containsV(ArrayList<Vertex<V>> a, Integer b) {
+
+		boolean contains = false;
+		boolean stop = false;
+
+		for (int i = 0; i < a.size() && !stop; i++) {
+			if (searchIndex(a.get(i)) == b) {
+
+				contains = true;
+				stop = true;
+			}
+		}
+
+		return contains;
+	}
+
+	public int searchIndex(V vertex) {
+
+		int index = -1;
+		int hashcode = vertex.hashCode();
+		boolean stop = false;
+
+		for (int i = 0; i < this.vertex.size() && !stop; i++) {
+
+			if (this.vertex.get(i).getElement().hashCode() == hashcode) {
+
+				index = i;
+
+				stop = true;
+			}
+		}
+
+		return index;
+	}
+	
+	private int searchIndexV(Vertex<V> vertex) {
+
+		int index = -1;
+		int hashcode = vertex.getElement().hashCode();
+		boolean stop = false;
+
+		for (int i = 0; i < this.vertex.size() && !stop; i++) {
+
+			if (this.vertex.get(i).getElement().hashCode() == hashcode) {
+
+				index = i;
+
+				stop = true;
+			}
+		}
+
+		return index;
 	}
 
 } // end of class

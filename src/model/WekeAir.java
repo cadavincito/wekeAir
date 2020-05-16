@@ -3,13 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import dataStructures.AdjacencyList;
 import dataStructures.AdjacencyMatrix;
 import dataStructures.Graph;
 import dataStructures.Vertex;
 
 public class WekeAir {
 
-	private AdjacencyMatrix<City> map;
+	private Graph<City> map;
 	private Hashtable<String, Flight> fligths;
 
 	private ArrayList<Vertex<City>> cities;
@@ -25,7 +26,7 @@ public class WekeAir {
 	 */
 	public void initialize() {
 
-		this.map = new AdjacencyMatrix<City>(false);
+		this.map = new AdjacencyList<City>(false);
 		this.cities = new ArrayList<Vertex<City>>();
 
 		initializeVertex();
@@ -180,8 +181,8 @@ public class WekeAir {
 		return this.cities;
 	}
 
-	public AdjacencyMatrix<City> getMap() {
-		return this.map;
-	}
+//	public AdjacencyMatrix<City> getMap() {
+//		return this.map;
+//	}
 
 }
