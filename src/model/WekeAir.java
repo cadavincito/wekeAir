@@ -1,7 +1,13 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 import dataStructures.AdjacencyList;
 import dataStructures.AdjacencyMatrix;
@@ -13,9 +19,12 @@ public class WekeAir {
 	private Graph<City> map;
 	private ArrayList<Flight> fligths;
 	private ArrayList<Vertex<City>> cities;
+	
+	private final static String PATH = "data/flights";
 
 	public WekeAir() {
 		initialize();
+		//load();
 		System.out.println((cheapestPath("bogota", "paramaribo").toString()));
 		System.out.println((fastestPath("bogota", "brasilia").toString()));
 	}
@@ -27,7 +36,7 @@ public class WekeAir {
 
 		this.map = new AdjacencyList<City>(false);
 		this.cities = new ArrayList<Vertex<City>>();
-		this.fligths = new ArrayList<Flight>();
+		this.fligths = new ArrayList<>();
 		
 		initializeVertex();
 		initializeEdges();
@@ -194,6 +203,42 @@ public class WekeAir {
 	public ArrayList<Flight> getFlight() {
 		
 		return fligths;
+	}
+	
+	public void save() {
+
+		try {
+
+			File f = new File(PATH);
+
+			ObjectOutputStream oos = new ObjectOutputStream(new ObjectOutputStream(new FileOutputStream(f)));
+			oos.writeObject(fligths);
+			oos.close();
+
+		} catch (IOException e) {
+			System.out.println();
+			e.printStackTrace();
+		}
+	}
+
+	public void load() {
+
+		try {
+
+			File f = new File(PATH);
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+
+			this.fligths =  (ArrayList) ois.readObject();
+			
+			ois.close();
+
+		} catch (FileNotFoundException e) {
+			System.out.println("FileNotFoundException");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException");
+		}
 	}
 
 }

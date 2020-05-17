@@ -1,6 +1,8 @@
 package model;
 
-public class Flight {
+import java.io.Serializable;
+
+public class Flight implements Serializable{
 
 	private double price;
 	private int fast;

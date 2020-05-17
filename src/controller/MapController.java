@@ -325,6 +325,7 @@ public class MapController {
 				else
 					temp = "cheap";
 					
+				this.wekete.save();
 				
 				genericAlert("Ticket information", "You just bought a "+temp+" ticket from "+origin.getId()+" to "+destiny.getId());
 			}
