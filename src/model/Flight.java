@@ -3,12 +3,12 @@ package model;
 public class Flight {
 
 	private double price;
-	private Boolean fast;
+	private int fast;
 
 	private City departure;
 	private City arrival;
 
-	public Flight(City departure, City arrival, Boolean fast) {
+	public Flight(City departure, City arrival, int fast) {
 		super();
 		this.departure = departure;
 		this.arrival = arrival;
@@ -32,14 +32,14 @@ public class Flight {
 	/**
 	 * @return the fast
 	 */
-	boolean isFast() {
+	int isFast() {
 		return fast;
 	}
 
 	/**
 	 * @param fast the fast to set
 	 */
-	void setFast(boolean fast) {
+	void setFast(int fast) {
 		this.fast = fast;
 	}
 
@@ -70,5 +70,11 @@ public class Flight {
 	void setArrival(City arrival) {
 		this.arrival = arrival;
 	}
+	
+	@Override
+	public String toString() {
+		return "["+departure.getName()+" - "+arrival.getName()+"]"+fast;
+	}
+	
 
 } // end of class

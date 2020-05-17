@@ -49,6 +49,7 @@
       <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
       <Button fx:id="fastest" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#findFastestFlight" text="Fastest flight" />
       <Button fx:id="cheapest" layoutX="138.0" layoutY="239.0" mnemonicParsing="false" onAction="#findCheapestFlight" text="Cheapest flight" />
-      <Button layoutX="76.0" layoutY="329.0" mnemonicParsing="false" text="Erase route" onAction="#eraseRoute"/>
+      <Button layoutX="74.0" layoutY="329.0" mnemonicParsing="false" onAction="#eraseRoute" text="Erase route" />
+      <Button layoutX="79.0" layoutY="379.0" mnemonicParsing="false" text="Buy ticket" onAction="#buy"/>
    </children>
 </Pane>

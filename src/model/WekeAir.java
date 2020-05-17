@@ -184,11 +184,16 @@ public class WekeAir {
 	}
 	
 	
-	public void addFlight(String origin, String destination, Boolean fast) {
+	public void addFlight(String origin, String destination, int fast) {
 		
 		Flight f = new Flight(new City(origin), new City(destination), fast);
 		
 		fligths.add(f);
+	}
+	
+	public ArrayList<Flight> getFlight() {
+		
+		return fligths;
 	}
 
 }

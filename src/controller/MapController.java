@@ -32,6 +32,9 @@ public class MapController {
 	@FXML
 	Circle destiny;
 
+	
+	private int fast = 0;
+	
 	@FXML
 	private Button searchButton;
 
@@ -115,10 +118,12 @@ public class MapController {
 
 	@FXML
 	void findCheapestFlight(ActionEvent event) {
-
+		
+		
 		try {
 
 			eraseRoutePaths();
+			this.fast = 2;
 
 			if (origin.getId() != null && destiny.getId() != null) {
 
@@ -134,7 +139,11 @@ public class MapController {
 				}
 				
 				message+="\n"+"Cost: $"+this.wekete.cheapestPathCost(origin.getId(), destiny.getId());
+				
+				
+				
 				genericAlert("Route", message);
+				
 			} else {
 
 				throw new RouteNotSelectedException("cheapest");
@@ -169,6 +178,8 @@ public class MapController {
 				}
 				
 				message+="\n"+"Cost: $"+this.wekete.fastesPathCost(origin.getId(), destiny.getId());
+				
+				this.fast = 1;
 				
 				genericAlert("Route", message);
 				
@@ -243,14 +254,15 @@ public class MapController {
 	@FXML
 	void eraseRoute() {
 
+		fast = 0;
 		Circle temp = null;
 
 		try {
 
-			if ((pane.getChildren().size() > 33) || (origin.getId() != null && destiny.getId() != null)) {
+			if ((pane.getChildren().size() > 34) || (origin.getId() != null && destiny.getId() != null)) {
 
-				if (pane.getChildren().size() > 33)
-					pane.getChildren().remove(33, pane.getChildren().size());
+				if (pane.getChildren().size() > 34)
+					pane.getChildren().remove(34, pane.getChildren().size());
 				else
 					throw new RouteNotSelectedException(33);
 			} else
@@ -278,8 +290,8 @@ public class MapController {
 		try {
 			if (origin.getId() != null && destiny.getId() != null) {
 
-				if ((pane.getChildren().size() > 33))
-					pane.getChildren().remove(33, pane.getChildren().size());
+				if ((pane.getChildren().size() > 34))
+					pane.getChildren().remove(34, pane.getChildren().size());
 				else
 					throw new RouteNotSelectedException(33);
 
@@ -296,6 +308,33 @@ public class MapController {
 
 		}
 
+	}
+	
+	
+	@FXML 
+	void buy(ActionEvent e) {
+		
+		try {
+			if(fast != 0) {
+				this.wekete.addFlight(origin.getId(), destiny.getId(), fast);
+				
+				String temp = "";
+				
+				if(fast == 1)
+					temp = "fast";
+				else
+					temp = "cheap";
+					
+				
+				genericAlert("Ticket information", "You just bought a "+temp+" ticket from "+origin.getId()+" to "+destiny.getId());
+			}
+			else
+				throw new RouteNotSelectedException(3);
+		}
+		catch(RouteNotSelectedException exc) {
+			
+			genericAlert("Error", exc.getMessage());
+		}
 	}
 
 }
