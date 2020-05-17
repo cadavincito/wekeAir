@@ -1,57 +1,74 @@
 package model;
 
 public class Flight {
-	
-	public final static double PRICE_PER_KM = 0.05;
-	
+
 	private double price;
-	private double distance;
-	
+	private Boolean fast;
+
 	private City departure;
 	private City arrival;
-	
-	public Flight(City departure, City arrival, double distance) {
+
+	public Flight(City departure, City arrival, Boolean fast) {
 		super();
 		this.departure = departure;
 		this.arrival = arrival;
-		this.distance = distance;
-		this.price = PRICE_PER_KM*distance;
-	}
-	
-	
-
-	public City getDeparture() {
-		return departure;
+		this.fast = fast;
 	}
 
-	public void setDeparture(City departure) {
-		this.departure = departure;
-	}
-
-	public City getArrival() {
-		return arrival;
-	}
-
-	public void setArrival(City arrival) {
-		this.arrival = arrival;
-	}
-
-	public double getPrice() {
+	/**
+	 * @return the price
+	 */
+	double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	/**
+	 * @param price the price to set
+	 */
+	void setPrice(double price) {
 		this.price = price;
 	}
 
-	public double getDistance() {
-		return distance;
+	/**
+	 * @return the fast
+	 */
+	boolean isFast() {
+		return fast;
 	}
 
-	public void setDistance(double distance) {
-		this.distance = distance;
+	/**
+	 * @param fast the fast to set
+	 */
+	void setFast(boolean fast) {
+		this.fast = fast;
 	}
-	
 
+	/**
+	 * @return the departure
+	 */
+	City getDeparture() {
+		return departure;
+	}
 
-} //end of class
+	/**
+	 * @param departure the departure to set
+	 */
+	void setDeparture(City departure) {
+		this.departure = departure;
+	}
+
+	/**
+	 * @return the arrival
+	 */
+	City getArrival() {
+		return arrival;
+	}
+
+	/**
+	 * @param arrival the arrival to set
+	 */
+	void setArrival(City arrival) {
+		this.arrival = arrival;
+	}
+
+} // end of class

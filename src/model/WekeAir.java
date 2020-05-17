@@ -11,8 +11,7 @@ import dataStructures.Vertex;
 public class WekeAir {
 
 	private Graph<City> map;
-	private Hashtable<String, Flight> fligths;
-
+	private ArrayList<Flight> fligths;
 	private ArrayList<Vertex<City>> cities;
 
 	public WekeAir() {
@@ -28,11 +27,10 @@ public class WekeAir {
 
 		this.map = new AdjacencyList<City>(false);
 		this.cities = new ArrayList<Vertex<City>>();
-
+		this.fligths = new ArrayList<Flight>();
+		
 		initializeVertex();
 		initializeEdges();
-
-		fligths = new Hashtable<String, Flight>();
 	}
 
 	public void initializeVertex() {
@@ -181,8 +179,16 @@ public class WekeAir {
 		return this.cities;
 	}
 
-//	public AdjacencyMatrix<City> getMap() {
-//		return this.map;
-//	}
+	public Graph<City> getMap() {
+		return this.map;
+	}
+	
+	
+	public void addFlight(String origin, String destination, Boolean fast) {
+		
+		Flight f = new Flight(new City(origin), new City(destination), fast);
+		
+		fligths.add(f);
+	}
 
 }
