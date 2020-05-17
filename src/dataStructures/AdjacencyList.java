@@ -8,6 +8,7 @@ import AuxiliarDataStructures.IQueue;
 import AuxiliarDataStructures.IStack;
 import AuxiliarDataStructures.Queue;
 import AuxiliarDataStructures.Stack;
+import AuxiliarDataStructures.UnionFind;
 
 public class AdjacencyList<V> implements Graph<V> {
 
@@ -217,39 +218,81 @@ public class AdjacencyList<V> implements Graph<V> {
 
 		return weights;
 	}
+	
+	public ArrayList<Vertex<V>> buildMSTKruskal() {
+		
 
-//  public void kruskalInMatrix(){
-//	//TODO
-//	//Missing fill all edges, edges ha
-//    PriorityQueue<Edge> pq = new PriorityQueue<Edge>(getEdges().size(),new Edge());
-//
-//    //add all the edges to priority queue, //sort the edges on weights
-//    for (int i = 0; i <getEdges().size() ; i++) {
-//        pq.add(getEdges().get(i));
-//    }
-//
-//    UnionFind<Vertex<V>> unionFind = new  UnionFind(getVertex());
-//    //makeset
-//    unionFind.makeSet();
-//
-//    ArrayList<Edge> mst = new ArrayList<>();
-//
-//    //process vertices - 1 edges
-//    int index = 0;
-//    while( index < vertex.size()-1){
-//        Edge edge = pq.remove();
-//      
-//        int origin = unionFind.find(searchIndex(edge.getOrigin()));
-//        int destination = unionFind.find(searchIndex(edge.getDestination()));
-//
-//        if(origin != destination){
-//            mst.add(edge);
-//            index++;
-//            unionFind.union(origin,destination);
-//        }
-//    }
-//    
-//}
+		ArrayList<Edge<V>> edges = kruskalInList();
+
+		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
+
+		for (int i = 0; i < edges.size(); i++) {
+			int origin = searchIndex(edges.get(i).getOrigin());
+			int destination = searchIndex(edges.get(i).getDestination());
+			
+			pre.set(origin, getVertex().get(destination));
+		}
+
+		return pre;
+	}
+
+  public ArrayList<Edge<V>> kruskalInList(){
+	
+	ArrayList<Edge<V>> allEdges = fillEdges();
+	
+    PriorityQueue<Edge<V>> pq = new PriorityQueue(allEdges.size(),new Edge<V>());
+
+    for (int i = 0; i < allEdges.size() ; i++) {
+        pq.add(allEdges.get(i));
+    }
+
+    UnionFind<Vertex<V>> unionFind = new UnionFind(getVertex());
+  
+    unionFind.makeSet();
+
+    ArrayList<Edge<V>> mst = new ArrayList<>();
+
+   
+    int index = 0;
+    while( index < vertex.size()-1){
+        Edge<V> edge = pq.remove();
+      
+        int origin = unionFind.find(searchIndex(edge.getOrigin()));
+        int destination = unionFind.find(searchIndex(edge.getDestination()));
+
+        if(origin != destination){
+            mst.add(edge);
+            index++;
+            unionFind.union(origin,destination);
+        }
+    }
+    
+    return mst;
+    
+  }
+  
+  	public ArrayList<Edge<V>> fillEdges(){
+  		ArrayList<Edge<V>> edgesList = new ArrayList<Edge<V>>();
+  		
+  		Edge<V> newEdge = null;
+  		
+  		for (int i = 0; i < getGraph().size(); i++) {
+  			newEdge = new Edge<V>(getVertex().get(i), null, 0);
+  			
+  			for (int j = 0; j < getGraph().get(i).size(); j++) {
+  				int posDest = getGraph().get(i).get(j).get(0).intValue();
+
+  				newEdge.setDestination(getVertex().get(posDest));
+  				newEdge.setWeight(getGraph().get(i).get(j).get(1));	
+  				edgesList.add(newEdge);
+			}
+  			
+  			
+		}
+  		
+  		return edgesList;
+  	}
+  
 
 	@Override
 	public ArrayList<Vertex<V>> dijkstra(V ori) {

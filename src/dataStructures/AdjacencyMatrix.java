@@ -481,39 +481,86 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		}
 
 	}
+	
+	public ArrayList<Vertex<V>> buildMSTKruskal() {
+		
 
-//    public void kruskalInMatrix(){
-//    	//TODO
-//    	//Missing fill all edges, edges ha
-//        PriorityQueue<Edge> pq = new PriorityQueue<Edge>(getEdges().size(),new Edge());
-//
-//        //add all the edges to priority queue, //sort the edges on weights
-//        for (int i = 0; i <getEdges().size() ; i++) {
-//            pq.add(getEdges().get(i));
-//        }
-//
-//        UnionFind<Vertex<V>> unionFind = new  UnionFind(getVertex());
-//        //makeset
-//        unionFind.makeSet();
-//
-//        ArrayList<Edge> mst = new ArrayList<>();
-//
-//        //process vertices - 1 edges
-//        int index = 0;
-//        while( index < vertex.size()-1){
-//            Edge edge = pq.remove();
-//          
-//            int origin = unionFind.find(searchIndex(edge.getOrigin()));
-//            int destination = unionFind.find(searchIndex(edge.getDestination()));
-//
-//            if(origin != destination){
-//                mst.add(edge);
-//                index++;
-//                unionFind.union(origin,destination);
-//            }
-//        }
-//        
-//    }
+		ArrayList<Edge<V>> edges = kruskalInMatrix();
+
+		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
+
+		for (int i = 0; i < edges.size(); i++) {
+			int origin = searchIndex(edges.get(i).getOrigin());
+			int destination = searchIndex(edges.get(i).getDestination());
+			
+			pre.set(origin, getVertex().get(destination));
+		}
+
+		return pre;
+	}
+
+	public ArrayList<Edge<V>> kruskalInMatrix(){
+			
+		ArrayList<Edge<V>> allEdges = fillEdges();
+		
+	    PriorityQueue<Edge<V>> pq = new PriorityQueue(allEdges.size(),new Edge<V>());
+	
+	    for (int i = 0; i < allEdges.size() ; i++) {
+	        pq.add(allEdges.get(i));
+	    }
+	
+	    UnionFind<Vertex<V>> unionFind = new UnionFind(getVertex());
+	  
+	    unionFind.makeSet();
+	
+	    ArrayList<Edge<V>> mst = new ArrayList<>();
+	
+	   
+	    int index = 0;
+	    while( index < vertex.size()-1){
+	        Edge<V> edge = pq.remove();
+	      
+	        int origin = unionFind.find(searchIndex(edge.getOrigin()));
+	        int destination = unionFind.find(searchIndex(edge.getDestination()));
+	
+	        if(origin != destination){
+	            mst.add(edge);
+	            index++;
+	            unionFind.union(origin,destination);
+	        }
+	    }
+	    
+	    return mst;
+		    
+	  }
+	
+  	public ArrayList<Edge<V>> fillEdges(){
+  		ArrayList<Edge<V>> edgesList = new ArrayList<Edge<V>>();
+  		
+  		Edge<V> newEdge = null;
+  		int[][] matrix = getGraph();
+  		
+  		for (int i = 0; i < matrix.length; i++) {
+  			newEdge = new Edge<V>(getVertex().get(i), null, 0);
+  			
+  			for (int j = 0; j < matrix[i].length; j++) {
+  				
+  				int posDest = matrix[i][j];
+  				
+  				if (posDest == 1) {
+  					newEdge.setDestination(getVertex().get(j));
+  	  				newEdge.setWeight(getWeights()[i][j]);	
+  	  				edgesList.add(newEdge);
+				}
+
+  				
+			}
+  			
+  			
+		}
+  		
+  		return edgesList;
+  	}
 
 	public ArrayList<Vertex<V>> bfs(Vertex<V> origin) {
 
