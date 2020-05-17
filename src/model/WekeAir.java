@@ -1,12 +1,12 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
 
 import dataStructures.AdjacencyList;
@@ -19,12 +19,12 @@ public class WekeAir {
 	private Graph<City> map;
 	private ArrayList<Flight> fligths;
 	private ArrayList<Vertex<City>> cities;
-	
-	private final static String PATH = "data/flights";
+
+	private final static String PATH = "data/flights.txt";
 
 	public WekeAir() {
 		initialize();
-		//load();
+		load();
 		System.out.println((cheapestPath("bogota", "paramaribo").toString()));
 		System.out.println((fastestPath("bogota", "brasilia").toString()));
 	}
@@ -38,6 +38,7 @@ public class WekeAir {
 		this.cities = new ArrayList<Vertex<City>>();
 		this.fligths = new ArrayList<>();
 		
+		load();
 		initializeVertex();
 		initializeEdges();
 	}
@@ -191,54 +192,81 @@ public class WekeAir {
 	public Graph<City> getMap() {
 		return this.map;
 	}
-	
-	
+
 	public void addFlight(String origin, String destination, int fast) {
-		
+
 		Flight f = new Flight(new City(origin), new City(destination), fast);
-		
+
 		fligths.add(f);
 	}
-	
+
 	public ArrayList<Flight> getFlight() {
-		
+
 		return fligths;
-	}
-	
-	public void save() {
-
-		try {
-
-			File f = new File(PATH);
-
-			ObjectOutputStream oos = new ObjectOutputStream(new ObjectOutputStream(new FileOutputStream(f)));
-			oos.writeObject(fligths);
-			oos.close();
-
-		} catch (IOException e) {
-			System.out.println();
-			e.printStackTrace();
-		}
 	}
 
 	public void load() {
 
+		File file = new File(PATH);
+
 		try {
 
-			File f = new File(PATH);
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+			FileReader reader = new FileReader(file);
+			BufferedReader br = new BufferedReader(reader);
 
-			this.fligths =  (ArrayList) ois.readObject();
-			
-			ois.close();
+			String ln = br.readLine();
+			String data[] = new String[3];
 
-		} catch (FileNotFoundException e) {
-			System.out.println("FileNotFoundException");
+			while (ln != null) {
+				data = ln.split(" - ");
+				String origin = data[0];
+				String destination = data[1];
+				
+				int fast = Integer.parseInt(data[2]);
+				
+				try {
+					Flight f = new Flight(new City(origin), new City(destination), fast);
+					this.fligths.add(f);
+					ln = br.readLine();
+				} catch (Exception e) {
+					ln = null;
+				}
+			}
+			br.close();
+			reader.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.println("ClassNotFoundException");
 		}
+	}
+
+	public void save() {
+
+		try {
+			File f = new File(PATH);
+			FileWriter pr = new FileWriter(f);
+
+			BufferedWriter bw = new BufferedWriter(pr);
+
+			bw.write("");
+
+			for (int i = 0; i < this.fligths.size(); i++) {
+
+				Flight temp = this.fligths.get(i);
+				
+				String origin = temp.getDeparture().getName();
+				String destination = temp.getArrival().getName();
+				int fast = temp.isFast();
+
+				pr.write(origin + " - " +destination + " - "+fast+ "\n");
+			}
+
+			pr.close();
+			bw.close();
+		} catch (IOException e) {
+
+		}
+
 	}
 
 }

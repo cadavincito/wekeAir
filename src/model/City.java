@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 public class City implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6153089557214296011L;
 	private String name;
 	
 	public City(String name) {

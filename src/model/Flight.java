@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Flight implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1074970463148372800L;
 	private double price;
 	private int fast;
 
