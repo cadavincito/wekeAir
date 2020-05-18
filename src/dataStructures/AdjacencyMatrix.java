@@ -25,8 +25,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	private List<Vertex<V>> vertex;
 	private boolean directed;
 	private int size;
-	private ArrayList<Edge<V>> edges; // every edge here is considered as NOT DIRECTED so its the same edge for a-b as
-									// b-a
+	private ArrayList<Edge<V>> edges; 
 
 	public AdjacencyMatrix(boolean directed, int m) throws InvalidBaseNumber {
 
@@ -525,7 +524,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	
 	   
 	    int index = 0;
-	    while( index < vertex.size()-1){
+	    while( index < getVertex().size()-1){
 	        Edge<V> edgeFront = pq.poll();
 	        
 	        int origin = unionFind.find(searchIndex(edgeFront.getOrigin()));
@@ -551,17 +550,12 @@ public class AdjacencyMatrix<V> implements Graph<V> {
   		for (int i = 0; i < getVertex().size(); i++) {
   			newEdge.setOrigin(getVertex().get(i));
   			
-  			for (int j = 0; j < getVertex().size(); j++) {
-  				
-  				int posDest = matrix[i][j];
-  				
-  				if (posDest == 1) {
-  					newEdge.setDestination(getVertex().get(j));
-  	  				newEdge.setWeight(getWeights()[i][j]);	
-  	  				getEdges().add(newEdge);
-				}
-
-  				
+  			ArrayList<Integer> adjacents2Ori = adjacents(i);
+  			
+  			for (int j = 0; j < adjacents2Ori.size(); j++) {
+  				newEdge.setDestination(getVertex().get(adjacents2Ori.get(j)));
+  				newEdge.setWeight(weights[i][adjacents2Ori.get(j)]);
+  				getEdges().add(newEdge);
 			}
   			
   			
