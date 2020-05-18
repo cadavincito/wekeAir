@@ -269,7 +269,7 @@ class TestAdjacencyList {
 
 	// test for adding an unweighted edge
 	// the graph is empty, therefore an
-	// edge can´t be added
+	// edge canï¿½t be added
 	@Test
 	void addEdgeTest1() {
 		setupScenario1();

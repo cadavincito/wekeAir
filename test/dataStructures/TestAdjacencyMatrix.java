@@ -649,6 +649,7 @@ class TestAdjacencyMatrix {
 				continue;
 			}
 		}
+		
 
 		b.add(null);
 		b.add(adjacencyMatrix.getVertex().get(3));

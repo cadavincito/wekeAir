@@ -467,9 +467,10 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 				int posAdjacent = adjacentsInt.get(i);
 				Vertex<V> vertexInMatter = getVertex().get(posAdjacent);
+				double distanceBetweenV = weights[frontInt][posAdjacent];
 				if (vertexInMatter.getColor().equalsIgnoreCase(Vertex.WHITE)
-						&& (weights[frontInt][posAdjacent] < vertexInMatter.getDistance())) {
-					int distanceInt = (int) weights[frontInt][posAdjacent]; // watch out for similar distances
+						&& (distanceBetweenV < vertexInMatter.getDistance()) ) {
+					int distanceInt = (int) distanceBetweenV; // watch out for similar distances
 					vertexInMatter.setDistance(distanceInt);
 					vertexInMatter.setPrior(head);
 					pq = updatePQ(pq);
@@ -643,13 +644,14 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		for (int i = 0; i < this.vertex.size(); i++) {
 
 			if (this.graph[index][i] >= 1) {
-				if (!contains(adjacents, i)) {
-
-					if (this.vertex.get(i).getPrior() != null)
-						this.vertex.get(i).setPrior(this.vertex.get(index));
-
-					adjacents.add(i);
-				}
+//				if (!contains(adjacents, i)) {
+//
+//					if (this.vertex.get(i).getPrior() != null)
+//						this.vertex.get(i).setPrior(this.vertex.get(index));
+//
+//					adjacents.add(i);
+//				}
+				adjacents.add(i);
 			}
 		}
 
