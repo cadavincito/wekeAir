@@ -338,4 +338,9 @@ public class MapController {
 		}
 	}
 
+	
+	@FXML
+	void changeImplementation() {
+		genericAlert("Implementation", this.wekete.changeImplementation());;
+	}
 }

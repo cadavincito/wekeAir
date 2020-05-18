@@ -50,6 +50,7 @@
       <Button fx:id="fastest" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#findFastestFlight" text="Fastest flight" />
       <Button fx:id="cheapest" layoutX="138.0" layoutY="239.0" mnemonicParsing="false" onAction="#findCheapestFlight" text="Cheapest flight" />
       <Button layoutX="74.0" layoutY="329.0" mnemonicParsing="false" onAction="#eraseRoute" text="Erase route" />
-      <Button layoutX="79.0" layoutY="379.0" mnemonicParsing="false" text="Buy ticket" onAction="#buy"/>
+      <Button layoutX="79.0" layoutY="379.0" mnemonicParsing="false" onAction="#buy" text="Buy ticket" />
+      <Button layoutX="50.0" layoutY="516.0" mnemonicParsing="false" text="Change implmentation" onAction="#changeImplementation"/>
    </children>
 </Pane>

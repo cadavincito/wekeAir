@@ -37,7 +37,7 @@ public class WekeAir {
 		this.map = new AdjacencyList<City>(false);
 		this.cities = new ArrayList<Vertex<City>>();
 		this.fligths = new ArrayList<>();
-		
+
 		load();
 		initializeVertex();
 		initializeEdges();
@@ -146,14 +146,12 @@ public class WekeAir {
 		this.map.addEdge(cities.get(17), cities.get(19), 100);
 
 		// Ciudad de Mexico
-		this.map.addEdge(cities.get(23), cities.get(20), 2000);
+		this.map.addEdge(cities.get(23), cities.get(20), 800);
 		this.map.addEdge(cities.get(23), cities.get(21), 4000);
 		this.map.addEdge(cities.get(23), cities.get(22), 800);
-		this.map.addEdge(cities.get(23), cities.get(22), 200);
 
 		// Washington
 		this.map.addEdge(cities.get(20), cities.get(21), 1000);
-		this.map.addEdge(cities.get(20), cities.get(23), 400);
 		this.map.addEdge(cities.get(0), cities.get(7), 1500);
 
 	}
@@ -221,9 +219,9 @@ public class WekeAir {
 				data = ln.split(" - ");
 				String origin = data[0];
 				String destination = data[1];
-				
+
 				int fast = Integer.parseInt(data[2]);
-				
+
 				try {
 					Flight f = new Flight(new City(origin), new City(destination), fast);
 					this.fligths.add(f);
@@ -253,12 +251,12 @@ public class WekeAir {
 			for (int i = 0; i < this.fligths.size(); i++) {
 
 				Flight temp = this.fligths.get(i);
-				
+
 				String origin = temp.getDeparture().getName();
 				String destination = temp.getArrival().getName();
 				int fast = temp.isFast();
 
-				pr.write(origin + " - " +destination + " - "+fast+ "\n");
+				pr.write(origin + " - " + destination + " - " + fast + "\n");
 			}
 
 			pr.close();
@@ -267,6 +265,27 @@ public class WekeAir {
 
 		}
 
+	}
+
+	public String changeImplementation() {
+
+		String msg = "";
+		
+		if (this.map instanceof AdjacencyList) {
+			this.map = new AdjacencyMatrix<City>(false);
+			
+			msg = "Implementation succesfuly change from adjacency list to adjacency matrix graph";
+		}
+		else {
+			this.map = new AdjacencyList<City>(false);
+			
+			msg = "Implementation succesfuly change from adjacency matrix to adjacency list graph";
+		}
+
+		initializeVertex();
+		initializeEdges();
+		
+		return msg;
 	}
 
 }
