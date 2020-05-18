@@ -426,14 +426,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	// predecesor of the vertex of the index
 	public ArrayList<Vertex<V>> buildMSTPrim(V ori) {
 		prim(new Vertex<V>(ori));
-
-		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
-
-		for (int i = 0; i < getVertex().size(); i++) {
-			pre.add(getVertex().get(i).getPrior());
-		}
-
-		return pre;
+		return buildPrecesorsTree();
 	}
 
 	// check
@@ -489,17 +482,28 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 
 		ArrayList<Edge<V>> edgesMST = kruskalInMatrix();
 
-		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
 
 		for (int i = 0; i < edgesMST.size(); i++) {
 			int origin = searchIndex(edgesMST.get(i).getOrigin());
 			int destination = searchIndex(edgesMST.get(i).getDestination());
 			
-			pre.set(origin, getVertex().get(destination));
+			getVertex().get(destination).setPrior(getVertex().get(origin));
+		}
+
+		return buildPrecesorsTree();
+	}
+	
+	public ArrayList<Vertex<V>> buildPrecesorsTree(){
+		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
+		
+		for (int i = 0; i < getVertex().size(); i++) {
+			pre.add(getVertex().get(i).getPrior());
 		}
 
 		return pre;
 	}
+
+	
 
 	public ArrayList<Edge<V>> kruskalInMatrix(){
 		fillEdges();
