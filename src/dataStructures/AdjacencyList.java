@@ -240,7 +240,7 @@ public class AdjacencyList<V> implements Graph<V> {
 	
 	ArrayList<Edge<V>> allEdges = fillEdges();
 	
-    PriorityQueue<Edge<V>> pq = new PriorityQueue(allEdges.size(),new Edge<V>());
+    PriorityQueue<Edge<V>> pq = new PriorityQueue<Edge<V>>(allEdges.size(),new Edge<V>());
 
     for (int i = 0; i < allEdges.size() ; i++) {
         pq.add(allEdges.get(i));

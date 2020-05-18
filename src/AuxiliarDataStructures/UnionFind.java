@@ -12,7 +12,7 @@ public class UnionFind<V> implements IUnionFind<V>{
 	
 	public UnionFind(List<Vertex<V>> list) {
 		this.vertexes = (ArrayList<Vertex<V>>) list;
-		parents = new int[list.size()];
+		parents = new int[vertexes.size()];
 	}
 
 	@Override

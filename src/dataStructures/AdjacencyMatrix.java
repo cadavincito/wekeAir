@@ -25,7 +25,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	private List<Vertex<V>> vertex;
 	private boolean directed;
 	private int size;
-	private List<Edge<V>> edges; // every edge here is considered as NOT DIRECTED so its the same edge for a-b as
+	private ArrayList<Edge<V>> edges; // every edge here is considered as NOT DIRECTED so its the same edge for a-b as
 									// b-a
 
 	public AdjacencyMatrix(boolean directed, int m) throws InvalidBaseNumber {
@@ -58,6 +58,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		this.vertex = new ArrayList<Vertex<V>>();
 		this.directed = directed;
 		this.size = 0;
+		this.edges = new ArrayList<Edge<V>>();
 
 	}
 
@@ -93,11 +94,11 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		this.size = size;
 	}
 
-	public List<Edge<V>> getEdges() {
+	public ArrayList<Edge<V>> getEdges() {
 		return edges;
 	}
 
-	public void setEdges(List<Edge<V>> edges) {
+	public void setEdges(ArrayList<Edge<V>> edges) {
 		this.edges = edges;
 	}
 
@@ -485,13 +486,13 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	public ArrayList<Vertex<V>> buildMSTKruskal() {
 		
 
-		ArrayList<Edge<V>> edges = kruskalInMatrix();
+		ArrayList<Edge<V>> edgesMST = kruskalInMatrix();
 
 		ArrayList<Vertex<V>> pre = new ArrayList<Vertex<V>>(getVertex().size());
 
-		for (int i = 0; i < edges.size(); i++) {
-			int origin = searchIndex(edges.get(i).getOrigin());
-			int destination = searchIndex(edges.get(i).getDestination());
+		for (int i = 0; i < edgesMST.size(); i++) {
+			int origin = searchIndex(edgesMST.get(i).getOrigin());
+			int destination = searchIndex(edgesMST.get(i).getDestination());
 			
 			pre.set(origin, getVertex().get(destination));
 		}
@@ -500,31 +501,33 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 	}
 
 	public ArrayList<Edge<V>> kruskalInMatrix(){
+		fillEdges();
 			
-		ArrayList<Edge<V>> allEdges = fillEdges();
+		ArrayList<Edge<V>> allEdges = getEdges();
 		
-	    PriorityQueue<Edge<V>> pq = new PriorityQueue(allEdges.size(),new Edge<V>());
+	    PriorityQueue<Edge<V>> pq = new PriorityQueue<Edge<V>>(allEdges.size(),new Edge<V>());
 	
 	    for (int i = 0; i < allEdges.size() ; i++) {
 	        pq.add(allEdges.get(i));
 	    }
+	    
 	
 	    UnionFind<Vertex<V>> unionFind = new UnionFind(getVertex());
 	  
 	    unionFind.makeSet();
 	
-	    ArrayList<Edge<V>> mst = new ArrayList<>();
+	    ArrayList<Edge<V>> mst = new ArrayList<Edge<V>>();
 	
 	   
 	    int index = 0;
 	    while( index < vertex.size()-1){
-	        Edge<V> edge = pq.remove();
-	      
-	        int origin = unionFind.find(searchIndex(edge.getOrigin()));
-	        int destination = unionFind.find(searchIndex(edge.getDestination()));
+	        Edge<V> edgeFront = pq.poll();
+	        
+	        int origin = unionFind.find(searchIndex(edgeFront.getOrigin()));
+	        int destination = unionFind.find(searchIndex(edgeFront.getDestination()));
 	
 	        if(origin != destination){
-	            mst.add(edge);
+	            mst.add(edgeFront);
 	            index++;
 	            unionFind.union(origin,destination);
 	        }
@@ -534,23 +537,23 @@ public class AdjacencyMatrix<V> implements Graph<V> {
 		    
 	  }
 	
-  	public ArrayList<Edge<V>> fillEdges(){
-  		ArrayList<Edge<V>> edgesList = new ArrayList<Edge<V>>();
+  	public void fillEdges(){
   		
-  		Edge<V> newEdge = null;
+  		
+  		Edge<V> newEdge = new Edge<V>(null, null, 0);
   		int[][] matrix = getGraph();
   		
-  		for (int i = 0; i < matrix.length; i++) {
-  			newEdge = new Edge<V>(getVertex().get(i), null, 0);
+  		for (int i = 0; i < getVertex().size(); i++) {
+  			newEdge.setOrigin(getVertex().get(i));
   			
-  			for (int j = 0; j < matrix[i].length; j++) {
+  			for (int j = 0; j < getVertex().size(); j++) {
   				
   				int posDest = matrix[i][j];
   				
   				if (posDest == 1) {
   					newEdge.setDestination(getVertex().get(j));
   	  				newEdge.setWeight(getWeights()[i][j]);	
-  	  				edgesList.add(newEdge);
+  	  				getEdges().add(newEdge);
 				}
 
   				
@@ -559,7 +562,7 @@ public class AdjacencyMatrix<V> implements Graph<V> {
   			
 		}
   		
-  		return edgesList;
+  		
   	}
 
 	public ArrayList<Vertex<V>> bfs(Vertex<V> origin) {

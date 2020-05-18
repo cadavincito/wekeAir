@@ -679,7 +679,7 @@ class TestAdjacencyMatrix {
 	@Test
 	void kruskalTest1() {
 		setupScenario7();
-
+		
 		List<Vertex<City>> a = adjacencyMatrix.buildMSTKruskal();
 		List<Vertex<City>> b = new ArrayList<Vertex<City>>();
 		System.out.println("kruskal1");

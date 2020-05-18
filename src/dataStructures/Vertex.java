@@ -111,14 +111,14 @@ public class Vertex<E> implements Comparator<Vertex<E>>{
 	/**
 	 * @return the prior
 	 */
-	public Vertex getPrior() {
+	public Vertex<E> getPrior() {
 		return prior;
 	}
 	
 	/**
 	 * @param prior the prior to set
 	 */
-	public void setPrior(Vertex prior) {
+	public void setPrior(Vertex<E> prior) {
 		this.prior = prior;
 	}
 	
