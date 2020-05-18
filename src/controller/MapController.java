@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import model.City;
@@ -33,9 +34,8 @@ public class MapController {
 	@FXML
 	Circle destiny;
 
-	
 	private int fast = 0;
-	
+
 	@FXML
 	private Button searchButton;
 
@@ -72,6 +72,9 @@ public class MapController {
 
 	public void clicked(MouseEvent e) {
 
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+
 		String id = ((Circle) e.getSource()).getId();
 		System.out.println(id);
 
@@ -82,7 +85,7 @@ public class MapController {
 
 			origin = (Circle) e.getSource();
 			origin.setFill(Color.GREEN);
-			
+
 			origin_box.setText(origin.getId());
 
 		}
@@ -94,7 +97,7 @@ public class MapController {
 
 			destiny = (Circle) e.getSource();
 			destiny.setFill(Color.GREEN);
-			
+
 			destination_box.setText(destiny.getId());
 
 		}
@@ -110,11 +113,17 @@ public class MapController {
 
 	public void selectOrigin() {
 
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+
 		this.originSelected = true;
 		genericAlert("Origin", "Please select your origin node.");
 	}
 
 	public void selectDestiny() {
+
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
 
 		this.destinySelected = true;
 		genericAlert("Destiny", "Please select your destiny node.");
@@ -123,8 +132,10 @@ public class MapController {
 
 	@FXML
 	void findCheapestFlight(ActionEvent event) {
-		
-		
+
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+
 		try {
 
 			eraseRoutePaths();
@@ -135,26 +146,23 @@ public class MapController {
 				ArrayList<City> path = this.wekete.cheapestPath(origin.getId(), destiny.getId());
 
 				String message = "";
-				
+
 				for (int i = 0; i < path.size() - 1; i++) {
 
 					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
-					
-					message +="["+path.get(i).getName()+" , "+path.get(i + 1).getName()+"]\n";
+
+					message += "[" + path.get(i).getName() + " , " + path.get(i + 1).getName() + "]\n";
 				}
-				
-				message+="\n"+"Cost: $"+this.wekete.cheapestPathCost(origin.getId(), destiny.getId());
-				
-				
-				
+
+				message += "\n" + "Cost: $" + this.wekete.cheapestPathCost(origin.getId(), destiny.getId());
+
 				genericAlert("Route", message);
-				
+
 			} else {
 
 				throw new RouteNotSelectedException("cheapest");
 			}
-		
-			
+
 		} catch (RouteNotSelectedException e) {
 
 			genericAlert("Error", e.getMessage());
@@ -165,6 +173,9 @@ public class MapController {
 	@FXML
 	void findFastestFlight(ActionEvent event) {
 
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+
 		eraseRoutePaths();
 
 		try {
@@ -174,20 +185,20 @@ public class MapController {
 				ArrayList<City> path = this.wekete.fastestPath(origin.getId(), destiny.getId());
 
 				String message = "";
-			
+
 				for (int i = 0; i < path.size() - 1; i++) {
 
 					paintLine(circleId(path.get(i).getName()), circleId(path.get(i + 1).getName()));
-					
-					message +="["+path.get(i).getName()+" , "+path.get(i + 1).getName()+"]\n";
+
+					message += "[" + path.get(i).getName() + " , " + path.get(i + 1).getName() + "]\n";
 				}
-				
-				message+="\n"+"Cost: $"+this.wekete.fastesPathCost(origin.getId(), destiny.getId());
-				
+
+				message += "\n" + "Cost: $" + this.wekete.fastesPathCost(origin.getId(), destiny.getId());
+
 				this.fast = 1;
-				
+
 				genericAlert("Route", message);
-				
+
 			} else {
 
 				throw new RouteNotSelectedException("fastest");
@@ -259,6 +270,9 @@ public class MapController {
 	@FXML
 	void eraseRoute() {
 
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+
 		fast = 0;
 		Circle temp = null;
 
@@ -314,38 +328,42 @@ public class MapController {
 		}
 
 	}
-	
-	
-	@FXML 
+
+	@FXML
 	void buy(ActionEvent e) {
-		
+
+		AudioClip sound = new AudioClip("file:resources/sounds/ClickOn.mp3");
+		sound.play();
+
 		try {
-			if(fast != 0) {
+			if (fast != 0) {
 				this.wekete.addFlight(origin.getId(), destiny.getId(), fast);
-				
+
 				String temp = "";
-				
-				if(fast == 1)
+
+				if (fast == 1)
 					temp = "fast";
 				else
 					temp = "cheap";
-					
+
 				this.wekete.save();
-				
-				genericAlert("Ticket information", "You just bought a "+temp+" ticket from "+origin.getId()+" to "+destiny.getId());
-			}
-			else
+
+				genericAlert("Ticket information",
+						"You just bought a " + temp + " ticket from " + origin.getId() + " to " + destiny.getId());
+			} else
 				throw new RouteNotSelectedException(3);
-		}
-		catch(RouteNotSelectedException exc) {
-			
+		} catch (RouteNotSelectedException exc) {
+
 			genericAlert("Error", exc.getMessage());
 		}
 	}
 
-	
 	@FXML
 	void changeImplementation() {
-		genericAlert("Implementation", this.wekete.changeImplementation());;
+
+		AudioClip sound = new AudioClip("file:resources/sounds/Toggle.mp3");
+		sound.play();
+		genericAlert("Implementation", this.wekete.changeImplementation());
+		;
 	}
 }
