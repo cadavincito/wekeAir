@@ -259,10 +259,10 @@ public class MapController {
 
 		try {
 
-			if ((pane.getChildren().size() > 34) || (origin.getId() != null && destiny.getId() != null)) {
+			if ((pane.getChildren().size() > 35) || (origin.getId() != null && destiny.getId() != null)) {
 
-				if (pane.getChildren().size() > 34)
-					pane.getChildren().remove(34, pane.getChildren().size());
+				if (pane.getChildren().size() > 35)
+					pane.getChildren().remove(35, pane.getChildren().size());
 				else
 					throw new RouteNotSelectedException(33);
 			} else
@@ -290,8 +290,8 @@ public class MapController {
 		try {
 			if (origin.getId() != null && destiny.getId() != null) {
 
-				if ((pane.getChildren().size() > 34))
-					pane.getChildren().remove(34, pane.getChildren().size());
+				if ((pane.getChildren().size() > 35))
+					pane.getChildren().remove(35, pane.getChildren().size());
 				else
 					throw new RouteNotSelectedException(33);
 
