@@ -21,7 +21,7 @@
 }
 
 .label {
-	-fx-text-fill: base_color;
+	-fx-text-fill: black;
 	-fx-font: bold 10pt "Arial";
 }
 
