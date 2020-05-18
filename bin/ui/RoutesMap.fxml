@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -45,12 +45,12 @@
             <Insets bottom="10.0" top="10.0" />
          </padding></Button>
       <Circle fx:id="ciudaddemexico" accessibleRole="BUTTON" fill="#ff441f" layoutX="435.0" layoutY="248.0" onMouseClicked="#clicked" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
-      <ChoiceBox fx:id="origin_box" layoutX="157.0" layoutY="33.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
-      <ChoiceBox fx:id="destination_box" layoutX="157.0" layoutY="118.0" prefHeight="23.0" prefWidth="76.0" stylesheets="@application.css" />
       <Button fx:id="fastest" layoutX="14.0" layoutY="239.0" mnemonicParsing="false" onAction="#findFastestFlight" text="Fastest flight" />
       <Button fx:id="cheapest" layoutX="138.0" layoutY="239.0" mnemonicParsing="false" onAction="#findCheapestFlight" text="Cheapest flight" />
       <Button layoutX="74.0" layoutY="329.0" mnemonicParsing="false" onAction="#eraseRoute" text="Erase route" />
       <Button layoutX="79.0" layoutY="379.0" mnemonicParsing="false" onAction="#buy" text="Buy ticket" />
-      <Button layoutX="50.0" layoutY="516.0" mnemonicParsing="false" text="Change implementation" onAction="#changeImplementation"/>
+      <Button layoutX="50.0" layoutY="516.0" mnemonicParsing="false" onAction="#changeImplementation" text="Change implementation" />
+      <Label fx:id="origin_box" layoutX="161.0" layoutY="34.0" prefHeight="16.0" prefWidth="23.0" stylesheets="@application.css" />
+      <Label fx:id="destination_box" layoutX="161.0" layoutY="125.0" prefHeight="18.0" prefWidth="35.0" stylesheets="@application.css" />
    </children>
 </Pane>

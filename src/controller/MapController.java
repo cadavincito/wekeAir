@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -39,10 +40,10 @@ public class MapController {
 	private Button searchButton;
 
 	@FXML
-	private ChoiceBox<String> origin_box;
+	private Label origin_box;
 
 	@FXML
-	private ChoiceBox<String> destination_box;
+	private Label destination_box;
 
 	private boolean originSelected;
 	private boolean destinySelected;
@@ -59,13 +60,13 @@ public class MapController {
 
 	private void fillFligths() {
 
-		origin_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As", "Montevideo",
-				"Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama", "Belmopan",
-				"Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
-
-		destination_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As",
-				"Montevideo", "Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama",
-				"Belmopan", "Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
+//		origin_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As", "Montevideo",
+//				"Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama", "Belmopan",
+//				"Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
+//
+//		destination_box.getItems().addAll("Bogota", "Quito", "Brasilia", "La Paz", "Lima", "Asuncion", "Bs.As",
+//				"Montevideo", "Santiago", "Guatemala", "San Salvador", "Tegucigalpa", "Managua", "San Jose", "Panama",
+//				"Belmopan", "Caracas", "Georgetown", "Paramaribo", "Cayena", "Washington", "Otawa", "La Habana");
 
 	}
 
@@ -81,6 +82,8 @@ public class MapController {
 
 			origin = (Circle) e.getSource();
 			origin.setFill(Color.GREEN);
+			
+			origin_box.setText(origin.getId());
 
 		}
 
@@ -91,6 +94,8 @@ public class MapController {
 
 			destiny = (Circle) e.getSource();
 			destiny.setFill(Color.GREEN);
+			
+			destination_box.setText(destiny.getId());
 
 		}
 
