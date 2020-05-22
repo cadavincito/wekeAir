@@ -50,7 +50,7 @@
       <Button layoutX="74.0" layoutY="329.0" mnemonicParsing="false" onAction="#eraseRoute" text="Erase route" />
       <Button layoutX="79.0" layoutY="379.0" mnemonicParsing="false" onAction="#buy" text="Buy ticket" />
       <Button layoutX="50.0" layoutY="516.0" mnemonicParsing="false" onAction="#changeImplementation" text="Change implementation" />
-      <Label fx:id="origin_box" layoutX="161.0" layoutY="34.0" prefHeight="16.0" prefWidth="23.0" stylesheets="@application.css" />
-      <Label fx:id="destination_box" layoutX="161.0" layoutY="125.0" prefHeight="18.0" prefWidth="35.0" stylesheets="@application.css" />
+      <Label fx:id="origin_box" layoutX="111.0" layoutY="34.0" prefHeight="16.0" prefWidth="130.0" stylesheets="@application.css" />
+      <Label fx:id="destination_box" layoutX="121.0" layoutY="125.0" prefHeight="18.0" prefWidth="114.0" stylesheets="@application.css" />
    </children>
 </Pane>

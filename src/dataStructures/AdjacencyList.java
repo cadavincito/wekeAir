@@ -549,6 +549,66 @@ public class AdjacencyList<V> implements Graph<V> {
 		return path;
 	}
 
+	public int dfs(Vertex<V> origin, int x) {
+
+		
+		int count = 0;
+		
+		boolean array[] = new boolean[this.graph.size()];		
+		
+		
+		Integer index = searchIndex(origin);
+
+		array[index] = true;
+		
+		ArrayList<Integer> path = new ArrayList<Integer>();
+
+		IStack<Integer> s = new Stack<Integer>();
+		s.push(index);
+
+		boolean finished = false;
+		
+		while(!finished) {
+			
+			while (!s.isEmpty()) {
+
+				index = s.pop();
+				if (!contains(path, index)) {
+					path.add(index);
+					array[index] = true;
+				}
+				ArrayList<Integer> adjacents = adjacents(index);
+
+				for (int i = 0; i < adjacents.size(); i++) {
+
+					Integer temp = adjacents.get(i);
+
+					if ((!s.contains(temp)) && (!contains(path, temp))) {
+						s.push(temp);
+						array[index]= true;
+					}
+				}
+
+			}
+			count++;
+			boolean stop = false;
+			for (int i = 0; i < array.length && !stop; i++) {
+				if(array[i] == false) {
+					s.push(i);
+					stop = true;
+				}
+					
+			}
+			
+			if(stop == false)
+				finished = true;
+		}
+		
+		
+		
+		return count;
+	}
+	
 	public ArrayList<Integer> adjacents(Integer index) {
 
 		ArrayList<Integer> adjacents = new ArrayList<Integer>();

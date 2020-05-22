@@ -16,7 +16,7 @@ import dataStructures.Vertex;
 
 public class WekeAir {
 
-	private Graph<City> map;
+	private AdjacencyList<City> map;
 	private ArrayList<Flight> fligths;
 	private ArrayList<Vertex<City>> cities;
 
@@ -25,8 +25,7 @@ public class WekeAir {
 	public WekeAir() {
 		initialize();
 		load();
-		System.out.println((cheapestPath("bogota", "paramaribo").toString()));
-		System.out.println((fastestPath("bogota", "brasilia").toString()));
+		System.out.println(componentes(""));
 	}
 
 	/**
@@ -156,7 +155,7 @@ public class WekeAir {
 
 	}
 
-	// Gonzo's path missing
+	
 	public ArrayList<City> cheapestPath(String origin, String destination) {
 
 		ArrayList<City> ans = this.map.dijkstraPath(new City(origin), new City(destination));
@@ -267,25 +266,30 @@ public class WekeAir {
 
 	}
 
-	public String changeImplementation() {
+//	public String changeImplementation() {
+//
+//		String msg = "";
+//		
+//		if (this.map instanceof AdjacencyList) {
+//			this.map = new AdjacencyMatrix<City>(false);
+//			
+//			msg = "Implementation succesfuly change from adjacency list to adjacency matrix graph";
+//		}
+//		else {
+//			this.map = new AdjacencyList<City>(false);
+//			
+//			msg = "Implementation succesfuly change from adjacency matrix to adjacency list graph";
+//		}
+//
+//		initializeVertex();
+//		initializeEdges();
+//		
+//		return msg;
+//	}
 
-		String msg = "";
+	public int componentes(String ori) {
 		
-		if (this.map instanceof AdjacencyList) {
-			this.map = new AdjacencyMatrix<City>(false);
-			
-			msg = "Implementation succesfuly change from adjacency list to adjacency matrix graph";
-		}
-		else {
-			this.map = new AdjacencyList<City>(false);
-			
-			msg = "Implementation succesfuly change from adjacency matrix to adjacency list graph";
-		}
-
-		initializeVertex();
-		initializeEdges();
-		
-		return msg;
+		return this.map.dfs(new Vertex<City>(new City("bogota")), 1);
 	}
-
+	
 }

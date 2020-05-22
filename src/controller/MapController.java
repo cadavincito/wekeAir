@@ -363,7 +363,7 @@ public class MapController {
 
 		AudioClip sound = new AudioClip("file:resources/sounds/Toggle.mp3");
 		sound.play();
-		genericAlert("Implementation", this.wekete.changeImplementation());
+		//genericAlert("Implementation", this.wekete.changeImplementation());
 		;
 	}
 }
